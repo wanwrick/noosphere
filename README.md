@@ -203,4 +203,4 @@ MIT. See [LICENSE](LICENSE) for details.
 
 ---
 
-*Originally designed by Paroz Mehta. Built with Claude.*
+*Originally designed by Paroz Mehta.*
