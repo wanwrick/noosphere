@@ -23,6 +23,15 @@
 - **Value of BATNA:** [quantified if possible]
 - **BATNA strength:** Strong / Moderate / Weak
 
+### BATNA Scoring
+| Dimension | Score (1-5) | Notes |
+|-----------|-------------|-------|
+| Availability of alternatives | | More alternatives = stronger BATNA |
+| Quality of best alternative | | How good is Plan B? |
+| Time pressure | | Less urgency = stronger position |
+| Switching cost | | Lower cost to switch = stronger BATNA |
+| **Total BATNA Strength** | **/20** | 16+: Strong, 10-15: Moderate, <10: Weak |
+
 ### Their BATNA
 - **Their best alternative is likely:** [your estimate]
 - **Their BATNA strength:** Strong / Moderate / Weak

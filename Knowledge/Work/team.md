@@ -95,27 +95,10 @@ Source Systems (Core Banking, APIs, Streaming)
 - **Retrospective:** Last Friday, after review
 
 ### User Story Format
-```
-As a [persona],
-I want to [action],
-So that [business value].
 
-Acceptance Criteria:
-- Given [context], when [action], then [expected result]
-- Given [context], when [action], then [expected result]
+For the full user story template with subtasks and Gherkin acceptance criteria, see `Templates/user-story.md`.
 
-Technical Notes:
-- [Implementation guidance]
-- [Dependencies]
-
-Definition of Done:
-- [ ] Code complete and peer reviewed
-- [ ] Unit tests passing (>80% coverage)
-- [ ] Integration tests passing
-- [ ] Documentation updated
-- [ ] Deployed to staging
-- [ ] Product owner approval
-```
+Quick format: **As a** [persona], **I want to** [action], **So that** [business value]. Include acceptance criteria, technical notes, and definition of done.
 
 ### Story Sizing (Fibonacci)
 | Points | Complexity | Duration | Example |
@@ -137,6 +120,8 @@ Definition of Done:
 ---
 
 ## 4. Strategic Frameworks (Applied to Role)
+
+> For full framework definitions, see `Knowledge/Frameworks/leadership.md` (Mintzberg, Kotter) and `Knowledge/Frameworks/strategy.md` (Strategic Planning). Below shows how they apply to this role.
 
 ### Mintzberg's 10 Managerial Roles
 | Category | Role | Application |
@@ -188,13 +173,8 @@ Both are necessary. Overindexing on management leads to stagnation. Overindexing
 | Business Units | Insights, reports, decision support | BI dashboards, data catalog |
 
 ### Communication Cadence
-| Audience | Format | Frequency | Content |
-|----------|--------|-----------|---------|
-| Team | Standup | Daily | Blockers, progress |
-| Team | Retro | Bi-weekly | Process improvements |
-| Stakeholders | Sprint Review | Bi-weekly | Demos, value delivered |
-| Leadership | Status Update | Monthly | 3P format (Progress/Plans/Problems) |
-| Executives | Roadmap Review | Quarterly | Strategy, investment, ROI |
+
+For the full communication cadence (meeting types, durations, frequencies), see `_Registry/Cadences.md`.
 
 ---
 

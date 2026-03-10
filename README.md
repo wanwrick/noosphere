@@ -2,7 +2,7 @@
 
 A portable, self-contained knowledge management system that turns Claude into an AI work partner with full access to business frameworks, operational context, reusable templates, and step-by-step workflows.
 
-**29 files. Zero external dependencies. Fork it, customize it, make it yours.**
+**31 markdown files. Zero external dependencies. Fork it, customize it, make it yours.**
 
 ---
 
@@ -115,10 +115,10 @@ work-os-template/
 ## Getting Started
 
 ### Step 1: Fork and Clone
-Fork this repository and clone it locally. This becomes your project folder for Claude Code or Cowork.
+Fork this repository and clone it locally. This becomes your project folder for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (CLI agent) or [Cowork](https://cowork.com) (collaborative AI workspace).
 
-### Step 2: Personalize the Core (30 min)
-- **CLAUDE.md**: Replace `[Your Name]`, `[Company Name]`, `[Team Name]`, and `[Platform Name]` placeholders with your info. Keep the session protocol and routing rules structure.
+### Step 2: Personalize the Core (1-2 hours)
+- **CLAUDE.md**: Search for bracket placeholders (`[Your Title]`, `[Company Name]`, `[Team Name]`, `[Platform Name]`, `[Your platform stack...]`, etc.) and replace with your info. Also replace all `your-notion-page-id-here` and `your-notion-database-id-here` entries in the Notion Reference Map. Keep the session protocol and routing rules structure.
 - **GOALS.md**: Replace with your P0-P3 priorities, current initiatives, key metrics, and decision principles.
 
 ### Step 3: Replace Knowledge (1-2 hours)

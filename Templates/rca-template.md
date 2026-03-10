@@ -44,6 +44,9 @@
 [Describe the technical root cause]
 
 ### 5 Whys Analysis
+
+> **When to stop:** Stop when you reach a cause that is (a) actionable and within your control, and (b) a system/process issue rather than an individual behavior. If you go past 5 and are still at human error, you have not gone deep enough into the system.
+
 1. **Why** did [symptom] happen? -> [cause 1]
 2. **Why** did [cause 1] happen? -> [cause 2]
 3. **Why** did [cause 2] happen? -> [cause 3]

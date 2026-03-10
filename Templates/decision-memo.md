@@ -1,6 +1,8 @@
 # Executive Decision Memo: Template
 
 > 3-pager format for C-suite and VP-level decisions. Based on Executive Influence and SCQA frameworks.
+>
+> **Audience calibration:** Adjust depth based on the reader. Board members need high-level strategic framing; VPs need operational detail; technical leads need architecture context. When in doubt, keep analysis in the appendix and keep the main 3 pages focused on the decision.
 
 ---
 

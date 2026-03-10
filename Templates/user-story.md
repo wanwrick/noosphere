@@ -35,6 +35,17 @@ WHEN [action taken]
 THEN [graceful handling / error message]
 ```
 
+**Example:**
+```gherkin
+GIVEN a Bronze table with raw transaction data
+WHEN the Silver pipeline runs the daily refresh
+THEN all records pass data quality expectations (nulls < 1%, schema match 100%)
+
+GIVEN a source system sends records with a new unexpected column
+WHEN the Bronze ingestion job processes the batch
+THEN the new column is captured in a _metadata field and an alert fires to #data-quality
+```
+
 ---
 
 ## Technical Notes

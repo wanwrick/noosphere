@@ -8,9 +8,9 @@
 
 | Level | Definition | Response Time | Example |
 |-------|-----------|--------------|---------|
-| **SEV-1** | Critical: production data loss, compliance breach, complete pipeline failure | Immediate (< 15 min) | Gold layer down, regulatory report missed |
-| **SEV-2** | Major: significant degradation, key pipeline delayed, data quality breach | < 1 hour | Silver layer SLA missed, dashboard stale > 4 hours |
-| **SEV-3** | Minor: non-critical pipeline failure, cosmetic issue, workaround available | < 4 hours | Single non-critical table delayed, formatting issue |
+| **SEV-1** | Critical: production data loss (>1000 rows), compliance breach, complete pipeline failure affecting >50% of consumers | Immediate (< 15 min) | Gold layer down, regulatory report missed |
+| **SEV-2** | Major: significant degradation (>2 hours), key pipeline delayed past SLA, data quality score drops below 95% | < 1 hour | Silver layer SLA missed, dashboard stale > 4 hours |
+| **SEV-3** | Minor: non-critical pipeline failure (<5 tables), cosmetic issue, workaround available | < 4 hours | Single non-critical table delayed, formatting issue |
 
 ---
 

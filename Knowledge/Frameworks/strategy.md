@@ -136,6 +136,8 @@ Predicts difficulty of doing business between countries.
 | **Geographic** | Physical distance, borders, climate | Logistics, communication, travel |
 | **Economic** | Income levels, development, resources | Market size, cost structures, demand |
 
+**Example:** US expanding to Japan scores high on Cultural (language, business norms) and Geographic distance, but low on Administrative (stable legal system) and Economic (similar income levels). Contrast with US to Canada: low distance on all four dimensions.
+
 ### AAA Strategies for Global Expansion
 - **Adaptation:** Modify offerings for local markets (localization)
 - **Aggregation:** Create regional/global economies of scale (standardization)

@@ -54,6 +54,8 @@ Structure for technology case analysis:
 
 ## 2. AI Fluency
 
+> **Note:** The AI landscape evolves rapidly. The frameworks below (adoption, governance, prompt engineering) remain durable, but specific model capabilities and vendor offerings may have changed since this was written. Verify current state before making technology selection decisions.
+
 ### AI/ML Fundamentals
 ```
 AI (Artificial Intelligence)

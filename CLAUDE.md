@@ -13,6 +13,7 @@ Every session follows this sequence. No shortcuts.
 ### 1. Load Context
 - Read `GOALS.md` to understand current priorities
 - Read `_Logs/feedback.md` to load accumulated learnings: **do not repeat past mistakes**
+- Read `_Registry/Cadences.md` to check if a recurring ritual is due
 - Identify which domain(s) this session will touch
 
 ### 2. Plan Before Execute
@@ -62,12 +63,17 @@ User Question
 
 1. **Always check GOALS.md first** to understand current priorities and context
 2. **For strategic/analytical questions** -> Route to the relevant domain file(s) in `Knowledge/Frameworks/`
-3. **For day-to-day work questions** -> Route to `Knowledge/Work/` files (team context, platform, communication, playbooks, collaborators)
-4. **For document creation** -> Check `Templates/` for formats, then apply relevant frameworks
-5. **For process questions** -> Check `Workflows/` for standard operating procedures
-6. **For "what tools do I have?"** -> Check `_Registry/`
-7. **Cross-domain questions** -> Pull from multiple knowledge files. Most real problems span domains.
-8. **For live work context** -> Query Notion Work Hub via MCP (see Notion Reference Map below)
+3. **For day-to-day work questions** -> Route to `Knowledge/Work/` files (team context, platform, communication, playbooks)
+4. **For "who is involved?"** -> Route to `Knowledge/Work/collaborators.md` for people context, domains, and working styles
+5. **For document creation** -> Check `Templates/` for formats, then apply relevant frameworks
+6. **For step-by-step processes** -> Check `Workflows/` for guided playbooks (incident response, negotiation, briefings, data storytelling)
+7. **For domain-specific SOPs** -> Check `Knowledge/Work/playbooks.md` for operational frameworks (10Q onboarding, CDO deliverables, Data Contracts)
+8. **For past decisions or logging a new one** -> Check `Knowledge/Decisions/`
+9. **For "what tools do I have?"** -> Check `_Registry/`
+10. **Cross-domain questions** -> Pull from multiple knowledge files. Most real problems span domains.
+11. **For live work context** -> Query Notion Work Hub via MCP (see Notion Reference Map below)
+
+> **Workflows/ vs playbooks.md:** `Workflows/` contains universal step-by-step playbooks (incident response, negotiation prep, executive briefing, data storytelling). `Knowledge/Work/playbooks.md` contains domain-specific operational SOPs (10Q onboarding, CDO deliverables, Data Contracts). When in doubt: if it is a general professional process, check Workflows/; if it is a team-specific operational procedure, check playbooks.md.
 
 ## Notion Work Hub: Reference Map
 
@@ -78,54 +84,40 @@ The Work Hub in Notion is the **live reference system** for day-to-day work. Use
 - **Use Notion** for live status (initiative progress, meeting notes, sprint data, calendar)
 - **Use Knowledge/Work/playbooks.md** for critical operational frameworks (snapshotted locally for portability)
 
+> **No Notion MCP?** This system works fully without Notion. All core knowledge lives in local files. Notion adds live project data but is not required.
+
 ### Targeted Page Reference (Fetch by ID)
 
-**Data Platform & Ingestion:**
-| Topic | Notion Page ID | When to Fetch |
-|-------|---------------|---------------|
-| Data Source Onboarding (10Q) | `your-notion-page-id-here` | Onboarding new sources, intake interviews |
-| Metadata-Driven Ingestion Framework | `your-notion-page-id-here` | YAML-based pipeline design, DLT patterns |
-| Data Contracts (Producer-Consumer) | `your-notion-page-id-here` | Pipeline interface design, SLA definitions |
-| Data Pipeline Observability | `your-notion-page-id-here` | Monitoring, technical debt detection |
-| CI/CD Asset Bundles | `your-notion-page-id-here` | Deployment pipeline design |
-| FinOps: Cost Optimization | `your-notion-page-id-here` | Cost reduction, compute optimization |
-
-**Data Modeling & Semantic Layer:**
-| Topic | Notion Page ID | When to Fetch |
-|-------|---------------|---------------|
-| Data Modeling for Modern Lakehouse + AI | `your-notion-page-id-here` | Modeling strategy, hybrid patterns, AI-augmented governance |
-| Semantic Modeling | `your-notion-page-id-here` | Semantic layer architecture, metric views, self-serve |
-| Facts & Dimensions Principles | `your-notion-page-id-here` | Dimensional modeling fundamentals |
-| Ontology-Driven Modeling | `your-notion-page-id-here` | AI-ready modeling beyond semantic layers |
-| Data Product Architecture (5 Pillars) | `your-notion-page-id-here` | Data product engineering quality framework |
-
-**AI & Agentic Analytics:**
-| Topic | Notion Page ID | When to Fetch |
-|-------|---------------|---------------|
-| Multi-Agent Architecture | `your-notion-page-id-here` | Multi-agent supervisor pattern, Agent Bricks, Genie + RAG |
-| AI/BI Genie in Production | `your-notion-page-id-here` | Benchmark-driven Genie development, 6-iteration loop |
-| AI Dev Kit | `your-notion-page-id-here` | MCP server for Databricks, Claude Code + Databricks |
-| AI Dev Kit: 80+ MCP Tools | `your-notion-page-id-here` | Extended tooling for AI dev on Databricks |
-| Lakeflow + Agent Bricks | `your-notion-page-id-here` | AI-first data engineering at scale |
-| Context Wall: Why AI Agents Fail | `your-notion-page-id-here` | Enterprise context for AI agents |
-| Defending AI Spend (Board Pressure Test) | `your-notion-page-id-here` | Justifying AI/architecture investment |
-
-**Strategy & Leadership:**
-| Topic | Notion Page ID | When to Fetch |
-|-------|---------------|---------------|
-| CDO Top 10 Deliverables | `your-notion-page-id-here` | Data strategy framing, CDO-level planning |
-| Data ROI: Judged by Outcomes | `your-notion-page-id-here` | Outcome framing for data teams |
-| Dashboard Factory Escape Canvas | `your-notion-page-id-here` | Shifting from reports to data products |
-| Data Thinking: 4 Pillars | `your-notion-page-id-here` | Data-driven decision frameworks |
-
-**Team & Process:**
-| Topic | Notion Page ID | When to Fetch |
-|-------|---------------|---------------|
-| 4 Data Team Meetings That Work | `your-notion-page-id-here` | Meeting design for data teams |
-| Decision Journey A to Z | `your-notion-page-id-here` | Taking teams through decisions |
-| Leadership Systems | `your-notion-page-id-here` | System-level leadership fixes |
+| Category | Topic | Page ID | When to Fetch |
+|----------|-------|---------|---------------|
+| Platform | Data Source Onboarding (10Q) | `your-notion-page-id-here` | Onboarding new sources, intake interviews |
+| Platform | Metadata-Driven Ingestion Framework | `your-notion-page-id-here` | YAML-based pipeline design, DLT patterns |
+| Platform | Data Contracts (Producer-Consumer) | `your-notion-page-id-here` | Pipeline interface design, SLA definitions |
+| Platform | Data Pipeline Observability | `your-notion-page-id-here` | Monitoring, technical debt detection |
+| Platform | CI/CD Asset Bundles | `your-notion-page-id-here` | Deployment pipeline design |
+| Platform | FinOps: Cost Optimization | `your-notion-page-id-here` | Cost reduction, compute optimization |
+| Modeling | Data Modeling for Modern Lakehouse + AI | `your-notion-page-id-here` | Modeling strategy, hybrid patterns |
+| Modeling | Semantic Modeling | `your-notion-page-id-here` | Semantic layer architecture, metric views |
+| Modeling | Facts & Dimensions Principles | `your-notion-page-id-here` | Dimensional modeling fundamentals |
+| Modeling | Ontology-Driven Modeling | `your-notion-page-id-here` | AI-ready modeling beyond semantic layers |
+| Modeling | Data Product Architecture (5 Pillars) | `your-notion-page-id-here` | Data product engineering quality framework |
+| AI | Multi-Agent Architecture | `your-notion-page-id-here` | Multi-agent supervisor pattern, Agent Bricks |
+| AI | AI/BI Genie in Production | `your-notion-page-id-here` | Benchmark-driven Genie development |
+| AI | AI Dev Kit | `your-notion-page-id-here` | MCP server for Databricks, Claude Code |
+| AI | AI Dev Kit: 80+ MCP Tools | `your-notion-page-id-here` | Extended tooling for AI dev on Databricks |
+| AI | Lakeflow + Agent Bricks | `your-notion-page-id-here` | AI-first data engineering at scale |
+| AI | Context Wall: Why AI Agents Fail | `your-notion-page-id-here` | Enterprise context for AI agents |
+| AI | Defending AI Spend | `your-notion-page-id-here` | Justifying AI/architecture investment |
+| Strategy | CDO Top 10 Deliverables | `your-notion-page-id-here` | Data strategy framing, CDO-level planning |
+| Strategy | Data ROI: Judged by Outcomes | `your-notion-page-id-here` | Outcome framing for data teams |
+| Strategy | Dashboard Factory Escape Canvas | `your-notion-page-id-here` | Shifting from reports to data products |
+| Strategy | Data Thinking: 4 Pillars | `your-notion-page-id-here` | Data-driven decision frameworks |
+| Team | 4 Data Team Meetings That Work | `your-notion-page-id-here` | Meeting design for data teams |
+| Team | Decision Journey A to Z | `your-notion-page-id-here` | Taking teams through decisions |
+| Team | Leadership Systems | `your-notion-page-id-here` | System-level leadership fixes |
 
 **Live Databases (query via MCP):**
+
 | Database | Use Case |
 |----------|----------|
 | Work Calendar (`your-notion-database-id-here`) | Meeting notes, decisions, upcoming events |
@@ -164,7 +156,7 @@ The Work Hub in Notion is the **live reference system** for day-to-day work. Use
 ### Working Patterns
 - Deep work in the morning
 - Async-first: prefers written proposals over meetings
-- Documentation-first: if it's not written down, it didn't happen
+- Documentation-first: if it is not written down, it did not happen
 - Feedback loops: logs decisions and revisits them quarterly
 
 ## Behavioral Instructions
@@ -180,7 +172,7 @@ The Work Hub in Notion is the **live reference system** for day-to-day work. Use
 1. **Check Templates/** for existing formats
 2. **Apply the relevant Communication frameworks** from `Knowledge/Work/communication.md`
 3. **Match the audience**: executive (BLUF + Pyramid Principle), technical (detail-rich), cross-functional (balanced)
-4. **Use SCQA structure** for memos and proposals (Situation -> Complication -> Question -> Answer)
+4. **For presentations**: see `Knowledge/Frameworks/leadership.md` Section 4 for Monroe's Motivated Sequence, RAMP openings, CLTs, and executive presence frameworks
 5. **Keep it concise**: avoid fluff
 
 ### When the User Faces a Decision
@@ -191,7 +183,7 @@ The Work Hub in Notion is the **live reference system** for day-to-day work. Use
 5. **Log the decision**: suggest adding to `Knowledge/Decisions/`
 
 ### When Preparing for a Meeting/Presentation
-1. **Check context**: who's the audience? what's the goal?
+1. **Check context**: who is the audience? what is the goal?
 2. **Apply Monroe's Motivated Sequence** for persuasive presentations
 3. **Use RAMP opening** (Rhetorical question / Analogy / Metaphor / Personal story)
 4. **Prepare for Q&A**: anticipate 3 toughest questions
@@ -204,32 +196,23 @@ The Work Hub in Notion is the **live reference system** for day-to-day work. Use
 4. **Check `Knowledge/Work/collaborators.md`** to know who is involved and their domain
 5. **Always frame data work** against GOALS.md initiatives: every task should tie back to an initiative
 
-## MCP Integrations (When Available)
+## MCP Integrations
 
-This project is designed to work with these connected services:
-
-| Service | What It Does | When to Use |
-|---------|-------------|-------------|
-| **Notion** | Workspace wiki, databases, meeting notes | Search for team context, project docs, sprint data: **use Reference Map above** |
-| **Gmail** | Email search, draft, send | Compose communications, find email threads |
-| **Google Calendar** | Events, scheduling, availability | Meeting prep, time management |
-| **Google Drive** | Document search and retrieval | Find shared docs, reports, presentations |
-| **Canva** | Design creation and editing | Presentations, visual assets |
-| **Figma** | Design system and UI context | Product design references |
+For the full list of connected services, capabilities, and usage guidance, see `_Registry/MCPs.md`.
 
 **If an MCP is not connected**, the system still works: all core knowledge is self-contained in the Knowledge/ files.
 
 ## Error Handling & Self-Correction
 
-### When You're Unsure
+### When You Are Unsure
 - **Try first**: attempt a reasonable approach using available Knowledge files
-- If confidence is below 70%, say so explicitly: "I'm not confident here because..."
+- If confidence is below 70%, say so explicitly: "I am not confident here because..."
 - Point to the closest relevant framework and note the gap
 - Suggest what additional information would help
 
 ### When Something Fails
 - **Attempt to fix it** before asking: try an alternative approach
-- If the fix attempt fails, explain what you tried and why it didn't work
+- If the fix attempt fails, explain what you tried and why it did not work
 - Then ask for direction with a specific question, not an open-ended "what should I do?"
 
 ### When the User Corrects You
@@ -245,43 +228,4 @@ This project is designed to work with these connected services:
 
 ## File Reference
 
-```
-work-os-template/
-+-- CLAUDE.md                    <- You are here
-+-- GOALS.md                     <- Current priorities and OKRs
-+-- Knowledge/
-|   +-- Frameworks/
-|   |   +-- finance.md           <- DCF, WACC, CAPM, LBO, accounting, valuation
-|   |   +-- strategy.md          <- Porter's 5F, VRIN, blue ocean, game theory, global
-|   |   +-- marketing.md         <- STP, 4Ps, JTBD, CLV/CAC, brand positioning
-|   |   +-- leadership.md        <- Transformational, teams, org behavior, presentations
-|   |   +-- operations.md        <- Process analysis, queueing, inventory, lean/TPS
-|   |   +-- economics.md         <- Micro (supply/demand, game theory) + Macro (GDP, policy)
-|   |   +-- technology.md        <- Digital transformation, GenAI strategy, AI governance
-|   |   +-- governance.md        <- Board composition, exec comp, shareholder activism
-|   +-- Work/
-|   |   +-- team.md              <- Team context, platform, Agile, stakeholders
-|   |   +-- platform.md          <- Medallion, Unity Catalog, DLT, ABAC, Power BI
-|   |   +-- communication.md     <- PREP, SBI, SUCCESS, email/meeting/presentation protocols
-|   |   +-- playbooks.md         <- 10Q onboarding, CDO deliverables, Data Contracts
-|   |   +-- collaborators.md     <- Key team members, domains, working context
-|   +-- Decisions/
-|       +-- _template.md         <- Decision log template
-+-- Templates/
-|   +-- decision-memo.md         <- Executive 3-pager format
-|   +-- status-update.md         <- 3P update format
-|   +-- rca-template.md          <- Root cause analysis
-|   +-- user-story.md            <- Agile story format
-+-- Workflows/
-|   +-- incident-response.md     <- SEV-based crisis playbook
-|   +-- negotiation-prep.md      <- BATNA + power dynamics + tactics
-|   +-- executive-briefing.md    <- Board deck / C-suite prep workflow
-|   +-- data-storytelling.md     <- Insight pyramid + visualization guide
-+-- _Registry/
-|   +-- Skills.md                <- Inventory of all available skills
-|   +-- MCPs.md                  <- Connected services and capabilities
-|   +-- Cadences.md              <- Recurring rituals and reviews
-+-- _Logs/
-    +-- feedback.md              <- Corrections and learning captures
-    +-- evolution.md             <- System changelog
-```
+For the complete file tree and structural overview, see `README.md`.

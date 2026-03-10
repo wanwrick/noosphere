@@ -51,6 +51,8 @@
 ## Step 3: Build the Deck
 
 ### Slide Budget (10 slides max)
+
+> **Appendix escape hatch:** The 10-slide limit applies to the main narrative. Add unlimited appendix slides for backup detail, deep-dive data, or anticipated questions. Label appendix slides clearly (e.g., "A1", "A2"). Never show appendix slides proactively; use only if asked.
 | Slide | Purpose | Time |
 |-------|---------|------|
 | 1 | Title + one-line key message | 30 sec |

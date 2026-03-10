@@ -99,6 +99,8 @@ Labor Efficiency Variance = (Actual Hours - Standard Hours) × Standard Rate
 EVA = NOPAT - (Capital × WACC)
 EVA = Operating Profit × (1 - Tax Rate) - (Total Capital × WACC)
 ```
+Where: NOPAT = Net Operating Profit After Tax ($), Capital = Total Invested Capital ($), WACC = Weighted Average Cost of Capital (%).
+
 Positive EVA = Creating shareholder value. Negative EVA = Destroying value.
 
 ### Target Costing
@@ -119,6 +121,7 @@ Annuity PV = PMT × [(1 - (1+r)^-n) / r]
 Perpetuity PV = PMT / r
 Growing Perpetuity PV = PMT / (r - g)
 ```
+Where: PV/FV = present/future value ($), r = discount rate (decimal), n = number of periods, PMT = payment per period ($), g = growth rate (decimal).
 
 ### Bond Valuation
 ```
@@ -207,6 +210,7 @@ Share Price = Equity Value / Shares Outstanding
 FCF = EBIT × (1-T) + Depreciation - CapEx - ΔWorking Capital
    = NOPAT + Non-cash charges - Investments
 ```
+Where: EBIT = Earnings Before Interest & Taxes, T = tax rate, CapEx = capital expenditures, ΔWorking Capital = change in net working capital.
 
 ### Terminal Value (Two Methods)
 ```

@@ -17,9 +17,9 @@
 ### Key Metrics
 | Metric | Target | Actual | Trend |
 |--------|--------|--------|-------|
-| Sprint velocity | | | up / down / flat |
-| Pipeline reliability | | | up / down / flat |
-| Data quality score | | | up / down / flat |
+| Sprint velocity | | | Up / Down / Flat |
+| Pipeline reliability | | | Up / Down / Flat |
+| Data quality score | | | Up / Down / Flat |
 
 ---
 

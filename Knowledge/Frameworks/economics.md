@@ -59,6 +59,8 @@ Player A  Cooperate  (3,3)    (0,5)
 ```
 Both defect is Nash equilibrium, but both cooperate is socially optimal. Cooperation is hard without enforcement or repeated interaction.
 
+**Business context:** Pricing wars between airlines, cloud providers, or retailers often follow Prisoner's Dilemma dynamics. Each firm is individually rational to cut prices, but industry profits suffer. Repeated interaction (ongoing competition) and credible retaliation (trigger strategies) can sustain cooperation.
+
 **Oligopoly Dynamics:**
 - **Collusion:** Firms agree to restrict output, raise prices (illegal but profitable)
 - **Cheating incentive:** Individual firm profits from secretly increasing output

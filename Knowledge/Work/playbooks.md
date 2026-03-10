@@ -1,5 +1,7 @@
 # [Platform Name] Playbooks: Critical Frameworks
 
+> **Template note:** These playbooks are examples from a data engineering context. Replace with your own team's operational frameworks and SOPs.
+
 > Snapshotted from Notion Work Hub for offline portability. For the latest version, fetch from Notion using the page IDs below.
 
 ---

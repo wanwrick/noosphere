@@ -173,17 +173,17 @@ Priority order for free cash flow:
 
 ## Case Studies Referenced
 
-### Tesla Executive Compensation
+### Tesla Executive Compensation (2018-2024)
 - Elon Musk's 2018 compensation plan: All performance-based, no salary
 - 12 tranches tied to market cap and revenue/EBITDA milestones
 - Shareholder-approved but controversial (largest CEO pay package ever)
 - 2024 Delaware court voided it; Texas re-vote approved it
 
-### Shake Shack Proxy Battle
+### Shake Shack Proxy Battle (2022)
 - Activist pushed for operational improvements and governance changes
 - Illustrates tension between founder vision and shareholder value maximization
 
-### SVB (Silicon Valley Bank) Failure
+### SVB (Silicon Valley Bank) Failure (2023)
 - Board governance failures: risk committee expertise, risk appetite framework
 - Concentration risk (tech/startup deposits), interest rate risk mismanagement
 - Lessons for board oversight of enterprise risk

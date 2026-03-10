@@ -1,5 +1,7 @@
 # Databricks -- Technical Reference
 
+> **Template note:** This is a sample platform reference (Databricks). Replace entirely with your own platform context and technical patterns.
+
 > Comprehensive reference for the [Platform Name] data platform: Medallion Architecture, Unity Catalog, Delta Live Tables, security, Power BI integration, and optimization.
 
 ---

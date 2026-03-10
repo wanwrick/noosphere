@@ -157,7 +157,7 @@ Demand variability amplifies as you move upstream in the supply chain.
 5. **Pursue Perfection:** Continuous improvement (Kaizen)
 
 ### Seven Wastes (Muda)
-| Waste | Description | Data Platform Example |
+| Waste | Description | Example (data platform; replace with your domain) |
 |-------|-------------|----------------------|
 | **Transport** | Unnecessary movement of materials | Data copying between systems |
 | **Inventory** | Excess stock/WIP | Backlog of unprocessed data |

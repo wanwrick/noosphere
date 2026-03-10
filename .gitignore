@@ -27,3 +27,9 @@ desktop.ini
 *.tmp
 *.bak
 *.orig
+
+# Personal launch materials (not part of the public template)
+linkedin/
+canva/
+github/
+POSTING-GUIDE.md

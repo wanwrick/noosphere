@@ -71,6 +71,8 @@ Work bottom-up, present top-down:
 | What's the flow? | Sankey diagram |
 | How does it rank? | Sorted bar chart |
 | What's the proportion? | Pie chart (only for 2-3 categories) |
+| What explains the change? | Waterfall chart |
+| What's the pattern across two dimensions? | Heatmap |
 
 ### Visualization Principles
 1. **Title states the insight**, not the chart type ("Revenue grew 23% in Q3" not "Q3 Revenue Chart")

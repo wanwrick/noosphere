@@ -46,11 +46,13 @@ because [reason to believe].
 
 ### Customer Lifetime Value (CLV) & Customer Acquisition Cost (CAC)
 ```
-CLV = (Average Revenue per Customer × Gross Margin) / Churn Rate
-CAC = Total Sales & Marketing Cost / Number of New Customers
-LTV:CAC Ratio Target: > 3:1
-Payback Period = CAC / (Monthly Revenue per Customer × Gross Margin)
+CLV  = (ARPC × GM) / Churn Rate
+CAC  = Total Sales & Marketing Cost / New Customers Acquired
+Payback = CAC / (Monthly Revenue per Customer × GM)
 ```
+Where: ARPC = Average Revenue Per Customer ($/yr), GM = Gross Margin (decimal), Churn Rate = annual customer loss rate (decimal).
+
+**Benchmark:** LTV:CAC ratio > 3:1 indicates healthy unit economics. Below 1:1 means you lose money on every customer acquired.
 
 ### Brand Equity (Keller's Model)
 ```

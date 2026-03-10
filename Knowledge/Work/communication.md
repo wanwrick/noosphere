@@ -85,59 +85,30 @@ Next Step: [Specific action] by [date]
 
 ## 3. Presentation Protocol
 
-### Monroe's Motivated Sequence (Persuasive Talks)
-1. **Attention:** Hook (story, statistic, question)
-2. **Need:** Establish the problem (make audience feel it)
-3. **Satisfaction:** Present your solution
-4. **Visualization:** Paint the future with/without
-5. **Action:** Clear call to action
+For full presentation frameworks (Monroe's Motivated Sequence, RAMP openings, CLTs, executive presence, Q&A handling), see `Knowledge/Frameworks/leadership.md` Section 4.
 
-### RAMP Openings
-- **R**hetorical Question: "What would happen if our data platform went down for a day?"
-- **A**nalogy: "Think of [Platform Name] like the nervous system of the organization..."
-- **M**etaphor: "We're building highways for data, not dirt roads"
-- **P**ersonal Story: Brief, relevant, 30 seconds max
-
-### Slide Design Rules
+### Applied Slide Design Rules
 - **One message per slide**: title states the conclusion
 - **10 slides max** for most presentations
 - **70% visual, 30% text**: graphs, diagrams, images
 - **No bullet points** on slides (use speaker notes instead)
 - **Consistent branding**: company template, clean fonts
 
-### Executive Presence During Presentations
-- **Power of Pause:** 2 seconds after key points
-- **Speak Third:** Considered, not eager or cautious
-- **Language Upgrades:**
-  | Instead of | Say |
-  |------------|-----|
-  | "I think" | "The data suggests" |
-  | "Maybe we could" | "I recommend" |
-  | "We're trying" | "We're on track to" |
-  | "The problem is" | "The opportunity is" |
-
-### Q&A Handling
-```
-Pause → Rephrase the question → Answer concisely → Bridge back to key message
-```
-- Never say "That's a great question" (filler, wastes time)
-- "I don't know, but I'll find out by [date]" is always acceptable
-- Prepare for the 3 toughest questions in advance
+### Language Upgrades (Quick Reference)
+| Instead of | Say |
+|------------|-----|
+| "I think" | "The data suggests" |
+| "Maybe we could" | "I recommend" |
+| "We're trying" | "We're on track to" |
+| "The problem is" | "The opportunity is" |
 
 ---
 
 ## 4. Meeting Protocol
 
 ### Meeting Types & Cadence
-| Type | Duration | Frequency | Format |
-|------|----------|-----------|--------|
-| Daily Standup | 15 min | Daily | Async-first (Slack) or sync |
-| Sprint Planning | 2 hours | Bi-weekly | Sync (collaborative) |
-| Sprint Review | 1 hour | Bi-weekly | Sync (demo) |
-| Retrospective | 45 min | Bi-weekly | Sync (facilitated) |
-| 1-on-1 | 30 min | Weekly | Sync (direct reports) |
-| Stakeholder Update | 30 min | Monthly | Sync or async |
-| Roadmap Review | 1 hour | Quarterly | Sync (leadership) |
+
+For the full meeting cadence table, see `_Registry/Cadences.md`.
 
 ### Meeting Prep Checklist
 - [ ] Clear objective stated in invite
@@ -201,19 +172,10 @@ Pause → Rephrase the question → Answer concisely → Bridge back to key mess
 - **I**nformed: People who need to know
 
 ### 3P Status Update Format
-```
-PROGRESS (What we accomplished):
-- [Achievement 1 with metric]
-- [Achievement 2 with metric]
 
-PLANS (What's coming next):
-- [Next milestone + target date]
-- [Key initiative + owner]
+For the full 3P template with metrics tables and risk register, see `Templates/status-update.md`.
 
-PROBLEMS (What needs attention):
-- [Blocker + proposed solution + help needed]
-- [Risk + mitigation plan]
-```
+Quick format: **Progress** (what we accomplished with metrics) + **Plans** (what's coming next with dates) + **Problems** (blockers with proposed solutions).
 
 ---
 
