@@ -1,4 +1,4 @@
-# Claude Code
+# Claude Code local settings (machine-specific, contains local paths)
 .claude/
 
 # OS generated files
@@ -27,6 +27,7 @@ desktop.ini
 *.tmp
 *.bak
 *.orig
+*.log
 
 # Personal launch materials (not part of the public template)
 linkedin/
