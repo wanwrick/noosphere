@@ -1,0 +1,10 @@
+# Claude Code local settings (machine-specific, contains local paths)
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp files
+*.tmp
+*.log
