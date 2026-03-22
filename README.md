@@ -34,6 +34,24 @@ Three problems this system solves:
 
 3. **Framework amnesia.** Knowing Porter's Five Forces exists is different from applying it consistently when the situation calls for it. The system routes questions to the right framework every time.
 
+**Built by [Paroz Mehta](https://linkedin.com/in/parozmehta) — Technical PM, Data Engineering | Cornell-Queen's EMBA CA26**
+`github.com/wanwrick/work-os-template`
+
+---
+
+## System Diagrams
+
+Visual architecture of Work OS v1.1. All diagrams rendered in Consolas monospace.
+
+### File Tree: 32 files across four layers
+![File Tree](https://raw.githubusercontent.com/wanwrick/work-os-template/main/_Diagrams/diagram1_file_tree.png)
+
+### Architecture: How a request becomes a verified output
+![Architecture](https://raw.githubusercontent.com/wanwrick/work-os-template/main/_Diagrams/diagram2_architecture.png)
+
+### v1.1 Capabilities: Auto-Loader, Verification Gate, Improvement Loop
+![New Capabilities](https://raw.githubusercontent.com/wanwrick/work-os-template/main/_Diagrams/diagram3_decision_tree.png)
+
 ---
 
 ## Architecture
@@ -127,8 +145,12 @@ work-os-template/
 |   +-- MCPs.md                     Connected services reference
 |   +-- Cadences.md                 Recurring rituals and schedules
 +-- _Logs/                          Learning system
-    +-- feedback.md                 Corrections and preferences
-    +-- evolution.md                System changelog
+|   +-- feedback.md                 Corrections and preferences
+|   +-- evolution.md                System changelog
++-- _Diagrams/                      System architecture visuals
+    +-- diagram1_file_tree.png      32-file structure across four layers
+    +-- diagram2_architecture.png   6-phase request-to-output flow
+    +-- diagram3_decision_tree.png  Three v1.1 capabilities decision tree
 ```
 
 ---
@@ -225,4 +247,4 @@ MIT. See [LICENSE](LICENSE) for details.
 
 ---
 
-*Originally designed by Paroz Mehta.*
+*Built by [Paroz Mehta](https://linkedin.com/in/parozmehta) — Technical PM, Data Engineering at [Practice Name] | Cornell-Queen's EMBA CA26 | [github.com/wanwrick](https://github.com/wanwrick)*
