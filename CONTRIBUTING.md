@@ -1,6 +1,6 @@
 # Contributing
 
-This project is designed to be **forked and customized**, not contributed to directly. Your Work OS should be yours.
+This project is designed to be **forked and customized**, not contributed to directly. Your Noosphere should be yours.
 
 ## How to Use This Template
 
