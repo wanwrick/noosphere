@@ -6,7 +6,6 @@ This workflow describes the auto-optimization loop built into Work OS. It ensure
 
 Inspired by:
 - **Boris Jeltsky** — build-in-public AI PM patterns (iterative public improvement, transparent versioning)
-- **Akash Kofta** — AIPM course frameworks (AI-first product management, feedback-driven system design)
 - **Andrej Karpathy** — autoresearch loop pattern (score → mutate → re-score → keep best)
 
 ---
