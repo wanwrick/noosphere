@@ -88,3 +88,19 @@ THEN the new column is captured in a _metadata field and an alert fires to #data
 - [ ] Documentation updated
 - [ ] Deployed to staging and validated
 - [ ] Product owner approval
+
+---
+
+## Pre-Delivery Verification
+
+Before moving to sprint, confirm:
+
+- [ ] **Persona:** The "As a" role is a real person on your team or stakeholder list, not a generic user.
+- [ ] **Value:** The "So that" statement is measurable. If you cannot tell when the value is delivered, rewrite it.
+- [ ] **Acceptance criteria:** Each criterion can be tested in isolation without running the others. If two criteria share a GIVEN, split them.
+- [ ] **Edge case:** At least one criterion covers a failure or error condition.
+- [ ] **Subtasks:** Every subtask has an owner. No orphaned tasks.
+- [ ] **Dependencies:** Upstream dependencies are confirmed ready, not just assumed ready.
+- [ ] **Estimate:** Story points reflect the full subtask list. If subtasks were added late, re-estimate.
+
+If any check fails, fix it before committing to the sprint.

@@ -73,4 +73,19 @@
 
 ---
 
+---
+
+## Pre-Delivery Verification
+
+Before sending, confirm:
+
+- [ ] **BLUF:** Page 1 states the decision and recommendation in two sentences. The reader needs nothing else to approve or reject.
+- [ ] **Options table:** Every cell is filled. No blank criteria.
+- [ ] **Evidence:** At least one data point per option. No assertions without support.
+- [ ] **Risk table:** Every risk has a probability, impact, and mitigation. "TBD" is not a mitigation.
+- [ ] **Action items:** Every row in the implementation plan has an owner and a specific date.
+- [ ] **Audience:** Would a reader unfamiliar with the project understand Page 1 in 60 seconds?
+
+If any check fails, fix it before sending.
+
 *Prepared by: [Your Name] | Date: YYYY-MM-DD*

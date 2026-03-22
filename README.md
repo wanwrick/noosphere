@@ -2,7 +2,25 @@
 
 A portable, self-contained knowledge management system that turns Claude into an AI work partner with full access to business frameworks, operational context, reusable templates, and step-by-step workflows.
 
-**31 markdown files. Zero external dependencies. Fork it, customize it, make it yours.**
+**32 markdown files. Zero external dependencies. Fork it, customize it, make it yours.**
+
+---
+
+## What's New in v1.1
+
+**Self-improvement loop.** Work OS now learns and optimizes within each session.
+
+| Capability | What changed |
+|-----------|-------------|
+| **Auto-Loader** | Session bootstrap reads GOALS.md, feedback.md, and Cadences.md in a defined sequence before any work starts |
+| **Verification loops** | Every template and workflow now includes a pre-delivery checklist that enforces BLUF, framework completeness, and action ownership |
+| **Autoresearch loop** | When a gap surfaces 3+ times, the system triggers a structured fix cycle: identify → score → propose → validate → implement → log |
+| **Session Protocol v2** | Three-pass verification (framework, BLUF, action) added to every output before delivery |
+| **Version discipline** | Semantic versioning and changelog entries required for every system-level change |
+
+Inspired by Boris Jeltsky's build-in-public AI PM patterns, Akash Kofta's AIPM course frameworks, and Andrej Karpathy's autoresearch loop (score → mutate → re-score).
+
+See `Workflows/self-improvement.md` for the full playbook.
 
 ---
 
@@ -96,11 +114,12 @@ work-os-template/
 |   +-- status-update.md            3P format (Progress/Plans/Problems)
 |   +-- rca-template.md             Root cause analysis (blameless)
 |   +-- user-story.md               Agile story format
-+-- Workflows/                      4 step-by-step playbooks
++-- Workflows/                      5 step-by-step playbooks
 |   +-- incident-response.md        SEV-based crisis playbook
 |   +-- negotiation-prep.md         BATNA + power dynamics + tactics
 |   +-- executive-briefing.md       Board deck / C-suite prep
 |   +-- data-storytelling.md        Insight pyramid + visualization guide
+|   +-- self-improvement.md         Auto-loader, verification loop, autoresearch
 +-- _Registry/                      System metadata
 |   +-- Skills.md                   All available skills inventory
 |   +-- MCPs.md                     Connected services reference
@@ -179,6 +198,7 @@ The system works fully offline with local files. When connected, these services 
 | Add a knowledge domain | Create a file in `Knowledge/Frameworks/` or `Knowledge/Work/`, add routing rule to CLAUDE.md |
 | Add a template | Create a file in `Templates/`, reference in CLAUDE.md |
 | Add a workflow | Create a file in `Workflows/`, add trigger to Cadences.md |
+| Optimize the system | Run the autoresearch loop in `Workflows/self-improvement.md` |
 | Log a decision | Copy `Knowledge/Decisions/_template.md`, fill in context and outcome |
 | Add an MCP | Update `_Registry/MCPs.md` and `_Registry/Skills.md` |
 | Update priorities | Edit `GOALS.md` at the start of each quarter |

@@ -138,3 +138,28 @@ Use the Pushback Response Framework:
 | **Strategic silence** | After making an offer, stop talking |
 | **Nibbling** | Ask for small extras after main deal is agreed |
 | **Contingent agreement** | "If X happens, then we'll do Y": bridges disagreement on forecasts |
+
+---
+
+## Verification Loop
+
+Run before entering the negotiation:
+
+**BATNA check:**
+- [ ] Your BATNA is a real alternative you could execute today, not a hypothetical. If you cannot name it specifically, your BATNA is weak.
+- [ ] You have scored your BATNA using the scoring table. Do not enter a negotiation without knowing your total score.
+- [ ] You have estimated their BATNA. Negotiations lost before they start often trace back to overestimating your counterpart's alternatives.
+
+**Interest mapping check:**
+- [ ] Your "must haves" and "tradeables" are distinct. If everything is a must have, you have no trading currency.
+- [ ] You have identified at least one trade where their interest differs from yours. That is your value creation opportunity.
+
+**Anchor check:**
+- [ ] Your opening anchor is ambitious but defensible. You can justify it with data, precedent, or market rates.
+- [ ] You have practiced saying your anchor out loud without hedging. "I was thinking maybe around..." signals weakness.
+
+**Post-negotiation check (after the deal):**
+- [ ] The agreement is in writing and confirmed by all parties before you leave the conversation.
+- [ ] You have documented what worked and what did not for the next time.
+
+If any check fails, address it before sitting down.

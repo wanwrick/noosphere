@@ -51,3 +51,17 @@
 **Overall Status:** On Track / At Risk / Blocked
 
 **Next Review:** [Date]
+
+---
+
+## Pre-Delivery Verification
+
+Before sending, confirm:
+
+- [ ] **PROGRESS:** Every bullet has a metric (number, percentage, or date). No vague statements like "made good progress."
+- [ ] **PLANS:** Every upcoming item has an owner and a target date.
+- [ ] **PROBLEMS:** Every blocker has a proposed solution and a specific help request. If you have no solution yet, say so explicitly.
+- [ ] **Risk register:** Every risk has a mitigation and an owner. Not just a list of fears.
+- [ ] **Opening line:** The first sentence tells the reader the overall status. They should not have to read to the end to find out.
+
+If any check fails, fix it before sending.

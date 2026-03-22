@@ -97,4 +97,19 @@
 
 ---
 
+---
+
+## Pre-Delivery Verification
+
+Before publishing, confirm:
+
+- [ ] **Blameless:** No action item assigns fault to a person. Every item addresses a system, process, or tooling gap.
+- [ ] **5 Whys:** Each "why" answer is genuinely distinct from the previous one. If two answers are the same, dig deeper.
+- [ ] **Root cause:** The final "why" is actionable and within your team's control. "Vendor outage" is a cause, not a root cause.
+- [ ] **Action items:** Every item has an owner, a priority, and a due date. No orphaned actions.
+- [ ] **Timeline:** Every timestamp is filled. Gaps in the timeline indicate investigation gaps.
+- [ ] **AAR:** "What will we do differently?" is specific enough to put in a runbook. If it is generic ("be more careful"), rewrite it.
+
+If any check fails, fix it before publishing.
+
 *This RCA was reviewed with: [names/teams] on [date]*
