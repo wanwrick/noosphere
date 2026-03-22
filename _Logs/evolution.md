@@ -6,8 +6,8 @@
 
 ## Version History
 
-### v1.0.0 -- [Date] -- Initial Release
-**Created by:** [Your Name] + Claude
+### v1.0.0 -- 2026-03-20 -- Initial Release
+**Created by:** Paroz Mehta + Claude
 
 **Structure:** See `README.md` for the full directory tree.
 
@@ -29,8 +29,9 @@
 
 | Date | Change | Reason |
 |------|--------|--------|
-| [Date] | v1.0 Initial creation | Build portable Work OS from frameworks + work knowledge |
+| 2026-03-20 | v1.0 Initial creation | Build portable Work OS from frameworks + work knowledge |
 | 2026-03-21 | v1.1.0 Self-improvement loop + verification system | Add auto-optimization so the system improves each session, not just accumulates corrections |
+| 2026-03-22 | v1.1.1 Diagram guidelines, README cleanup, gitignore hardening | Excalidraw design constraints added to CLAUDE.md; CONTRIBUTING.md and LICENSE added to directory tree; .excalidraw files excluded from repo |
 
 ---
 
@@ -61,3 +62,22 @@
 - Version incremented as minor (1.0 → 1.1) because a new workflow file was added
 
 **Gap that triggered this update:** No structured mechanism existed to improve the system based on session learnings. Corrections went into feedback.md but no loop closed back to system-level fixes.
+
+---
+
+### v1.1.1 -- 2026-03-22 -- Diagram Guidelines and Repo Hygiene
+**Author:** Paroz Mehta + Claude Opus 4.6
+
+**What changed:**
+
+| File | Change |
+|------|--------|
+| `CLAUDE.md` | Diagram Generation section added: pastel palette, L-to-R layout, spacing rules, overlap guard, sketch aesthetic |
+| `.gitignore` | `*.excalidraw` added to prevent local diagram files from being committed |
+| `README.md` | Directory tree updated to include CONTRIBUTING.md and LICENSE at root |
+| `_Logs/evolution.md` | v1.0.0 placeholders (`[Date]`, `[Your Name]`) replaced with actual values |
+
+**Design Decisions:**
+- Excalidraw files are local review artifacts; the generator script produces them on demand
+- Design constraints documented in CLAUDE.md so every future session enforces the same visual standards
+- Version incremented as patch (1.1.0 to 1.1.1) because only existing files were edited
