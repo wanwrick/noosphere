@@ -1,6 +1,8 @@
-# Work OS Template
+# Noosphere
 
-A portable, self-contained knowledge management system that turns Claude into an AI work partner with full access to business frameworks, operational context, reusable templates, and step-by-step workflows.
+**The context layer for your AI work partner.**
+
+A portable, self-contained knowledge system that turns Claude into an AI work partner with full access to business frameworks, operational context, reusable templates, and step-by-step workflows.
 
 **32 markdown files. Zero external dependencies. Fork it, customize it, make it yours.**
 
@@ -8,7 +10,7 @@ A portable, self-contained knowledge management system that turns Claude into an
 
 ## What's New in v1.1
 
-**Self-improvement loop.** Work OS now learns and optimizes within each session.
+**Self-improvement loop.** Noosphere now learns and optimizes within each session.
 
 | Capability | What changed |
 |-----------|-------------|
@@ -35,22 +37,22 @@ Three problems this system solves:
 3. **Framework amnesia.** Knowing Porter's Five Forces exists is different from applying it consistently when the situation calls for it. The system routes questions to the right framework every time.
 
 **Built by [Paroz Mehta](https://linkedin.com/in/parozmehta) — Technical PM, Data Engineering | Cornell-Queen's EMBA CA26**
-`github.com/wanwrick/work-os-template`
+`github.com/wanwrick/noosphere`
 
 ---
 
 ## System Diagrams
 
-Visual architecture of Work OS v1.1. All diagrams rendered in Consolas monospace.
+Visual architecture of Noosphere v1.1. All diagrams rendered in Consolas monospace.
 
 ### File Tree: 32 files across four layers
-![File Tree](https://raw.githubusercontent.com/wanwrick/work-os-template/main/_Diagrams/diagram1_file_tree.png)
+![File Tree](https://raw.githubusercontent.com/wanwrick/noosphere/main/_Diagrams/diagram1_file_tree.png)
 
 ### Architecture: How a request becomes a verified output
-![Architecture](https://raw.githubusercontent.com/wanwrick/work-os-template/main/_Diagrams/diagram2_architecture.png)
+![Architecture](https://raw.githubusercontent.com/wanwrick/noosphere/main/_Diagrams/diagram2_architecture.png)
 
 ### v1.1 Capabilities: Auto-Loader, Verification Gate, Improvement Loop
-![New Capabilities](https://raw.githubusercontent.com/wanwrick/work-os-template/main/_Diagrams/diagram3_decision_tree.png)
+![New Capabilities](https://raw.githubusercontent.com/wanwrick/noosphere/main/_Diagrams/diagram3_decision_tree.png)
 
 ---
 
@@ -106,7 +108,7 @@ User Request
 ## Directory Structure
 
 ```
-work-os-template/
+noosphere/
 +-- CLAUDE.md                       System brain + routing
 +-- GOALS.md                        Priorities + OKRs
 +-- CONTRIBUTING.md                 Fork-and-customize guide
@@ -247,4 +249,4 @@ MIT. See [LICENSE](LICENSE) for details.
 
 ---
 
-*Built by [Paroz Mehta](https://linkedin.com/in/parozmehta) — Technical PM, Data Engineering at Questrade | Cornell-Queen's EMBA CA26 | [github.com/wanwrick](https://github.com/wanwrick)*
+*Built by [Paroz Mehta](https://linkedin.com/in/parozmehta) — Technical PM, Data Engineering at Questrade | Cornell-Queen's EMBA CA26 | [github.com/wanwrick/noosphere](https://github.com/wanwrick/noosphere)*
