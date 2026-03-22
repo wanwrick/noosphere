@@ -114,3 +114,28 @@
 - [ ] Include: decisions made, action items, owners, deadlines
 - [ ] Follow up on any "I'll get back to you" commitments
 - [ ] Log decisions in `Knowledge/Decisions/`
+
+---
+
+## Verification Loop
+
+Run before walking into the room:
+
+**BLUF check:**
+- [ ] Slide 1 states your recommendation in one sentence. A reader who sees only Slide 1 knows what you are asking for.
+- [ ] Your opening line is memorized and leads with the conclusion, not the agenda.
+
+**Pyramid Principle check:**
+- [ ] Every slide title is a conclusion ("We need $200K for platform observability"), not a topic ("Budget Request").
+- [ ] Each reason on slides 5-6 is backed by at least one data point. Assertions without evidence will be challenged.
+- [ ] The recommendation on Slide 4 flows directly from the complication on Slide 3. There is no logical gap.
+
+**Audience check:**
+- [ ] You have adapted depth to the specific audience (see the Audience Adaptation table above). A Board deck is not the same as a VP deck.
+- [ ] Every appendix slide maps to a question on your Q&A prep list. If an appendix slide has no matching question, remove it.
+
+**Action check:**
+- [ ] Slide 9 (the Ask) states a specific decision with a deadline. "Consider this" is not an ask.
+- [ ] Every action item in the closing slide has a named owner.
+
+If any check fails, revise before presenting.

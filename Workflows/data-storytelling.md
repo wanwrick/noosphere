@@ -131,3 +131,25 @@ Work bottom-up, present top-down:
 - [ ] Are numbers accurate and sourced?
 - [ ] Would this make sense to someone seeing it for the first time?
 - [ ] Is the recommended action clear and specific?
+
+---
+
+## Verification Loop
+
+Run before sharing any data story:
+
+**Insight Pyramid check:**
+- [ ] Can you trace every "so what" to a specific data point? If not, the insight is an opinion, not a finding.
+- [ ] Is the observation distinct from the insight? ("Latency tripled" is an observation. "Schema drift causes reprocessing" is the insight.)
+- [ ] Does the "so what" recommend a specific action with a timeline? Vague calls to action fail.
+
+**Visualization check:**
+- [ ] Does each chart title state a conclusion, not a topic? ("Revenue grew 23% in Q3" vs. "Q3 Revenue")
+- [ ] If you remove the labels, can the audience still identify the key point from the visual alone?
+- [ ] Are you using more than 3 colors? If yes, reduce.
+
+**BLUF check:**
+- [ ] The first thing the audience sees is the recommendation, not the background.
+- [ ] If someone reads only the titles (no body text), do they get the full story?
+
+If any check fails, revise before sharing.

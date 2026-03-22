@@ -23,16 +23,35 @@ Every session follows this sequence. No shortcuts.
 
 ### 3. Execute with Verification
 - Produce the work
-- **Before marking anything done**, verify the output:
-  - Does it match the stated plan?
-  - Is the framework applied correctly (cross-check against Knowledge/ files)?
-  - Does it meet communication standards (BLUF, brevity, evidence-based)?
-  - For data/technical work: is the logic sound? Would a second review catch errors?
+- **Before marking anything done**, run three verification passes:
+
+  **Pass 1: Framework Check**
+  - Is the framework named explicitly?
+  - Are all components addressed (all 5 forces, all 4 Is, all steps)?
+  - Is the conclusion derived from the framework, not retrofitted onto it?
+
+  **Pass 2: BLUF Check**
+  - Can the reader understand the recommendation from the first sentence?
+  - Is every sentence under 25 words?
+  - Are banned words absent (leverage, utilize, synergies, deep dive, circle back)?
+
+  **Pass 3: Action Check**
+  - Does every action item have an owner and a due date or trigger?
+  - Is the next step specific enough to execute without follow-up questions?
+
+- If any pass fails: revise, then re-check. Do not deliver a failing output.
+- For full details on the verification loop, see `Workflows/self-improvement.md`.
 
 ### 4. Close the Loop
 - If the user corrects anything, **log it immediately** to `_Logs/feedback.md` using the entry format
 - If a new pattern or preference emerges, propose adding it to feedback.md
 - Summarize what was accomplished and any open items
+
+### 5. Self-Improvement Check
+- Did this session surface a gap in Knowledge/, Templates/, or Workflows/?
+- Were there 3+ corrections in the same category? If yes, trigger the autoresearch loop in `Workflows/self-improvement.md`.
+- Did a framework produce a wrong or incomplete output? Propose a system-level fix (new rule, file update, or routing change).
+- Log any system fix to `_Logs/evolution.md` and bump the version.
 
 ## How This System Works
 
@@ -72,6 +91,7 @@ User Question
 9. **For "what tools do I have?"** -> Check `_Registry/`
 10. **Cross-domain questions** -> Pull from multiple knowledge files. Most real problems span domains.
 11. **For live work context** -> Query Notion Work Hub via MCP (see Notion Reference Map below)
+12. **For system improvement or verification** -> See `Workflows/self-improvement.md` for the auto-optimization loop, BLUF enforcement, and version discipline
 
 > **Workflows/ vs playbooks.md:** `Workflows/` contains universal step-by-step playbooks (incident response, negotiation prep, executive briefing, data storytelling). `Knowledge/Work/playbooks.md` contains domain-specific operational SOPs (10Q onboarding, CDO deliverables, Data Contracts). When in doubt: if it is a general professional process, check Workflows/; if it is a team-specific operational procedure, check playbooks.md.
 

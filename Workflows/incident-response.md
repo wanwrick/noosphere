@@ -112,3 +112,23 @@ Data Engineer -> Team Lead (IC) -> VP Engineering -> CTO
                       |
                 Business stakeholders (if user-facing impact)
 ```
+
+---
+
+## Verification Loop
+
+Run at end of Phase 2 (before declaring resolved) and again before publishing the post-mortem:
+
+**Resolution check (before closing the incident):**
+- [ ] The fix is deployed and confirmed working, not just "looks okay." What test proves it?
+- [ ] The stakeholder notification matrix has been followed. No one is finding out via word-of-mouth.
+- [ ] A post-mortem date is scheduled before you close the incident channel.
+
+**Post-mortem check (before publishing the RCA):**
+- [ ] Every action item names a system or process failure, not a person. If a name appears next to a root cause, rewrite it.
+- [ ] The 5 Whys reaches a root cause that is actionable by your team. "Vendor outage" stops at symptom. Keep going.
+- [ ] Every action item has an owner and a due date. Items without both are aspirations, not commitments.
+- [ ] "What will we do differently?" in the AAR is specific enough to become a runbook entry. Test it: could a new engineer follow this instruction?
+- [ ] The post-mortem has been reviewed by at least one person who was not in the incident.
+
+If any check fails, resolve it before publishing.
