@@ -1,6 +1,6 @@
 # System Evolution Log
 
-> Changelog for the Work OS itself. Track additions, modifications, and structural changes.
+> Changelog for the Noosphere system. Track additions, modifications, and structural changes.
 
 ---
 
@@ -29,7 +29,7 @@
 
 | Date | Change | Reason |
 |------|--------|--------|
-| 2026-03-20 | v1.0 Initial creation | Build portable Work OS from frameworks + work knowledge |
+| 2026-03-20 | v1.0 Initial creation | Build portable Noosphere from frameworks + work knowledge |
 | 2026-03-21 | v1.1.0 Self-improvement loop + verification system | Add auto-optimization so the system improves each session, not just accumulates corrections |
 | 2026-03-22 | v1.1.1 Diagram guidelines, README cleanup, gitignore hardening | Excalidraw design constraints added to CLAUDE.md; CONTRIBUTING.md and LICENSE added to directory tree; .excalidraw files excluded from repo |
 

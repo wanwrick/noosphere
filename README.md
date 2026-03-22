@@ -36,7 +36,7 @@ Three problems this system solves:
 
 3. **Framework amnesia.** Knowing Porter's Five Forces exists is different from applying it consistently when the situation calls for it. The system routes questions to the right framework every time.
 
-**Built by [Paroz Mehta](https://linkedin.com/in/parozmehta) — Technical PM, Data Engineering | Cornell-Queen's EMBA CA26**
+**Built by [Paroz Mehta](https://linkedin.com/in/parozmehta), Technical PM, Data Engineering | Cornell-Queen's EMBA CA26**
 `github.com/wanwrick/noosphere`
 
 ---
@@ -249,4 +249,4 @@ MIT. See [LICENSE](LICENSE) for details.
 
 ---
 
-*Built by [Paroz Mehta](https://linkedin.com/in/parozmehta) — Technical PM, Data Engineering at Questrade | Cornell-Queen's EMBA CA26 | [github.com/wanwrick/noosphere](https://github.com/wanwrick/noosphere)*
+*Built by [Paroz Mehta](https://linkedin.com/in/parozmehta), Technical PM, Data Engineering at Questrade | Cornell-Queen's EMBA CA26 | [github.com/wanwrick/noosphere](https://github.com/wanwrick/noosphere)*

@@ -1,6 +1,6 @@
 # Skills Registry
 
-> Inventory of all skills available to Claude when using this Work OS. Skills are specialized instruction sets that improve output quality for specific task types.
+> Inventory of all skills available to Claude when using this Noosphere. Skills are specialized instruction sets that improve output quality for specific task types.
 
 ---
 

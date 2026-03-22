@@ -2,11 +2,11 @@
 
 ## Purpose
 
-This workflow describes the auto-optimization loop built into Work OS. It ensures the system improves with each session rather than remaining static. Two mechanisms drive this: the **Auto-Loader** (context bootstrap at session start) and the **Auto-Improver** (verification and correction loop at session end).
+This workflow describes the auto-optimization loop built into Noosphere. It ensures the system improves with each session rather than remaining static. Two mechanisms drive this: the **Auto-Loader** (context bootstrap at session start) and the **Auto-Improver** (verification and correction loop at session end).
 
 Inspired by:
-- **Boris Jeltsky** — build-in-public AI PM patterns (iterative public improvement, transparent versioning)
-- **Andrej Karpathy** — autoresearch loop pattern (score → mutate → re-score → keep best)
+- **Boris Jeltsky**, build-in-public AI PM patterns (iterative public improvement, transparent versioning)
+- **Andrej Karpathy**, autoresearch loop pattern (score → mutate → re-score → keep best)
 
 ---
 
@@ -32,15 +32,15 @@ Map the session request to one or more Knowledge/ files:
 | Request type | Primary file | Secondary file |
 |---|---|---|
 | Strategy or competitive analysis | Knowledge/Frameworks/strategy.md | Knowledge/Frameworks/economics.md |
-| Financial analysis or modeling | Knowledge/Frameworks/finance.md | — |
+| Financial analysis or modeling | Knowledge/Frameworks/finance.md | - |
 | People, teams, org design | Knowledge/Frameworks/leadership.md | Knowledge/Work/collaborators.md |
 | Data platform or technical work | Knowledge/Work/platform.md | Knowledge/Work/playbooks.md |
 | Communication or stakeholder update | Knowledge/Work/communication.md | Templates/status-update.md |
 | Decision under uncertainty | Knowledge/Frameworks/strategy.md | Templates/decision-memo.md |
 | Presentation or deck | Workflows/executive-briefing.md | Knowledge/Work/communication.md |
 | Incident or crisis | Workflows/incident-response.md | Templates/rca-template.md |
-| Negotiation | Workflows/negotiation-prep.md | — |
-| Data narrative or dashboard | Workflows/data-storytelling.md | — |
+| Negotiation | Workflows/negotiation-prep.md | - |
+| Data narrative or dashboard | Workflows/data-storytelling.md | - |
 
 ### Step 3: State the Plan
 

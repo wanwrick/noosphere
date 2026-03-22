@@ -31,7 +31,7 @@ Leading the build-out of [Platform Name], an enterprise data lakehouse that serv
 ### P3: Continuous Learning Application
 - Apply business frameworks systematically to real work challenges
 - Use financial analysis skills for business cases and ROI modeling
-- Leverage strategy frameworks for competitive positioning of the platform
+- Use strategy frameworks for competitive positioning of the platform
 - Apply leadership models to team development and organizational influence
 
 ## Key Metrics I Track

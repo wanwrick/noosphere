@@ -1,4 +1,4 @@
-# Work OS: System Instructions
+# Noosphere: System Instructions
 
 ## Identity
 
@@ -250,7 +250,7 @@ For the full list of connected services, capabilities, and usage guidance, see `
 
 When generating architecture or workflow diagrams, enforce these constraints:
 
-- **Palette:** `#AEC6CF` (blue) `#B7E4C7` (green) `#FDFD96` (yellow) `#C3B1E1` (purple) `#D3D3D3` (gray) — no bright red, orange, or neon
+- **Palette:** `#AEC6CF` (blue) `#B7E4C7` (green) `#FDFD96` (yellow) `#C3B1E1` (purple) `#D3D3D3` (gray), no bright red, orange, or neon
 - **Layout:** strictly left to right; no side columns, no zig-zag flows
 - **Text:** no ordinals (1, 2, 3) to indicate sequence; all labels grammatically correct
 - **Spacing:** box height min 62px for two-line text; vertical gap between stacked boxes min 14px
