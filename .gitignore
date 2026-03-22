@@ -28,6 +28,9 @@ desktop.ini
 *.bak
 *.orig
 
+# Excalidraw diagrams (local review artifacts)
+*.excalidraw
+
 # Personal launch materials (not part of the public template)
 linkedin/
 canva/

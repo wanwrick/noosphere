@@ -91,6 +91,8 @@ User Request
 work-os-template/
 +-- CLAUDE.md                       System brain + routing
 +-- GOALS.md                        Priorities + OKRs
++-- CONTRIBUTING.md                 Fork-and-customize guide
++-- LICENSE                         MIT license
 +-- Knowledge/
 |   +-- Frameworks/                 8 business domain files
 |   |   +-- finance.md              DCF, WACC, CAPM, LBO, accounting, valuation
