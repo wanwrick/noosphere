@@ -18,7 +18,7 @@ A portable, self-contained knowledge management system that turns Claude into an
 | **Session Protocol v2** | Three-pass verification (framework, BLUF, action) added to every output before delivery |
 | **Version discipline** | Semantic versioning and changelog entries required for every system-level change |
 
-Inspired by Boris Jeltsky's build-in-public AI PM patterns, Akash Kofta's AIPM course frameworks, and Andrej Karpathy's autoresearch loop (score → mutate → re-score).
+Inspired by Boris Jeltsky's build-in-public AI PM patterns and Andrej Karpathy's autoresearch loop (score → mutate → re-score).
 
 See `Workflows/self-improvement.md` for the full playbook.
 

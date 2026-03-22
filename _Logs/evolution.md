@@ -57,7 +57,7 @@
 - Verification loops placed at end of each file (not inline) to keep the workflow readable on first pass
 - Three-pass verification (framework, BLUF, action) mirrors a consulting peer review: content, communication, execution
 - Autoresearch loop adapts Karpathy's pattern for knowledge work: score → mutate → re-score
-- Boris Jeltsky (AI PM build-in-public) and Akash Kofta (AIPM course) credited in self-improvement.md and README
+- Boris Jeltsky (AI PM build-in-public) credited in self-improvement.md and README
 - Version incremented as minor (1.0 → 1.1) because a new workflow file was added
 
 **Gap that triggered this update:** No structured mechanism existed to improve the system based on session learnings. Corrections went into feedback.md but no loop closed back to system-level fixes.
