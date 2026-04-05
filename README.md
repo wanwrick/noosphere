@@ -4,7 +4,7 @@
 
 A portable, self-contained knowledge system that turns Claude into an AI work partner with full access to business frameworks, operational context, reusable templates, and step-by-step workflows.
 
-**32 markdown files. Zero external dependencies. Fork it, customize it, make it yours.**
+**34 markdown files. Zero external dependencies. Fork it, customize it, make it yours.**
 
 ---
 
@@ -45,7 +45,7 @@ Three problems this system solves:
 
 Visual architecture of Noosphere v1.1. All diagrams rendered in Consolas monospace.
 
-### File Tree: 32 files across four layers
+### File Tree: 34 files across four layers
 ![File Tree](https://raw.githubusercontent.com/wanwrick/noosphere/main/_Diagrams/diagram1_file_tree.png)
 
 ### Architecture: How a request becomes a verified output
@@ -114,7 +114,7 @@ noosphere/
 +-- CONTRIBUTING.md                 Fork-and-customize guide
 +-- LICENSE                         MIT license
 +-- Knowledge/
-|   +-- Frameworks/                 8 business domain files
+|   +-- Frameworks/                 9 domain files
 |   |   +-- finance.md              DCF, WACC, CAPM, LBO, accounting, valuation
 |   |   +-- strategy.md             Porter's 5F, VRIN, blue ocean, game theory, CAGE
 |   |   +-- leadership.md           Transformational, teams, org behavior, presentations
@@ -123,6 +123,7 @@ noosphere/
 |   |   +-- economics.md            Supply/demand, game theory, GDP, policy
 |   |   +-- marketing.md            STP, 4Ps, JTBD, CLV/CAC, brand equity
 |   |   +-- technology.md           Digital transformation, GenAI strategy, AI governance
+|   |   +-- llm-knowledge-bases.md LLM-as-author wiki pattern, compile/query/lint pipeline
 |   +-- Work/                       Operational context files
 |   |   +-- team.md                 Team structure, platform, Agile practices
 |   |   +-- platform.md             Technical reference with code patterns
@@ -136,12 +137,13 @@ noosphere/
 |   +-- status-update.md            3P format (Progress/Plans/Problems)
 |   +-- rca-template.md             Root cause analysis (blameless)
 |   +-- user-story.md               Agile story format
-+-- Workflows/                      5 step-by-step playbooks
++-- Workflows/                      6 step-by-step playbooks
 |   +-- incident-response.md        SEV-based crisis playbook
 |   +-- negotiation-prep.md         BATNA + power dynamics + tactics
 |   +-- executive-briefing.md       Board deck / C-suite prep
 |   +-- data-storytelling.md        Insight pyramid + visualization guide
 |   +-- self-improvement.md         Auto-loader, verification loop, autoresearch
+|   +-- knowledge-base-ops.md      Ingest, compile, query, lint, and maintain an LLM wiki
 +-- _Registry/                      System metadata
 |   +-- Skills.md                   All available skills inventory
 |   +-- MCPs.md                     Connected services reference

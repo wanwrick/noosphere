@@ -85,13 +85,14 @@ User Question
 3. **For day-to-day work questions** -> Route to `Knowledge/Work/` files (team context, platform, communication, playbooks)
 4. **For "who is involved?"** -> Route to `Knowledge/Work/collaborators.md` for people context, domains, and working styles
 5. **For document creation** -> Check `Templates/` for formats, then apply relevant frameworks
-6. **For step-by-step processes** -> Check `Workflows/` for guided playbooks (incident response, negotiation, briefings, data storytelling)
+6. **For step-by-step processes** -> Check `Workflows/` for guided playbooks (incident response, negotiation, briefings, data storytelling, knowledge base ops)
 7. **For domain-specific SOPs** -> Check `Knowledge/Work/playbooks.md` for operational frameworks (10Q onboarding, CDO deliverables, Data Contracts)
 8. **For past decisions or logging a new one** -> Check `Knowledge/Decisions/`
 9. **For "what tools do I have?"** -> Check `_Registry/`
 10. **Cross-domain questions** -> Pull from multiple knowledge files. Most real problems span domains.
 11. **For live work context** -> Query Notion Work Hub via MCP (see Notion Reference Map below)
 12. **For system improvement or verification** -> See `Workflows/self-improvement.md` for the auto-optimization loop, BLUF enforcement, and version discipline
+13. **For LLM knowledge base design or wiki compilation** -> See `Knowledge/Frameworks/llm-knowledge-bases.md` for the pattern and `Workflows/knowledge-base-ops.md` for the operational playbook
 
 > **Workflows/ vs playbooks.md:** `Workflows/` contains universal step-by-step playbooks (incident response, negotiation prep, executive briefing, data storytelling). `Knowledge/Work/playbooks.md` contains domain-specific operational SOPs (10Q onboarding, CDO deliverables, Data Contracts). When in doubt: if it is a general professional process, check Workflows/; if it is a team-specific operational procedure, check playbooks.md.
 
