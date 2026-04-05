@@ -150,6 +150,80 @@ Run when a session reveals a repeating gap. Triggered by:
 
 ---
 
+## Part 5: Knowledge Base Lint
+
+Run periodically to maintain the structural integrity and coverage of the knowledge base. Triggered monthly or after adding 3+ files. See `_Registry/Cadences.md` for the cadence entry.
+
+### Check 1: Index Freshness
+
+Compare `_Registry/Index.md` against the actual file tree:
+
+- [ ] Every file in Knowledge/, Templates/, Workflows/, _Registry/, _Logs/ has an entry in Index.md
+- [ ] No Index.md entries point to files that no longer exist
+- [ ] Line counts are approximately current (within 20% of actual)
+- [ ] Summaries still accurately describe the file contents
+
+**Fix:** Update Index.md entries. Add missing files, remove stale entries, correct summaries.
+
+### Check 2: Cross-Reference Integrity
+
+Scan CLAUDE.md, README.md, and all internal file references:
+
+- [ ] Every file path referenced in CLAUDE.md routing rules resolves to an existing file
+- [ ] Every file path in README.md directory tree resolves to an existing file
+- [ ] Internal links within knowledge files (e.g., "see `Workflows/self-improvement.md`") resolve correctly
+- [ ] No orphan files exist (files not referenced by any routing rule, index, or cross-reference)
+
+**Fix:** Update broken references. Add routing rules for orphan files or remove them if obsolete.
+
+### Check 3: Gap Detection
+
+Identify concepts that are referenced but not covered:
+
+- [ ] Scan knowledge files for mentions of frameworks, models, or concepts that lack their own article or section
+- [ ] Check if any routing rules in CLAUDE.md point to domains with thin coverage
+- [ ] Review recent feedback.md entries for questions the system could not answer
+
+**Fix:** Log gaps as candidates for new articles. Prioritize by frequency of reference and user need.
+
+### Check 4: Staleness Detection
+
+Flag content that may be outdated:
+
+- [ ] Identify files covering fast-moving topics (technology, AI, platform specifics) not updated in 90+ days
+- [ ] Check if any framework files reference superseded models or outdated data
+- [ ] Review _Sources/ for source material with stale access dates
+
+**Fix:** Flag for refresh. For critical files, trigger a research pass to update content.
+
+### Check 5: Structure Consistency
+
+Verify all files follow the same conventions:
+
+- [ ] Every file has an H1 title as its first heading
+- [ ] Knowledge/Frameworks/ files have a consistent section structure (overview, frameworks, application)
+- [ ] Templates/ files include a Pre-Delivery Verification section
+- [ ] Workflows/ files include a Verification Loop or checklist section
+- [ ] All files use consistent table formatting and heading hierarchy
+
+**Fix:** Normalize structure in files that deviate. Use `Templates/knowledge-article.md` as the reference format for new articles.
+
+### Lint Quick Reference
+
+```
+Monthly or after 3+ files added:
+  Check 1: Index.md matches file tree?
+  Check 2: All cross-references resolve?
+  Check 3: Any referenced concepts without coverage?
+  Check 4: Any files stale on fast-moving topics?
+  Check 5: All files follow structural conventions?
+
+After each check:
+  Fix issues found → Update Index.md → Log to evolution.md if structural
+```
+
+---
+
 ## Part 4: Version Discipline
 
 Every improvement cycle produces a version increment. Use semantic versioning:

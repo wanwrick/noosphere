@@ -14,6 +14,7 @@ Every session follows this sequence. No shortcuts.
 - Read `GOALS.md` to understand current priorities
 - Read `_Logs/feedback.md` to load accumulated learnings: **do not repeat past mistakes**
 - Read `_Registry/Cadences.md` to check if a recurring ritual is due
+- If the domain is ambiguous, read `_Registry/Index.md` for file summaries to find the right knowledge file
 - Identify which domain(s) this session will touch
 
 ### 2. Plan Before Execute
@@ -52,6 +53,7 @@ Every session follows this sequence. No shortcuts.
 - Were there 3+ corrections in the same category? If yes, trigger the autoresearch loop in `Workflows/self-improvement.md`.
 - Did a framework produce a wrong or incomplete output? Propose a system-level fix (new rule, file update, or routing change).
 - Log any system fix to `_Logs/evolution.md` and bump the version.
+- Is `_Registry/Index.md` still current? If files were added or modified, update it.
 
 ## How This System Works
 
@@ -92,7 +94,7 @@ User Question
 10. **Cross-domain questions** -> Pull from multiple knowledge files. Most real problems span domains.
 11. **For live work context** -> Query Notion Work Hub via MCP (see Notion Reference Map below)
 12. **For system improvement or verification** -> See `Workflows/self-improvement.md` for the auto-optimization loop, BLUF enforcement, and version discipline
-13. **For LLM knowledge base design or wiki compilation** -> See `Knowledge/Frameworks/llm-knowledge-bases.md` for the pattern and `Workflows/knowledge-base-ops.md` for the operational playbook
+13. **For LLM knowledge base design, wiki compilation, or knowledge base lint** -> See `Knowledge/Frameworks/llm-knowledge-bases.md` for the pattern, `Workflows/knowledge-base-ops.md` for the operational playbook, and `Workflows/self-improvement.md` Part 5 for lint checks
 
 > **Workflows/ vs playbooks.md:** `Workflows/` contains universal step-by-step playbooks (incident response, negotiation prep, executive briefing, data storytelling). `Knowledge/Work/playbooks.md` contains domain-specific operational SOPs (10Q onboarding, CDO deliverables, Data Contracts). When in doubt: if it is a general professional process, check Workflows/; if it is a team-specific operational procedure, check playbooks.md.
 

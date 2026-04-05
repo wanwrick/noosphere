@@ -1,67 +1,71 @@
 # Knowledge Base Operations
 
-Step-by-step playbook for building and operating an LLM-powered knowledge base. For the conceptual framework, see `Knowledge/Frameworks/llm-knowledge-bases.md`.
+Step-by-step playbook for building and operating an LLM-powered knowledge base. Applicable to any markdown-based wiki where an LLM is the primary author and operator. For the conceptual framework, see `Knowledge/Frameworks/llm-knowledge-bases.md`.
 
 ---
 
-## Setup (One-Time)
+## Setup
 
-### 1. Create the Directory Structure
+### Directory Structure
+
+Adapt to your context. A typical LLM knowledge base has four zones:
 
 ```
-kb/
-+-- raw/                 # Source documents (articles, papers, images)
-+-- wiki/                # LLM-compiled articles (do not edit manually)
+[root]/
++-- sources/             # Raw input material (articles, papers, images)
++-- knowledge/           # LLM-compiled articles (the wiki itself)
 |   +-- _index.md        # Master index (auto-maintained by LLM)
-|   +-- concepts/        # One .md per concept
-|   +-- sources/         # Summaries of each raw document
-|   +-- categories/      # Grouping pages
 +-- output/              # Generated artifacts (reports, slides, charts)
-+-- tools/               # Custom CLIs and scripts
++-- tools/               # Custom CLIs and scripts (optional)
 ```
 
-### 2. Configure Obsidian
-- Open the `kb/` directory as an Obsidian vault
-- Install plugins: Marp Slides (presentations), Excalidraw (diagrams)
-- Set `wiki/` as the default note location
-- Enable backlinks panel
+> **Noosphere mapping:** `_Sources/` = sources, `Knowledge/` = the wiki, `_Registry/Index.md` = the master index. There is no separate output/ directory; outputs are filed directly into the knowledge base or delivered to the user.
 
-### 3. Set Up Web Clipping
+### Viewer Setup
+
+Obsidian is the recommended viewing layer:
+- Open the root directory as an Obsidian vault
+- Install plugins as needed: Marp Slides (presentations), Excalidraw (diagrams)
+- Enable backlinks panel for cross-reference navigation
+
+### Web Clipping (for Research-Scale Wikis)
+
 - Install Obsidian Web Clipper browser extension
-- Configure output directory to `kb/raw/`
-- Set up a hotkey to download all page images to `kb/raw/images/`
+- Configure output to the sources directory
+- Set up a hotkey to download all page images locally
 - Preferred format: markdown with front matter (title, URL, date, tags)
 
 ---
 
 ## Ingest: Adding New Sources
 
-### Step 1: Clip or Download
-- Web article: Use Obsidian Web Clipper -> saves to `raw/`
-- PDF/paper: Download to `raw/`, optionally convert to .md
-- Repository: Clone or snapshot relevant files to `raw/repos/`
-- Dataset: Download CSV/JSON to `raw/data/`
-- Images: Save to `raw/images/` with descriptive filenames
+### Step 1: Collect
+- Web article: Use web clipper or manual save to sources/
+- PDF/paper: Download, optionally convert to .md
+- Repository: Clone or snapshot relevant files
+- Dataset: Download CSV/JSON
+- Images: Save with descriptive filenames
 
 ### Step 2: Verify Source Quality
-Before compiling, check:
-- [ ] Source is complete (not truncated, images downloaded)
+- [ ] Source is complete (not truncated, images downloaded locally)
 - [ ] Front matter present (title, source URL, date)
-- [ ] Duplicates checked (not already in raw/ under different name)
+- [ ] Duplicates checked (not already ingested under a different name)
 
 ### Step 3: Trigger Incremental Compile
-Prompt the LLM:
 
-> "I have added new sources to raw/. Read the new files, then update the wiki: create or update concept articles, add source summaries, update the master index, and add cross-references to existing articles."
+Prompt the LLM to read new sources and update the wiki:
+
+> "I have added new sources. Read them, then update the wiki: create or update concept articles, add source summaries, update the master index, and add cross-references to existing articles."
 
 The LLM should:
-1. Read `wiki/_index.md` to understand existing coverage
-2. Read new files in `raw/`
+1. Read the master index to understand existing coverage
+2. Read new source files
 3. Identify new concepts and connections to existing concepts
-4. Create new articles in `wiki/concepts/`
-5. Create source summaries in `wiki/sources/`
-6. Update `wiki/_index.md` with new entries
-7. Update cross-references in affected existing articles
+4. Create or update articles
+5. Update the master index with new entries
+6. Update cross-references in affected existing articles
+
+> **Noosphere:** At current scale, "compilation" is manual curation. When adding new knowledge, use `Templates/knowledge-article.md` as the article format and update `_Registry/Index.md` afterward.
 
 ---
 
@@ -70,7 +74,7 @@ The LLM should:
 ### Simple Lookup
 > "What does the wiki say about [concept]?"
 
-The LLM reads `_index.md`, finds the relevant article(s), and summarizes.
+The LLM reads the index, finds the relevant article(s), and summarizes.
 
 ### Research Question
 > "Based on the wiki, what is the relationship between [concept A] and [concept B]?"
@@ -83,111 +87,98 @@ The LLM reads both articles, follows cross-references, and synthesizes.
 The LLM answers what it can and explicitly notes where the wiki lacks depth.
 
 ### Cross-Cutting Analysis
-> "Across all articles tagged [category], what are the common patterns?"
+> "Across all articles in [category], what are the common patterns?"
 
-The LLM reads the category page, pulls all referenced articles, and identifies patterns.
+The LLM reads the category or domain file, pulls all referenced articles, and identifies patterns.
+
+> **Noosphere:** The LLM uses `CLAUDE.md` routing rules and `_Registry/Index.md` to navigate. For cross-cutting analysis, it pulls from multiple Knowledge/ files as described in routing rule 10.
 
 ---
 
 ## Output: Generating Artifacts
 
-### Markdown Report
-> "Write a report on [topic] based on the wiki. Save to output/reports/[topic].md."
+### Common Formats
 
-### Marp Slide Deck
-> "Create a 10-slide Marp presentation on [topic]. Save to output/slides/[topic].md."
-
-Marp format:
-```markdown
----
-marp: true
-theme: default
----
-
-# Slide Title
-
-Content here
-
----
-
-# Next Slide
-
-More content
-```
-
-### Data Visualization
-> "Generate a chart showing [data relationship]. Save the matplotlib PNG to output/charts/."
+| Output | Example Prompt | Format |
+|--------|---------------|--------|
+| Report | "Write a report on [topic] based on the wiki" | Markdown (.md) |
+| Slide deck | "Create a 10-slide Marp presentation on [topic]" | Marp markdown |
+| Chart | "Generate a chart showing [data relationship]" | matplotlib PNG |
+| Diagram | "Draw the architecture of [system]" | Excalidraw |
 
 ### Filing Output Back
-After reviewing an output:
-> "This report on [topic] is good. File it into the wiki as a new article under concepts/."
+
+After reviewing an output, file it back into the wiki:
+
+> "This report on [topic] is useful. File it into the wiki as a new article."
 
 This is the output-as-input loop. Your explorations compound into the knowledge base.
+
+> **Noosphere:** File useful outputs as new Knowledge/ articles or append to existing ones. Log corrections to `_Logs/feedback.md`. Update `_Registry/Index.md` after any addition.
 
 ---
 
 ## Lint: Health Checks
 
-Run these periodically (weekly for active wikis, monthly for stable ones).
+Run periodically to maintain wiki quality. For active wikis, weekly. For stable ones, monthly.
 
-### Consistency Check
-> "Read all articles in wiki/concepts/. Find any contradictory claims across articles. List each contradiction with the two source articles."
+### Core Lint Checks
 
-### Gap Detection
-> "Read wiki/_index.md and all concept articles. Find any concepts that are referenced or linked but do not have their own article. List them as candidates for new articles."
+| Check | What It Finds | Fix |
+|-------|---------------|-----|
+| **Consistency** | Contradictory claims across articles | Reconcile with source material, update the weaker article |
+| **Gap detection** | Concepts referenced but not defined | Create stub articles or flag for research |
+| **Connection discovery** | Concepts with thematic overlap but no cross-reference | Add cross-references or bridging articles |
+| **Data imputation** | Incomplete articles (missing sections, TODO markers) | Use web search to fill gaps, propose updates |
+| **Staleness** | Sources or articles older than threshold on fast-moving topics | Flag for refresh, trigger research pass |
+| **Structure normalization** | Inconsistent formatting, headings, metadata | Normalize to the standard article template |
 
-### Connection Discovery
-> "Read all concept articles. Identify pairs of concepts that are not currently cross-referenced but share significant thematic overlap. Suggest new cross-references or bridging articles."
+### Lint Prompts
 
-### Data Imputation
-> "Read articles flagged as incomplete (missing sections, TODO markers). Use web search to find the missing information and propose updates."
+- Consistency: "Find contradictory claims across articles. List each contradiction with both source articles."
+- Gaps: "Find concepts that are referenced or linked but have no article. List as candidates."
+- Connections: "Identify concept pairs not cross-referenced but sharing thematic overlap."
+- Staleness: "Flag articles on fast-moving topics not updated in 90+ days."
 
-### Staleness Check
-> "Read all source summaries. Flag any sources older than [threshold] that cover fast-moving topics. Suggest which should be refreshed."
-
-### Structure Normalization
-> "Check all articles for consistent formatting: H1 title, front matter, sections, cross-references section at the bottom. Fix any that deviate."
+> **Noosphere:** Use `Workflows/self-improvement.md` Part 5 for the noosphere-specific lint checklist. It covers index freshness, cross-reference integrity, gap detection, staleness, and structure consistency, adapted for the system's architecture.
 
 ---
 
-## Maintenance
+## Maintenance Cadences
 
 ### Weekly (Active Wiki)
-- [ ] Ingest any new sources collected during the week
+- [ ] Ingest new sources collected during the week
 - [ ] Run consistency check and gap detection
-- [ ] Review and file any useful outputs back into wiki
-- [ ] Check `_index.md` is current
+- [ ] Review and file useful outputs back into wiki
+- [ ] Verify master index is current
 
 ### Monthly
-- [ ] Run full lint pass (all six checks)
-- [ ] Review category pages for reorganization
-- [ ] Archive stale sources in `raw/archive/`
-- [ ] Back up the wiki (git commit + push)
+- [ ] Run full lint pass (all checks)
+- [ ] Review category/domain organization
+- [ ] Archive stale sources
+- [ ] Git commit + push (backup)
 
 ### Quarterly
-- [ ] Review wiki scope: is it still focused or has it drifted?
+- [ ] Review wiki scope: focused or drifted?
 - [ ] Prune low-value articles
 - [ ] Assess whether scale warrants hierarchical indexes
 - [ ] Evaluate custom tooling needs
+
+> **Noosphere:** The monthly lint cadence is registered in `_Registry/Cadences.md`. The quarterly review aligns with the quarterly prep checklist in the same file.
 
 ---
 
 ## Tool Development
 
-### Search Engine (First Tool to Build)
-A naive full-text search over wiki articles, available as:
-- **Web UI**: For human browsing and exploration
-- **CLI**: For LLM to invoke as a tool during complex queries
+As the wiki grows, custom tools extend the LLM's capabilities:
 
-Minimal implementation: index all .md files, support keyword search with snippet preview, rank by relevance (TF-IDF or simpler).
-
-### Other Useful Tools
-| Tool | Purpose |
-|------|---------|
-| Link checker | Verify all cross-references resolve to existing articles |
-| Stats dashboard | Article count, word count, coverage by category, growth over time |
-| Diff viewer | Show what changed in the wiki after each compile pass |
-| Export pipeline | Convert wiki subset to PDF, EPUB, or static site |
+| Tool | Purpose | Priority |
+|------|---------|----------|
+| Full-text search (CLI + web UI) | Human browsing and LLM tool use for complex queries | First tool to build |
+| Link checker | Verify all cross-references resolve | High (automates lint check 2) |
+| Stats dashboard | Article count, word count, coverage by category, growth over time | Medium |
+| Diff viewer | Show what changed after each compile pass | Medium |
+| Export pipeline | Convert wiki subset to PDF, EPUB, or static site | Low |
 
 ---
 
@@ -195,8 +186,9 @@ Minimal implementation: index all .md files, support keyword search with snippet
 
 Before considering a compile or lint pass complete:
 
-- [ ] `_index.md` reflects all articles (no orphans, no stale entries)
-- [ ] Every new concept article has at least one cross-reference
-- [ ] Source summaries link back to the raw file
+- [ ] Master index reflects all articles (no orphans, no stale entries)
+- [ ] Every new article has at least one cross-reference
+- [ ] Source material is traceable (summaries link to raw files)
 - [ ] No broken internal links
 - [ ] Consistent formatting across all new/modified articles
+- [ ] Version incremented if structural changes were made (see `Workflows/self-improvement.md` Part 4)

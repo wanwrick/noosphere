@@ -4,7 +4,7 @@
 
 A portable, self-contained knowledge system that turns Claude into an AI work partner with full access to business frameworks, operational context, reusable templates, and step-by-step workflows.
 
-**34 markdown files. Zero external dependencies. Fork it, customize it, make it yours.**
+**37 markdown files. Zero external dependencies. Fork it, customize it, make it yours.**
 
 ---
 
@@ -45,7 +45,7 @@ Three problems this system solves:
 
 Visual architecture of Noosphere v1.1. All diagrams rendered in Consolas monospace.
 
-### File Tree: 34 files across four layers
+### File Tree: 37 files across four layers
 ![File Tree](https://raw.githubusercontent.com/wanwrick/noosphere/main/_Diagrams/diagram1_file_tree.png)
 
 ### Architecture: How a request becomes a verified output
@@ -132,11 +132,12 @@ noosphere/
 |   |   +-- collaborators.md        Key people and interaction guidelines
 |   +-- Decisions/
 |       +-- _template.md            Decision log format
-+-- Templates/                      4 reusable document formats
++-- Templates/                      5 reusable document formats
 |   +-- decision-memo.md            Executive 3-pager
 |   +-- status-update.md            3P format (Progress/Plans/Problems)
 |   +-- rca-template.md             Root cause analysis (blameless)
 |   +-- user-story.md               Agile story format
+|   +-- knowledge-article.md        Standard format for compiled wiki articles
 +-- Workflows/                      6 step-by-step playbooks
 |   +-- incident-response.md        SEV-based crisis playbook
 |   +-- negotiation-prep.md         BATNA + power dynamics + tactics
@@ -145,9 +146,12 @@ noosphere/
 |   +-- self-improvement.md         Auto-loader, verification loop, autoresearch
 |   +-- knowledge-base-ops.md      Ingest, compile, query, lint, and maintain an LLM wiki
 +-- _Registry/                      System metadata
+|   +-- Index.md                    Auto-maintained content index with file summaries
 |   +-- Skills.md                   All available skills inventory
 |   +-- MCPs.md                     Connected services reference
 |   +-- Cadences.md                 Recurring rituals and schedules
++-- _Sources/                       Provenance and raw source material
+|   +-- README.md                   Source conventions and traceability guidelines
 +-- _Logs/                          Learning system
 |   +-- feedback.md                 Corrections and preferences
 |   +-- evolution.md                System changelog
@@ -201,6 +205,8 @@ Review the 4 templates and 4 workflows. Keep what applies, swap what doesn't, ad
 | **Portable** | Works as a zip file; no database, no server, no build step |
 | **Learning Loop** | `feedback.md` captures corrections; the system never repeats mistakes |
 | **Action-Oriented** | Every concept paired with a template or workflow that produces real output |
+| **Provenance** | Knowledge traceable to sources via `_Sources/` directory and inline citations |
+| **Self-Linting** | Periodic structural health checks (index freshness, cross-references, gaps, staleness) via `self-improvement.md` Part 5 |
 
 ---
 
@@ -230,6 +236,9 @@ The system works fully offline with local files. When connected, these services 
 | Log a decision | Copy `Knowledge/Decisions/_template.md`, fill in context and outcome |
 | Add an MCP | Update `_Registry/MCPs.md` and `_Registry/Skills.md` |
 | Update priorities | Edit `GOALS.md` at the start of each quarter |
+| Add source material | Place raw files in `_Sources/[domain]/`, add `## Sources` to the knowledge file |
+| Run a lint pass | Follow `Workflows/self-improvement.md` Part 5 checklist |
+| Add a knowledge article | Use `Templates/knowledge-article.md`, update `_Registry/Index.md` |
 
 ---
 

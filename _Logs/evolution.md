@@ -32,6 +32,7 @@
 | 2026-03-20 | v1.0 Initial creation | Build portable Noosphere from frameworks + work knowledge |
 | 2026-03-21 | v1.1.0 Self-improvement loop + verification system | Add auto-optimization so the system improves each session, not just accumulates corrections |
 | 2026-03-22 | v1.1.1 Diagram guidelines, README cleanup, gitignore hardening | Excalidraw design constraints added to CLAUDE.md; CONTRIBUTING.md and LICENSE added to directory tree; .excalidraw files excluded from repo |
+| 2026-04-05 | v1.2.0 LLM Knowledge Base pattern + self-linting + provenance | New framework (llm-knowledge-bases.md), workflow (knowledge-base-ops.md), auto-index (Index.md), provenance layer (_Sources/), knowledge article template, KB lint (self-improvement.md Part 5), lint cadence |
 
 ---
 
@@ -81,3 +82,33 @@
 - Excalidraw files are local review artifacts; the generator script produces them on demand
 - Design constraints documented in CLAUDE.md so every future session enforces the same visual standards
 - Version incremented as patch (1.1.0 to 1.1.1) because only existing files were edited
+
+---
+
+### v1.2.0 -- 2026-04-05 -- LLM Knowledge Base Pattern + Self-Linting + Provenance
+**Author:** Paroz Mehta + Claude Opus 4.6
+
+**What changed:**
+
+| File | Change |
+|------|--------|
+| `Knowledge/Frameworks/llm-knowledge-bases.md` | New. LLM-as-author wiki pattern: ingest, compile, index, query, output, lint. Includes architecture, 5 pipeline stages, design principles, scaling considerations, comparison with RAG/vector/graph approaches, and "Applying This to Noosphere" section mapping the pattern to this system |
+| `Workflows/knowledge-base-ops.md` | New. Operational playbook for building and maintaining LLM knowledge bases. General-purpose with Noosphere-specific annotations. Covers setup, ingest, query, output, lint, maintenance cadences, tool development |
+| `_Registry/Index.md` | New. Auto-maintained content index with one-line summaries of every file, organized by directory. Replaces the need to scan CLAUDE.md routing for file descriptions |
+| `_Sources/README.md` | New. Provenance conventions: inline source sections, raw material storage, front matter format, image sources |
+| `Templates/knowledge-article.md` | New. Standard format for compiled wiki articles: definition, frameworks, application, cross-references, sources, pre-delivery verification |
+| `Workflows/self-improvement.md` | Part 5 added: Knowledge Base Lint with 5 checks (index freshness, cross-reference integrity, gap detection, staleness, structure consistency) |
+| `_Registry/Cadences.md` | Lint cadence added to ad-hoc triggers: monthly or after 3+ files added |
+| `CLAUDE.md` | Session Protocol Step 1: Index.md added for ambiguous domain routing. Step 5: Index.md freshness check added. Routing rule 6: knowledge base ops added to workflow list. Routing rule 13: expanded to include lint operations |
+| `README.md` | File count updated to 37. Directory tree: added Index.md, _Sources/, knowledge-article.md. Design Principles: added Provenance and Self-Linting. How to Extend: added source material, lint pass, knowledge article rows |
+| `_Logs/evolution.md` | This entry |
+
+**Design Decisions:**
+- Index.md is the highest-value single addition: makes LLM file discovery faster than scanning routing rules
+- KB Lint integrated into existing self-improvement.md (Part 5) rather than a separate workflow, to avoid parallel systems
+- Provenance layer is deliberately lightweight (_Sources/ with conventions) rather than a full ingest pipeline, appropriate for a 37-file hand-curated system
+- The LLM KB framework article grounds itself in Noosphere's own architecture via "Applying This to Noosphere" section, avoiding the trap of describing a separate system
+- The workflow file uses inline Noosphere annotations (blockquotes) to show how each general step maps to this specific system
+- Version incremented as minor (1.1.1 to 1.2.0) because 5 new files were added
+
+**Gap that triggered this update:** No framework existed for the LLM-as-author knowledge base pattern. The system lacked a content index (forcing reliance on CLAUDE.md routing descriptions), had no provenance tracking, and had no structural lint checks beyond the autoresearch loop's gap detection

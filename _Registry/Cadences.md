@@ -114,6 +114,7 @@
 | Negotiation coming up | Negotiation prep | `Workflows/negotiation-prep.md` |
 | Executive presentation | Briefing prep | `Workflows/executive-briefing.md` |
 | Data insight to share | Data storytelling | `Workflows/data-storytelling.md` |
+| Monthly or after adding 3+ files | Knowledge base lint | `Workflows/self-improvement.md` Part 5 |
 
 ---
 
