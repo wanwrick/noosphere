@@ -51,7 +51,7 @@ Enterprise data strategy framework identifying the 10 deliverables every Chief D
 | 5 | **Metadata Management** | [Status] | [Team Name] |
 | 6 | **Data Architecture** | [Status] | [Your Name] + [Partner 2] |
 | 7 | **Data Literacy & Self-Serve** | [Status] | [Your Name] |
-| 8 | **Data Monetization** | [Status] | TBD |
+| 8 | **Data Monetization** | [Status] | [Your Name] |
 | 9 | **Privacy & Compliance** | [Status] | [Your Name] + [Team Member 2] |
 | 10 | **Data Culture & Change Mgmt** | [Status] | [Your Name] |
 
