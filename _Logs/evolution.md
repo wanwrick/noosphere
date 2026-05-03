@@ -32,6 +32,7 @@
 | 2026-03-20 | v1.0 Initial creation | Build portable Noosphere from frameworks + work knowledge |
 | 2026-03-21 | v1.1.0 Self-improvement loop + verification system | Add auto-optimization so the system improves each session, not just accumulates corrections |
 | 2026-03-22 | v1.1.1 Diagram guidelines, README cleanup, gitignore hardening | Excalidraw design constraints added to CLAUDE.md; CONTRIBUTING.md and LICENSE added to directory tree; .excalidraw files excluded from repo |
+| 2026-05-02 | v1.1.2 Placeholder convention fix in playbooks.md | CDO Deliverables row 8 ("Data Monetization") used `TBD` for owner while every other row used `[Your Name]` / `[Team Name]`. Aligned with the bracket-placeholder convention defined in CONTRIBUTING.md |
 
 ---
 
@@ -81,3 +82,20 @@
 - Excalidraw files are local review artifacts; the generator script produces them on demand
 - Design constraints documented in CLAUDE.md so every future session enforces the same visual standards
 - Version incremented as patch (1.1.0 to 1.1.1) because only existing files were edited
+
+---
+
+### v1.1.2 -- 2026-05-02 -- Placeholder Convention Fix
+**Author:** Paroz Mehta + Claude Opus 4.7
+
+**What changed:**
+
+| File | Change |
+|------|--------|
+| `Knowledge/Work/playbooks.md` | CDO Top 10 Deliverables table, row 8 (Data Monetization): owner cell changed from `TBD` to `[Your Name]` to match the bracket-placeholder convention used by every other row in the same table |
+
+**Gap that triggered this update:** `CONTRIBUTING.md` mandates that all personalizable content uses bracket syntax (`[Your Name]`, `[Team Name]`, etc.). The `TBD` value was the only deviation from this convention in the repo and would surface as an inconsistent placeholder during fork-and-customize workflows.
+
+**Design Decisions:**
+- Kept `[Your Name]` for parity with rows 1, 7, and 10 (other owner-only rows)
+- Version incremented as patch (1.1.1 to 1.1.2) because only an existing file was edited and no new file or routing rule was added
