@@ -99,3 +99,23 @@
 **Design Decisions:**
 - Kept `[Your Name]` for parity with rows 1, 7, and 10 (other owner-only rows)
 - Version incremented as patch (1.1.1 to 1.1.2) because only an existing file was edited and no new file or routing rule was added
+
+---
+
+### v1.2.0-phase9 -- 2026-05-09 -- Practice OS Registries Refresh
+**Author:** Paroz Mehta + Claude Opus 4.7
+
+**What changed:**
+
+| File | Change |
+|------|--------|
+| `_Registry/Cadences.md` | Added Practice OS Rituals section: sanitization audit (pre-commit), weekly practice synthesis, governance audit gate, attribution lint, IP coverage check, diagram refresh. Sanitization hook flow + weekly synthesis format documented. |
+| `_Registry/MCPs.md` | Added GitHub + Diagram (mermaid/svg) MCPs. Reframed Notion as the live reference (always fetch by page ID). GitHub MCP scope and diagram-MCP usage rules added under Important Notes. |
+| `_Registry/Archetypes.md` | New registry: 5-archetype index (codename, sector, type, phase, tier, regulated, DPIA) + IP coverage matrix + governance gate reminder + file map. Pointer back to `initiatives/initiatives.yaml`. |
+
+**Closes:** Phase 9 of the v1.2.0 Practice OS extension (PR #3). Archetype dossiers and `initiatives.yaml` were already complete; this commit refreshes the three `_Registry/` files to reflect v1.2.0 (Skills.md is intentionally deferred to Phase 10 when the 7 new skills + 3 atomic subagents land).
+
+**Design Decisions:**
+- Phase tag in version (`v1.2.0-phase9`) keeps the evolution log honest about WIP. Final `v1.2.0` stamp lands in Phase 14 per PR description.
+- Did not refresh `_Registry/Skills.md` here. Phase 10 will add the v1.2.0 skills as a single coherent change, not a partial preview.
+- `_Registry/Archetypes.md` is a derived index, not a source of truth. `initiatives.yaml` remains canonical.
