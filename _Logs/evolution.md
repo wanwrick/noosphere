@@ -150,3 +150,24 @@
 - The seven skills mirror the practice's actual end-to-end engagement loop: bootstrap repo → intake source → init DABs → audit governance → contract AI consumption → defend spend → synthesize weekly.
 - The three subagents are intentionally narrow so the parent skill can compose them without re-implementing focused checks.
 - Attribution preserved (Invariant #3): `defending-ai-spend-memo` cites Hewing as the curated 12-question source; authored IP (No LAC, Platinum) is the answer pattern, not blurred together.
+
+---
+
+### v1.2.0-phase11 -- 2026-05-09 -- Insights Seed (First Published POV)
+**Author:** Paroz Mehta + Claude Opus 4.7
+
+**What changed:**
+
+| File | Change |
+|------|--------|
+| `insights/CLAUDE.md` | New: routing for the insights directory; conventions (BLUF, three counter-positions, kill criterion, attribution rules); workflow from `_backlog.md` → draft → published. |
+| `insights/_backlog.md` | New: candidate POV table — five working titles seeded, one promoted to published, four remain draft / candidate. |
+| `insights/from-contract-yaml-to-deployable-product-in-30-minutes-2026-05-09.md` | New: first published POV. The 30-minute benchmark argument for the DABs Golden Path. Three counter-positions defended (YAML can't capture mess; benchmark trick; vendor lock-in). Authored vs curated IP cited separately (Invariant #3). Kill criterion stated. |
+
+**Closes:** Phase 11 of the v1.2.0 Practice OS extension (PR #3).
+
+**Design Decisions:**
+- The first POV directly defends the most ambitious authored deliverable in this PR (the DABs Golden Path subproject). Picking it first is a deliberate provocation: it exposes the contract-first thesis in public.
+- `_backlog.md` was seeded with five working titles (not one) because `weekly-practice-synthesis` skill expects a backlog to draw from. Future synthesis runs append to it.
+- POV filename convention is `<topic>-<YYYY-MM-DD>.md`. Working drafts use the topic only. Promotion = adding the date.
+- Attribution: the 30-minute benchmark argument is mine; Mahboub (metadata-driven ingestion) and Shi (5 Pillars) are cited as the curated underpinning. Never blurred.
