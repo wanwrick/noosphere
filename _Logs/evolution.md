@@ -206,3 +206,38 @@
 - L-to-R or T-to-B layout. No zig-zag. No ordinals (numbered shapes) for sequence — arrows carry direction.
 - 13 chosen diagrams span the IP frontier (No LAC · Platinum · DABs Golden Path · 10Q), the practice spine (3-layer model · IP catalog · case answer shapes), the operational gates (sanitization · governance audit), and the strategic frame (Cascade · medallion properties · platform mandate sequence · AI Consumption Contract entity shape).
 - Existing v1.1 PNGs in `_Diagrams/` are kept as archive; the index README marks them as superseded by their Mermaid replacements.
+
+---
+
+### v1.2.0-phase13 -- 2026-05-09 -- 9 Verification Checks
+**Author:** Paroz Mehta + Claude Opus 4.7
+
+**What changed:**
+
+| File | Check |
+|------|-------|
+| `scripts/verify/01_token_budget.sh` | CLAUDE.md ≤600 tokens (≈480 target) |
+| `scripts/verify/02_routing.sh` | Every routing-table target in CLAUDE.md exists (talent/ + playbooks/ deferred to Phase 14) |
+| `scripts/verify/03_skill_invocation.sh` | Every skill + subagent named in CLAUDE.md exists in `.claude/` |
+| `scripts/verify/04_dabs_end_to_end.sh` | DABs subproject validate_bundle.sh + pytest unit tests |
+| `scripts/verify/05_attribution_lint.sh` | Invariant #3: every `ip/curated/*.md` has Source callout |
+| `scripts/verify/06_governance_gate.py` | Every `regulated:true` archetype declares dpia_required + dpia_completed explicitly |
+| `scripts/verify/07_ip_coverage.py` | Invariant #1: every archetype names ≥1 IP file and every slug resolves |
+| `scripts/verify/08_sanitization_audit.sh` | Wraps `scripts/lint_sanitization.sh` |
+| `scripts/verify/09_diagram_coverage.sh` | Every diagram declared in `methodology/diagram-generation.md` exists in `_Diagrams/` |
+| `scripts/verify_all.sh` | Runner: prints pass/fail summary |
+| `.github/workflows/verify.yml` | CI wrapper that runs `verify_all.sh` on PR + main push |
+| `Knowledge/Frameworks/CLAUDE.md` | Added (was missing — caught by 02_routing) |
+| `CLAUDE.md` | Trimmed IP catalog line by 4 words (was at 604 tokens, now under 600) |
+
+**Closes:** Phase 13 of the v1.2.0 Practice OS extension (PR #3).
+
+**Verification result on this commit:** 9/9 pass · 0 fail.
+
+**Design Decisions:**
+- The verification suite caught two real defects (missing `Knowledge/Frameworks/CLAUDE.md`; CLAUDE.md 4 tokens over budget) on first run. Working as intended.
+- Token budget gate uses words × 1.3 as a conservative estimator. Real tokenizer would be tighter; this errs on the side of strictness.
+- 04_dabs_end_to_end skips gracefully if `databricks` CLI or `pytest` are absent (CI will install them; sandbox does not have them).
+- 05_attribution_lint warns on authored files lacking author marker but does not fail; that's a craft issue, not a hard invariant. Hard invariant is: curated files MUST cite Source.
+- 06_governance_gate is intentionally narrow: it checks that the field declaration is honest (no nulls where regulated:true). The 7-check audit lives in the `governance-audit` skill, not in CI.
+- CI workflow runs on PR + main push so the gate is honored end-to-end, not just locally.

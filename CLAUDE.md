@@ -61,9 +61,8 @@ Atomic subagents: `dq-validator` · `schema-reviewer` · `compliance-checker`
 Layer · 10Q Framework · Enterprise CLAUDE.md pattern · Platform-Mandate
 Playbook · DABs Data-Contract Golden Path subproject.
 
-**Curated (12 named authors)** — Mahboub · Grover · Hewing · Tekiner · Czarnas
-· Baeyens · Bain · Kocyigit · Shi (×2) · Dataplex 6 Principles · CDO Top 10
-Deliverables.
+**Curated (12)** — Mahboub · Grover · Hewing · Tekiner · Czarnas · Baeyens
+· Bain · Kocyigit · Shi (×2) · Dataplex 6 · CDO Top 10.
 
 ## Session Protocol Summary
 
