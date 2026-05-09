@@ -171,3 +171,38 @@
 - `_backlog.md` was seeded with five working titles (not one) because `weekly-practice-synthesis` skill expects a backlog to draw from. Future synthesis runs append to it.
 - POV filename convention is `<topic>-<YYYY-MM-DD>.md`. Working drafts use the topic only. Promotion = adding the date.
 - Attribution: the 30-minute benchmark argument is mine; Mahboub (metadata-driven ingestion) and Shi (5 Pillars) are cited as the curated underpinning. Never blurred.
+
+---
+
+### v1.2.0-phase12 -- 2026-05-09 -- 13 Mermaid Diagrams
+**Author:** Paroz Mehta + Claude Opus 4.7
+
+**What changed:**
+
+13 Mermaid diagram files added under `_Diagrams/` plus an index README:
+
+| File | Mermaid type | Subject |
+|---|---|---|
+| `_Diagrams/no-lac-architecture.md` | flowchart LR | Medallion stack |
+| `_Diagrams/ai-ready-platinum-5-principles.md` | flowchart + mindmap | 5 Principles + 6-Q rubric |
+| `_Diagrams/dabs-contract-flow.md` | flowchart LR | Contract → renders |
+| `_Diagrams/practice-os-3-layers.md` | flowchart TB | Three-layer mental model |
+| `_Diagrams/ip-catalog-attribution.md` | flowchart LR | Authored vs curated vs EMBA |
+| `_Diagrams/10q-discovery-flow.md` | flowchart TB | 10Q intake decision flow |
+| `_Diagrams/platform-mandate-coalition.md` | sequenceDiagram | Coalition sequence |
+| `_Diagrams/strategy-cascade.md` | flowchart TB | Roger Martin Cascade |
+| `_Diagrams/case-answer-shapes.md` | flowchart LR | 4 prompt types → frameworks |
+| `_Diagrams/medallion-layers-table.md` | flowchart TB | Property table per layer |
+| `_Diagrams/ai-consumption-contract-shape.md` | erDiagram | AI contract entity model |
+| `_Diagrams/sanitization-flow.md` | flowchart LR | Pre-commit gate flow |
+| `_Diagrams/governance-audit-flow.md` | stateDiagram-v2 | 7-check audit state machine |
+| `_Diagrams/README.md` | — | Index + style + how-to-add |
+
+**Closes:** Phase 12 of the v1.2.0 Practice OS extension (PR #3).
+
+**Design Decisions:**
+- Native Mermaid (`.md` files with fenced ```mermaid blocks) instead of calling the diagram MCP. GitHub renders Mermaid natively in the markdown view; this keeps source control honest and makes diagrams diffable as text.
+- Pastel palette enforced via Mermaid `classDef` blocks (`#AEC6CF`, `#B7E4C7`, `#FDFD96`, `#C3B1E1`, `#D3D3D3`) per `methodology/diagram-generation.md`.
+- L-to-R or T-to-B layout. No zig-zag. No ordinals (numbered shapes) for sequence — arrows carry direction.
+- 13 chosen diagrams span the IP frontier (No LAC · Platinum · DABs Golden Path · 10Q), the practice spine (3-layer model · IP catalog · case answer shapes), the operational gates (sanitization · governance audit), and the strategic frame (Cascade · medallion properties · platform mandate sequence · AI Consumption Contract entity shape).
+- Existing v1.1 PNGs in `_Diagrams/` are kept as archive; the index README marks them as superseded by their Mermaid replacements.
