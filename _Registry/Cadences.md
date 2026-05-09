@@ -117,4 +117,40 @@
 
 ---
 
-*Last updated: 2026-03-06*
+## Practice OS Rituals (v1.2.0)
+
+Practice-level rituals introduced with Noosphere v1.2.0. These run on top of the
+team-level cadences above and are owned by the practice author, not by any one
+client engagement.
+
+| Ritual | Cadence | Trigger | Reference |
+|--------|---------|---------|-----------|
+| Sanitization Audit | Pre-commit + pre-push | Every commit touching tracked files | `Workflows/sanitization-pass.md`, `_Logs/sanitization-audit.md`, `scripts/lint_sanitization.sh` |
+| Weekly Practice Synthesis | Weekly (Friday) | End-of-week reflection on engagements + IP | `weekly-practice-synthesis` skill (Phase 10) |
+| Governance Audit Gate | Per archetype phase advance | `regulated: true` or `pii: true` in `initiatives.yaml` | `governance-audit` skill (Phase 10), `governance/compliance-register.yaml` |
+| Attribution Lint | Pre-merge | Any change to `ip/curated/*.md` | `methodology/attribution-policy.md`, banned: blurring authored vs curated |
+| IP Coverage Check | Per archetype change | `ip_applied` field added/changed in `initiatives.yaml` | `methodology/repository-conventions.md`, Invariant #1 |
+| Diagram Refresh | Per architectural change | New IP file or routing change in `CLAUDE.md` | `methodology/diagram-generation.md`, `_Diagrams/` |
+
+### Sanitization Audit Pre-Commit Hook
+```
+1. .pre-commit-config.yaml runs scripts/lint_sanitization.sh
+2. gitleaks scan runs in parallel
+3. Any banned-token match (employer / team / stakeholder / JIRA / vendor / workspace ID) blocks the commit
+4. CI re-runs the same gate via .github/workflows/sanitization.yml
+5. Findings logged to _Logs/sanitization-audit.md
+```
+
+### Weekly Practice Synthesis Format
+```
+This week's engagements: [archetype IDs touched]
+IP applied: [authored + curated]
+New corrections logged: [count from _Logs/feedback.md]
+System fixes proposed: [count from _Logs/evolution.md]
+Insight candidates: [POV ideas for insights/]
+Open governance items: [DPIA, classification, masking gaps]
+```
+
+---
+
+*Last updated: 2026-05-09 (v1.2.0 — Practice OS rituals added)*

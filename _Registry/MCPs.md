@@ -8,7 +8,9 @@
 
 | Service | Capabilities | When to Use |
 |---------|-------------|-------------|
-| **Notion** | Search, read pages, create pages, update pages, query databases, manage comments | Knowledge base, meeting notes, project docs, task tracking |
+| **Notion** | Search, read pages, create pages, update pages, query databases, manage comments | Live reference for engagement context, meeting notes, sprint data — **always fetch by page ID** (see CLAUDE.md Reference Map) |
+| **GitHub** | List/read/create PRs, issues, files, branches, releases; CI status; review comments | Practice repo PR review, branch management, sanitization workflow runs |
+| **Diagram (mermaid / svg / markdown)** | Generate Mermaid diagrams, draw SVG, create markdown documents | Architecture diagrams in `_Diagrams/` and `methodology/diagram-generation.md` |
 | **Gmail** | Search messages, read threads, create drafts, get profile | Email drafts, searching correspondence, stakeholder communication |
 | **Google Calendar** | List events, create events, find meeting times, check free time | Scheduling, meeting prep, availability checks |
 | **Google Drive** | Search files, read documents | Finding docs, reading shared documents |
@@ -57,7 +59,9 @@ Read → google_drive_fetch (by document ID)
 - **Gmail drafts only**: Claude creates drafts, never sends without explicit approval
 - **Calendar actions**: creating events requires confirmation
 - **All MCPs require active connection**: if a connector isn't available, fall back to the knowledge in this project
+- **GitHub MCP scope (v1.2.0)**: tools are restricted to `wanwrick/noosphere`. Never read from or write to other repositories.
+- **Diagram MCP usage (v1.2.0)**: produce Mermaid first; reserve SVG for final whiteboard renders. All diagrams follow the palette + layout rules in `methodology/diagram-generation.md`. Do not commit `.excalidraw` files.
 
 ---
 
-*Last updated: 2026-03-06*
+*Last updated: 2026-05-09 (v1.2.0 — added GitHub + Diagram MCPs; clarified Notion as live reference)*
