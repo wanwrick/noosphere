@@ -1,0 +1,21 @@
+# Unity Catalog permissions — applied from data-contract.yml metadata.
+#
+# The classification taxonomy maps to UC ABAC groups. Forks should adapt
+# group names to their IdP (EntraID, Okta, Google Workspace).
+
+resources:
+  schemas:
+    product_schema:
+      catalog_name: ${var.catalog}
+      name: ${var.schema}
+      grants:
+        - principal: account_admins
+          privileges: [USE_SCHEMA, SELECT, MODIFY]
+        - principal: ${var.owner_team_group}
+          privileges: [USE_SCHEMA, SELECT, MODIFY, CREATE]
+        - principal: data_consumers_internal
+          privileges: [USE_SCHEMA, SELECT]    # masked by UC tags for confidential/restricted
+
+  # The actual masking-function deployment is handled by
+  # src/shared/unity_catalog_helpers.py at pipeline run time, applying
+  # functions named in data-contract.yml schema.columns[].masking_function.

@@ -1,0 +1,33 @@
+api_version: data-product/v1
+kind: DataContract
+
+metadata:
+  id: minimal-product
+  name: Minimal Product
+  owner_team: producer-platform
+  classification: internal
+  pii: false
+  version:
+    current: 0.1.0
+
+grain:
+  description: "one row per event"
+
+bronze:
+  source_type: files
+  ingestion_strategy: snapshot
+
+schema:
+  columns:
+    - name: id
+      type: STRING
+      nullable: false
+      classification: internal
+
+freshness:
+  sla_minutes: 1440
+
+quality_expectations:
+  - name: id_not_null
+    expectation: "id IS NOT NULL"
+    on_violation: fail

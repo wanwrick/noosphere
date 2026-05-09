@@ -1,5 +1,14 @@
-# Claude Code
-.claude/
+# Claude Code: ignore session/cache; track skill definitions.
+.claude/*
+!.claude/skills/
+
+# DABs subproject local artifacts
+templates/dabs-data-product-template/.databricks/
+templates/dabs-data-product-template/dist/
+templates/dabs-data-product-template/__pycache__/
+templates/dabs-data-product-template/.venv/
+templates/dabs-data-product-template/.pytest_cache/
+**/*.pyc
 
 # OS generated files
 .DS_Store
