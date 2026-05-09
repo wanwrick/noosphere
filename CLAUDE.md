@@ -6,6 +6,25 @@ You are the user's AI work partner. This project contains a complete professiona
 
 The user brings deep knowledge across finance, strategy, marketing, leadership, operations, economics, technology, and governance. This system makes that knowledge accessible in every working session.
 
+## Repository at a Glance
+
+**What this repo is:** Noosphere is a portable, fork-and-customize Claude knowledge system. It is content, not code — 32 markdown files across four layers, no build step, no runtime, no tests.
+
+**Current version:** v1.1.2 (see `_Logs/evolution.md` for the full changelog)
+
+**Layered structure:**
+
+| Layer | Path | Purpose |
+|-------|------|---------|
+| Core | `CLAUDE.md`, `GOALS.md` | Routing brain + current priorities |
+| Knowledge | `Knowledge/Frameworks/` (8 files), `Knowledge/Work/` (5 files), `Knowledge/Decisions/` | Business frameworks + operational context + decision log |
+| Action | `Templates/` (4 files), `Workflows/` (5 files) | Document formats + step-by-step playbooks |
+| System | `_Registry/` (3 files), `_Logs/` (2 files), `_Diagrams/` (3 PNGs) | Skills/MCPs/cadences + feedback/evolution + visuals |
+
+**Top-level files:** `CLAUDE.md`, `GOALS.md`, `README.md`, `CONTRIBUTING.md`, `LICENSE`, `.gitignore`.
+
+**No code, no dependencies:** This repository contains only markdown and image assets. There is no package manager, no test suite, no linter, and no build pipeline. "Validation" means: ask Claude a question, check that routing and output match expectations (see `CONTRIBUTING.md` § Validation).
+
 ## Session Protocol
 
 Every session follows this sequence. No shortcuts.
@@ -261,6 +280,66 @@ Do not commit `.excalidraw` files to this repository; they are local review arti
 
 ---
 
+## Repository Conventions (For AI Assistants Modifying This Repo)
+
+When the user asks you to add, edit, or restructure files in this repository, follow these conventions exactly. They are enforced by `CONTRIBUTING.md` and the version log.
+
+### Placeholder Convention
+- All personalizable content uses **bracket syntax**: `[Your Name]`, `[Your Title]`, `[Company Name]`, `[Team Name]`, `[Platform Name]`.
+- All Notion identifiers use the literal strings `your-notion-page-id-here` and `your-notion-database-id-here`.
+- Never use `TBD`, `<placeholder>`, `XXX`, or any other ad-hoc convention. The v1.1.2 patch existed only to fix one such deviation.
+
+### File Naming
+- Knowledge, templates, and workflows: `kebab-case.md` (e.g., `data-storytelling.md`, `rca-template.md`).
+- Top-level system files: `SCREAMING_CASE.md` (e.g., `CLAUDE.md`, `GOALS.md`, `README.md`).
+- Decision logs: copy `Knowledge/Decisions/_template.md` and rename with date prefix (e.g., `2026-05-09-platform-vendor-choice.md`).
+
+### Where Content Goes
+| Adding... | Goes in... | Then update... |
+|-----------|-----------|----------------|
+| A business framework | `Knowledge/Frameworks/<domain>.md` | Routing rule in CLAUDE.md if a new domain |
+| A team/work-context fact | `Knowledge/Work/<file>.md` | None (existing routing covers it) |
+| A reusable document format | `Templates/<name>.md` with Pre-Delivery Verification section | README directory tree |
+| A step-by-step playbook | `Workflows/<name>.md` with Verification Loop section | `_Registry/Cadences.md` if trigger-based |
+| A new MCP integration | `_Registry/MCPs.md` and `_Registry/Skills.md` | None |
+| A logged decision | `Knowledge/Decisions/<date>-<topic>.md` | None |
+| A correction or preference | `_Logs/feedback.md` (entry format defined in that file) | None |
+
+### Verification Sections (Mandatory for New Templates and Workflows)
+Every new file in `Templates/` must include a **Pre-Delivery Verification** section. Every new file in `Workflows/` must include a **Verification Loop** section. Pattern: BLUF check + framework completeness check + action ownership check. See existing files for examples.
+
+### Version Discipline
+Any change to the system structure (new file, new routing rule, edited workflow) requires:
+1. **Bump the version** in `_Logs/evolution.md`:
+   - **Major** (`x.0.0`): structural overhaul (rare).
+   - **Minor** (`1.x.0`): new file or new routing rule added.
+   - **Patch** (`1.1.x`): edits to existing files only.
+2. **Add a changelog entry** in `_Logs/evolution.md` with: date, version, author, changed files table, design decisions, and the gap that triggered the update.
+3. **Update `README.md`** if the directory tree, file count, or "What's New" section changed.
+4. **Update routing rules in CLAUDE.md** if a new file requires a new route.
+
+### BLUF and Style Rules (Enforced on All Outputs)
+- BLUF: first sentence states the recommendation.
+- Sentences under 25 words.
+- **Banned words:** leverage, utilize, synergies, deep dive, circle back. Find-and-replace if they slip in.
+- Action items always carry an owner and a due date or trigger.
+
+### Cross-Reference Hygiene
+When you rename or move a file, search for all references and update them:
+- `CLAUDE.md` (routing rules, behavioral instructions)
+- `README.md` (directory tree, getting started)
+- `_Registry/Cadences.md` (trigger-based references)
+- Any sibling file that links to the moved one.
+
+### What Does NOT Belong in This Repo
+- Personal knowledge content (goes in your fork, not the template).
+- Company-specific context (same).
+- `.excalidraw` files (gitignored — local review artifacts only).
+- Generated diagram outputs other than the three canonical PNGs in `_Diagrams/`.
+- Anything in `linkedin/`, `canva/`, `github/`, or `POSTING-GUIDE.md` (gitignored).
+
+---
+
 ## File Reference
 
-For the complete file tree and structural overview, see `README.md`.
+For the complete file tree and structural overview, see `README.md`. For the changelog and rationale behind each version, see `_Logs/evolution.md`.
