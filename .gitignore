@@ -1,6 +1,7 @@
-# Claude Code: ignore session/cache; track skill definitions.
+# Claude Code: ignore session/cache; track skill + subagent definitions.
 .claude/*
 !.claude/skills/
+!.claude/agents/
 
 # DABs subproject local artifacts
 templates/dabs-data-product-template/.databricks/

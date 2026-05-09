@@ -119,3 +119,34 @@
 - Phase tag in version (`v1.2.0-phase9`) keeps the evolution log honest about WIP. Final `v1.2.0` stamp lands in Phase 14 per PR description.
 - Did not refresh `_Registry/Skills.md` here. Phase 10 will add the v1.2.0 skills as a single coherent change, not a partial preview.
 - `_Registry/Archetypes.md` is a derived index, not a source of truth. `initiatives.yaml` remains canonical.
+
+---
+
+### v1.2.0-phase10 -- 2026-05-09 -- Practice OS Skills + Atomic Subagents
+**Author:** Paroz Mehta + Claude Opus 4.7
+
+**What changed:**
+
+| File / dir | Change |
+|------|--------|
+| `.claude/skills/claude-md-bootstrap/SKILL.md` | New: generate the CLAUDE.md routing brain for forks / new repos. |
+| `.claude/skills/data-source-10q-intake/SKILL.md` | New: runs the 10-question intake; produces `data-contract.yml` + 2-page brief. |
+| `.claude/skills/dabs-template-init/SKILL.md` | New: bootstraps a DABs project from `templates/dabs-data-product-template/`. |
+| `.claude/skills/governance-audit/SKILL.md` | New: 7-check pre-phase-advance audit (DPIA, classification, masking, retention, erasure, access, jurisdiction). |
+| `.claude/skills/ai-consumption-contract/SKILL.md` | New: authors per-agent AI Consumption Contract (5 Principles + 6-question rubric). |
+| `.claude/skills/defending-ai-spend-memo/SKILL.md` | New: 12-question (Hewing) memo with No LAC + Platinum architectural defence. |
+| `.claude/skills/weekly-practice-synthesis/SKILL.md` | New: Friday weekly retro ritual with punch list. |
+| `.claude/agents/dq-validator.md` | New atomic subagent: DQ section verdict only. |
+| `.claude/agents/schema-reviewer.md` | New atomic subagent: schema modeling review against authored + curated IP. |
+| `.claude/agents/compliance-checker.md` | New atomic subagent: cross-reference contract against `compliance-register.yaml`. |
+| `.gitignore` | Whitelisted `.claude/agents/` alongside `.claude/skills/`. |
+| `_Registry/Skills.md` | Added Practice OS Skills + Atomic Subagents tables; bumped Last updated stamp. |
+
+**Closes:** Phase 10 of the v1.2.0 Practice OS extension (PR #3).
+
+**Design Decisions:**
+- Skills live at `.claude/skills/<name>/SKILL.md` per Claude Code convention so they auto-register and become invocable as `/<name>`.
+- Subagents at `.claude/agents/<name>.md` for the same auto-registration. Each subagent is single-purpose with explicit boundary statements (no scope creep).
+- The seven skills mirror the practice's actual end-to-end engagement loop: bootstrap repo → intake source → init DABs → audit governance → contract AI consumption → defend spend → synthesize weekly.
+- The three subagents are intentionally narrow so the parent skill can compose them without re-implementing focused checks.
+- Attribution preserved (Invariant #3): `defending-ai-spend-memo` cites Hewing as the curated 12-question source; authored IP (No LAC, Platinum) is the answer pattern, not blurred together.
