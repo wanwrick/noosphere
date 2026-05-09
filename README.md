@@ -1,252 +1,208 @@
-# Noosphere
+# Noosphere — Practice Operating System
 
-**The context layer for your AI work partner.**
+**The operating system of a Data & AI Strategy practice. Open-sourced. Authored by Paroz Mehta (Cornell-Queen's EMBA CA26).**
 
-A portable, self-contained knowledge system that turns Claude into an AI work partner with full access to business frameworks, operational context, reusable templates, and step-by-step workflows.
-
-**32 markdown files. Zero external dependencies. Fork it, customize it, make it yours.**
+A portable, fork-and-customize, version-controlled practice OS for any Data & AI team operating in regulated industry. Pairs original authored IP with 12 attributed industry methodologies and Cornell-Queen's EMBA framework grounding. Ships with a real, working DABs Data-Contract Golden Path subproject so any data team can clone, fill in `data-contract.yml`, and have a contract-enforcing pipeline running the same week.
 
 ---
 
-## What's New in v1.1
+## Three Killer Signals
 
-**Self-improvement loop.** Noosphere now learns and optimizes within each session.
+> **🚀 No LAC — *No Lack of Analytical Capability.***
+> *Land it once. Land it well. Get out of the business's way.*
+> Bronze ingests almost everything plausibly needed for analytics; iteration speed lives in the Silver → Gold → Platinum tier; the platform stops being a gatekeeper. **A humility principle as much as a technical one.** See `ip/authored/no-lac-principle.md`.
 
-| Capability | What changed |
-|-----------|-------------|
-| **Auto-Loader** | Session bootstrap reads GOALS.md, feedback.md, and Cadences.md in a defined sequence before any work starts |
-| **Verification loops** | Every template and workflow now includes a pre-delivery checklist that enforces BLUF, framework completeness, and action ownership |
-| **Autoresearch loop** | When a gap surfaces 3+ times, the system triggers a structured fix cycle: identify → score → propose → validate → implement → log |
-| **Session Protocol v2** | Three-pass verification (framework, BLUF, action) added to every output before delivery |
-| **Version discipline** | Semantic versioning and changelog entries required for every system-level change |
+> **🤖 AI-Ready Platinum Layer.**
+> Unity Catalog metadata as the runtime semantic layer for AI agents. 5 Principles + 6-question metadata rubric. Network-effect economics: *1× publish → 1× govern → 5+ consume.* See `ip/authored/ai-ready-platinum-layer.md`.
 
-Inspired by Boris Jeltsky's build-in-public AI PM patterns and Andrej Karpathy's autoresearch loop (score → mutate → re-score).
-
-See `Workflows/self-improvement.md` for the full playbook.
+> **🛠️ DABs Data-Contract Golden Path — a real working forkable subproject.**
+> One `data-contract.yml` declares a data product. The bundle wires it into Bronze ingestion + Silver DLT expectations + Gold transformations + Platinum AI-ready views + Unity Catalog ABAC + CI/CD validation. **Forkable today.** See `templates/dabs-data-product-template/`.
 
 ---
 
-## Why This Exists
+## Who Authored This
 
-Three problems this system solves:
+**Paroz Mehta · Data Product Manager · Building agentic-ready data platforms in regulated financial services.**
+Cornell-Queen's EMBA CA26 · NBAB5630 Strategic Planning · [LinkedIn](https://linkedin.com/in/parozmehta) · [github.com/wanwrick/noosphere](https://github.com/wanwrick/noosphere)
 
-1. **Knowledge silos.** Frameworks across finance, strategy, marketing, leadership, operations, economics, technology, and governance sit in notebooks and slide decks. They should be in every working session.
-
-2. **Context switching.** Each new AI conversation starts from scratch. The system loads priorities, team context, past corrections, and communication preferences automatically.
-
-3. **Framework amnesia.** Knowing Porter's Five Forces exists is different from applying it consistently when the situation calls for it. The system routes questions to the right framework every time.
-
-**Built by [Paroz Mehta](https://linkedin.com/in/parozmehta), Technical PM, Data Engineering | Cornell-Queen's EMBA CA26**
-`github.com/wanwrick/noosphere`
+The repo doubles as a portfolio artifact AND a forkable practice OS. One repo, multiple audiences: data teams cloning the DABs Golden Path; case-interview prep workbook; recruiter-magnet at MBB / Senior Tech PM / Director-level Data & AI roles.
 
 ---
 
-## System Diagrams
+## What's New in v1.2.0
 
-Visual architecture of Noosphere v1.1. All diagrams rendered in Consolas monospace.
-
-### File Tree: 32 files across four layers
-![File Tree](https://raw.githubusercontent.com/wanwrick/noosphere/main/_Diagrams/diagram1_file_tree.png)
-
-### Architecture: How a request becomes a verified output
-![Architecture](https://raw.githubusercontent.com/wanwrick/noosphere/main/_Diagrams/diagram2_architecture.png)
-
-### v1.1 Capabilities: Auto-Loader, Verification Gate, Improvement Loop
-![New Capabilities](https://raw.githubusercontent.com/wanwrick/noosphere/main/_Diagrams/diagram3_decision_tree.png)
+| Capability | What landed |
+|---|---|
+| **Sanitization Protocol** (Invariant #0) | Banned-token lint + gitleaks + GitHub Actions gate; no employer / team / stakeholder / JIRA / Databricks-internal IDs in committed content. See `Workflows/sanitization-pass.md` and `_Logs/sanitization-audit.md`. |
+| **No LAC Atomic Framework** | Bronze → Silver I/II/III → Gold → Platinum medallion architecture with custom code only at Gold. Cloud-agnostic outputs. See `ip/authored/no-lac-principle.md`. |
+| **AI-Ready Platinum Layer** | 5 Principles + 6-question metadata rubric for serving AI agents alongside Power BI. See `ip/authored/ai-ready-platinum-layer.md`. |
+| **DABs Data-Contract Golden Path subproject** | ~40-file working Databricks Asset Bundle template. `data-contract.yml` → DLT expectations + UC ABAC + Platinum scoped views + AI Consumption Contract. See `templates/dabs-data-product-template/`. |
+| **10Q Framework + toolkit** | New data source onboarding stress-test across 10 dimensions, with intake form, elicitation guide, tracker schema, Miro blueprint spec. See `ip/authored/10q-framework.md`. |
+| **Enterprise CLAUDE.md pattern** | Production-ready CLAUDE.md skeleton for regulated-industry data engineering teams. See `ip/authored/enterprise-claude-md.md`. |
+| **12 curated industry methodologies** | Mahboub · Grover · Hewing · Tekiner · Czarnas · Baeyens · Bain · Kocyigit · Shi (×2) · Dataplex 6 Principles · CDO Top 10. Every file carries a Source callout. See `ip/curated/`. |
+| **EMBA framework expansion** | ~50 framework files across `Knowledge/EMBA/` and `Knowledge/Strategy/` covering Critical Thinking, Negotiation Suite, Corporate Finance core, Operations Management Suite, Cornell 5-Phase Strategic Process, Strategy Meta Framework, Roger Martin's Strategic Choice Cascade. |
+| **5 anonymized archetypes** | Engagement archetypes for regulated FSI platform launch, marketing modernization with CDP + clean rooms, self-serve tenant flatpack, agentic self-serve analytics, legacy DW → cloud lakehouse. See `initiatives/archetypes/`. |
+| **7 v1.2.0 skills + 3 atomic subagents** | `claude-md-bootstrap`, `data-source-10q-intake`, `dabs-template-init`, `governance-audit`, `ai-consumption-contract`, `defending-ai-spend-memo`, `weekly-practice-synthesis` plus `dq-validator` · `schema-reviewer` · `compliance-checker` atomic subagents. |
+| **13 Mermaid architecture diagrams** | Generated and embedded across flagship IP files + DABs Golden Path docs + README. |
 
 ---
 
-## Architecture
-
-### System Flow
+## Architecture (Three Layers)
 
 ```
-User Request
-     |
-     v
-+-----------+
-| CLAUDE.md |  Reads GOALS.md (priorities) + feedback.md (past corrections)
-+-----------+
-     |
-     v
-  Route to domain(s)
-     |
-     +---> Knowledge/Frameworks/  (business frameworks, theory, analysis tools)
-     +---> Knowledge/Work/        (team, tech stack, stakeholders, playbooks)
-     +---> Templates/             (document formats: memo, status, RCA, story)
-     +---> Workflows/             (step-by-step: incident, briefing, negotiation)
-     +---> _Registry/             (skills, MCPs, cadences)
-     +---> Notion MCP             (live data: sprint status, meeting notes)
-     |
-     v
-  Execute + Verify
-     |
-     v
-  Log learnings to _Logs/feedback.md
++--------------------------------------------------------------------+
+|  SHARED DISCIPLINE                                                 |
+|    governance/ · workflows/ · _Registry/ · _Logs/ · scripts/       |
+|    .claude/skills/ · templates/dabs-data-product-template/         |
++--------------------------------------------------------------------+
+|  SHARED QUERIES                                                    |
+|    initiatives/ · data-products/ · playbooks/ · talent/            |
++--------------------------------------------------------------------+
+|  SHARED CONTEXT                                                    |
+|    practice-context/ · methodology/ · ip/{authored,curated}/       |
+|    Knowledge/Frameworks/ · Knowledge/EMBA/ · Knowledge/Strategy/   |
++--------------------------------------------------------------------+
 ```
 
-### Four Layers
-
-```
-+---------------------------------------------------------------+
-|  SYSTEM LAYER          _Registry/ + _Logs/                    |
-|  Skills, MCPs, cadences, feedback, version history            |
-+---------------------------------------------------------------+
-|  ACTION LAYER          Templates/ + Workflows/                |
-|  Document formats + step-by-step operational playbooks        |
-+---------------------------------------------------------------+
-|  KNOWLEDGE LAYER       Knowledge/Frameworks/ + Knowledge/Work/|
-|  8 business domains + operational context files               |
-+---------------------------------------------------------------+
-|  CORE LAYER            CLAUDE.md + GOALS.md                   |
-|  Routing brain + current priorities (P0-P3)                   |
-+---------------------------------------------------------------+
-```
+The DABs Data-Contract Golden Path subproject sits at the boundary of Discipline and Queries: it operationalizes 6 named methodologies (No LAC + AI-Ready Platinum + Czarnas + Baeyens + Kocyigit + Shi×2) into a single forkable Databricks Asset Bundle with `data-contract.yml` as the single source of truth.
 
 ---
 
-## Directory Structure
+## Directory Structure (v1.2.0)
 
 ```
 noosphere/
-+-- CLAUDE.md                       System brain + routing
-+-- GOALS.md                        Priorities + OKRs
-+-- CONTRIBUTING.md                 Fork-and-customize guide
-+-- LICENSE                         MIT license
++-- CLAUDE.md                        Routing brain (~500 tokens)
++-- README.md                        This file
++-- GOALS.md                         Priorities + OKRs (private to your fork)
++-- CONTRIBUTING.md                  Fork-and-customize guide
++-- LICENSE                          MIT
++-- .gitleaks.toml                   Secret scanning + custom sanitization rules
++-- .pre-commit-config.yaml          Sanitization gate at commit time
++-- .github/workflows/sanitization.yml  CI gate
++--
++-- practice-context/                Identity, voice, stack, regulated context
++-- methodology/                     How we work, attribution policy, diagrams
++-- ip/
+|   +-- authored/                    Original IP (sanitized)
+|   |   +-- no-lac-principle.md
+|   |   +-- ai-ready-platinum-layer.md
+|   |   +-- 10q-framework.md
+|   |   +-- 10q-toolkit/
+|   |   +-- enterprise-claude-md.md
+|   |   +-- platform-mandate-playbook.md
+|   |   +-- dabs-data-contract-golden-path.md
+|   +-- curated/                     12 named industry sources, attributed
++--
++-- initiatives/
+|   +-- initiatives.yaml             Engagement registry (anonymized archetypes)
+|   +-- archetypes/                  5 archetype examples
++-- data-products/
+|   +-- data-products.yaml           Data product registry
+|   +-- ai-consumption-contract-template.md
++--
++-- playbooks/
+|   +-- onboarding/                  10Q discovery session
+|   +-- governance/                  UC ABAC, PII medallion classification, masking
+|   +-- change-mgmt/                 Stakeholder mandate, Kotter applied
++--
++-- talent/                          Roles, capability matrix, bench policy
++-- governance/                      Ethics, model risk, classification, NDA, DPIA
++-- insights/                        Publishable POV articles
 +-- Knowledge/
-|   +-- Frameworks/                 8 business domain files
-|   |   +-- finance.md              DCF, WACC, CAPM, LBO, accounting, valuation
-|   |   +-- strategy.md             Porter's 5F, VRIN, blue ocean, game theory, CAGE
-|   |   +-- leadership.md           Transformational, teams, org behavior, presentations
-|   |   +-- operations.md           Little's Law, VUT, EOQ, lean/TPS, queueing
-|   |   +-- governance.md           Agency theory, board composition, exec comp
-|   |   +-- economics.md            Supply/demand, game theory, GDP, policy
-|   |   +-- marketing.md            STP, 4Ps, JTBD, CLV/CAC, brand equity
-|   |   +-- technology.md           Digital transformation, GenAI strategy, AI governance
-|   +-- Work/                       Operational context files
-|   |   +-- team.md                 Team structure, platform, Agile practices
-|   |   +-- platform.md             Technical reference with code patterns
-|   |   +-- communication.md        PREP, SBI, SUCCESS, email/meeting protocols
-|   |   +-- playbooks.md            Critical SOPs and decision frameworks
-|   |   +-- collaborators.md        Key people and interaction guidelines
-|   +-- Decisions/
-|       +-- _template.md            Decision log format
-+-- Templates/                      4 reusable document formats
-|   +-- decision-memo.md            Executive 3-pager
-|   +-- status-update.md            3P format (Progress/Plans/Problems)
-|   +-- rca-template.md             Root cause analysis (blameless)
-|   +-- user-story.md               Agile story format
-+-- Workflows/                      5 step-by-step playbooks
-|   +-- incident-response.md        SEV-based crisis playbook
-|   +-- negotiation-prep.md         BATNA + power dynamics + tactics
-|   +-- executive-briefing.md       Board deck / C-suite prep
-|   +-- data-storytelling.md        Insight pyramid + visualization guide
-|   +-- self-improvement.md         Auto-loader, verification loop, autoresearch
-+-- _Registry/                      System metadata
-|   +-- Skills.md                   All available skills inventory
-|   +-- MCPs.md                     Connected services reference
-|   +-- Cadences.md                 Recurring rituals and schedules
-+-- _Logs/                          Learning system
-|   +-- feedback.md                 Corrections and preferences
-|   +-- evolution.md                System changelog
-+-- _Diagrams/                      System architecture visuals
-    +-- diagram1_file_tree.png      32-file structure across four layers
-    +-- diagram2_architecture.png   6-phase request-to-output flow
-    +-- diagram3_decision_tree.png  Three v1.1 capabilities decision tree
+|   +-- Frameworks/                  8 evergreen MBA framework domains
+|   +-- EMBA/                        ~30 Cornell-Queen's EMBA frameworks
+|   +-- Strategy/                    Cross-cutting strategy toolkits
+|   +-- Work/                        Operational context
+|   +-- Decisions/                   Logged decisions
++--
++-- Templates/                       Document formats (decision-memo, status, RCA, story)
++-- Workflows/                       Step-by-step playbooks (incident, briefing, sanitization-pass, …)
++-- _Registry/                       Skills, MCPs, Cadences
++-- _Logs/                           evolution.md, feedback.md, sanitization-audit.md
++-- _Diagrams/                       PNG + Mermaid architecture visuals
++-- scripts/                         lint_sanitization.sh, sanitize_from_notion.py
++--
++-- templates/dabs-data-product-template/   ← THE FLAGSHIP SUBPROJECT
+    +-- data-contract.yml            Single source of truth
+    +-- databricks.yml               Bundle config wires contract → resources
+    +-- src/contract/                Contract loader + checks (Python)
+    +-- src/pipelines/               Bronze · Silver · Gold · Platinum (Python)
+    +-- tests/                       Unit + integration + fixtures
+    +-- scripts/                     validate_bundle.sh + deploy.sh + AI contract gen
+    +-- .github/workflows/           ci.yml + deploy.yml
+    +-- examples/                    3 worked examples (snapshot, CDC, AI-ready)
+    +-- docs/                        4 walkthrough docs
++-- .claude/skills/                  7 v1.2.0 skills + 3 atomic subagents
 ```
 
 ---
 
-## Getting Started
+## How to Fork (Ready-to-Play in 4 Weeks)
 
-### Step 1: Fork and Clone
-Fork this repository and clone it locally. This becomes your project folder for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (CLI agent) or [Cowork](https://cowork.com) (collaborative AI workspace).
+### Week 1 — Read + identity
+- Read `CLAUDE.md`, `practice-context/about.md`, `methodology/how-we-work.md`.
+- Populate `practice-context/about.md` with your identity. Keep the structure; replace identity-specific content.
+- Run `bash scripts/lint_sanitization.sh` to confirm zero banned-token leakage in your fork.
 
-### Step 2: Personalize the Core (1-2 hours)
-- **CLAUDE.md**: Search for bracket placeholders (`[Your Title]`, `[Company Name]`, `[Team Name]`, `[Platform Name]`, `[Your platform stack...]`, etc.) and replace with your info. Also replace all `your-notion-page-id-here` and `your-notion-database-id-here` entries in the Notion Reference Map. Keep the session protocol and routing rules structure.
-- **GOALS.md**: Replace with your P0-P3 priorities, current initiatives, key metrics, and decision principles.
+### Week 2 — Bootstrap your own Enterprise CLAUDE.md
+- Use the `claude-md-bootstrap` skill against your own data platform repo.
+- Adapt the pattern (`ip/authored/enterprise-claude-md.md`) to your stack — Databricks/Snowflake/dbt/Fabric — and regulator (OSFI/SOX/HIPAA/SOC2/GDPR).
 
-### Step 3: Replace Knowledge (1-2 hours)
-- **Knowledge/Frameworks/**: Keep the 8 domain files and add your own frameworks, or replace with your specialized knowledge areas.
-- **Knowledge/Work/**: Replace team context, platform details, communication preferences, playbooks, and collaborator info with your own.
+### Week 3 — Seed your first archetype + first 10Q intake
+- Copy one of the 5 archetypes to your `initiatives/` registry.
+- Run a 10Q discovery session against a real new data source using the toolkit.
+- Apply ≥1 IP framework (authored or curated) — log it in `ip_applied`.
 
-### Step 4: Customize Templates & Workflows (30 min)
-Review the 4 templates and 4 workflows. Keep what applies, swap what doesn't, add new ones for your recurring needs.
-
-### Step 5: Configure the Registry (15 min)
-- **Skills.md**: List your available Claude Code skills
-- **MCPs.md**: List your connected services
-- **Cadences.md**: Define your recurring rituals
-
-### Step 6: Initialize the Learning Loop (5 min)
-- **feedback.md**: Start empty; the system populates it as Claude learns your preferences
-- **evolution.md**: Add your v1.0 entry
-
-### Step 7: Test It (15 min)
-1. Ask a cross-domain question. Verify Claude routes to the right knowledge files.
-2. Ask Claude to create a document. Verify it uses the correct template.
-3. Correct Claude on something. Verify it logs the correction to feedback.md.
-4. Ask for help with a task. Verify it references GOALS.md.
+### Week 4 — Fork the DABs Golden Path
+- Copy `templates/dabs-data-product-template/` into your platform repo.
+- Fill in `data-contract.yml`. Run `databricks bundle validate`. Run the test suite.
+- Wire the GitHub Actions to your environments. Ship your first contract-enforced data product.
 
 ---
 
-## Design Principles
+## Adoption Models
 
-| Principle | How It Works |
-|-----------|-------------|
-| **Token Efficiency** | Notion Reference Map with page IDs for targeted lookups; local-first before MCP |
-| **Frameworks First** | Every recommendation grounded in a named, referenced framework |
-| **Portable** | Works as a zip file; no database, no server, no build step |
-| **Learning Loop** | `feedback.md` captures corrections; the system never repeats mistakes |
-| **Action-Oriented** | Every concept paired with a template or workflow that produces real output |
+| Mode | Setup time | Governance overhead | Expected lift |
+|---|---|---|---|
+| **Solo Practitioner** | 1 day | Light: identity + invariants only | Repeatable methodology + LinkedIn-magnet portfolio |
+| **Small Pod (2–5)** | 1 week | Medium: capability matrix + cadences | Shared vocabulary + reusable IP across pod |
+| **Full Practice (>5)** | 2 weeks | Full: governance register + DPIA + sanitization audit | Cross-pod consistency + audit trail + compounding IP |
 
 ---
 
-## MCP Integrations (Optional)
+## Governance & Trust
 
-The system works fully offline with local files. When connected, these services add live data:
-
-| Service | What It Adds |
-|---------|-------------|
-| **Notion** | Sprint data, meeting notes, initiative status |
-| **Gmail** | Email search and draft composition |
-| **Google Calendar** | Schedule and availability |
-| **Google Drive** | Shared docs and reports |
-| **Canva** | Presentations and visual assets |
-| **Figma** | UI/UX design context |
+- **Sanitization** — `Workflows/sanitization-pass.md` + `_Logs/sanitization-audit.md`. Banned-token lint + gitleaks + CI gate. v1.2.0+ release tag blocked on a clean audit.
+- **Data ethics + classification** — `governance/data-ethics-policy.md`, `governance/client-data-classification.md` (CDMC-aligned 4-tier).
+- **NDA + DPIA + regulated-FSI runbook** — `governance/nda-template.md`, `governance/dpia-template.md`, `governance/regulated-fsi-compliance-runbook.md` (OSFI-style + PIPEDA-style).
+- **Model risk** — `governance/model-risk-governance.md`.
 
 ---
 
 ## How to Extend
 
 | Goal | Action |
-|------|--------|
-| Add a knowledge domain | Create a file in `Knowledge/Frameworks/` or `Knowledge/Work/`, add routing rule to CLAUDE.md |
-| Add a template | Create a file in `Templates/`, reference in CLAUDE.md |
-| Add a workflow | Create a file in `Workflows/`, add trigger to Cadences.md |
-| Optimize the system | Run the autoresearch loop in `Workflows/self-improvement.md` |
-| Log a decision | Copy `Knowledge/Decisions/_template.md`, fill in context and outcome |
-| Add an MCP | Update `_Registry/MCPs.md` and `_Registry/Skills.md` |
-| Update priorities | Edit `GOALS.md` at the start of each quarter |
+|---|---|
+| Add a knowledge domain | Create a file under `Knowledge/{Frameworks,EMBA,Strategy}/`; add routing rule to `CLAUDE.md`; bump version in `_Logs/evolution.md`. |
+| Add an authored IP page | Create under `ip/authored/`; sanitize first; add to `ip/authored/CLAUDE.md` index; bump version. |
+| Add a curated framework | Create under `ip/curated/` with a Source callout (author + URL); attribution lint enforces. |
+| Add a workflow | Create under `Workflows/`; add to `_Registry/Cadences.md` if trigger-based. |
+| Add a skill | Create under `.claude/skills/<name>/SKILL.md` with YAML frontmatter; register in `_Registry/Skills.md`. |
+| Add a worked DABs example | Drop into `templates/dabs-data-product-template/examples/<name>/`; ensure `databricks bundle validate` passes. |
+| Refresh from Notion | Follow `Workflows/sanitization-pass.md`. |
+| Update priorities | Edit `GOALS.md` at the start of each quarter. |
 
 ---
 
-## Troubleshooting
+## License + Acknowledgements
 
-| Problem | Likely Cause | Fix |
-|---------|-------------|-----|
-| Claude ignores Knowledge files | CLAUDE.md routing rules don't match | Update routing rules to reference new file names |
-| Responses are too generic | GOALS.md not loaded | Verify GOALS.md exists and Session Protocol references it |
-| Same mistake repeated | feedback.md not being read | Check Session Protocol step 1 includes feedback.md |
-| Notion fetches fail | Page IDs incorrect or MCP not connected | Verify page IDs; check MCP connection status |
-| Claude doesn't use templates | Templates not referenced in routing | Add template routing rules to CLAUDE.md |
+**MIT.** See [LICENSE](LICENSE).
 
----
+This project stands on the shoulders of named authors. Every curated framework file in `ip/curated/` carries a Source callout citing the original author + URL. Particular thanks to:
 
-## License
+- **Yassine Mahboub** (Data Thinking 4 Pillars), **Raj Grover** (Defending AI & Architecture Spend 12-Question Pressure Test), **Sebastian Hewing** (9-Question Canvas to Escape the Dashboard Factory), **Firat Tekiner** (Context Wall + Meta Knowledge Graph), **Piotr Czarnas** (Data Product Architecture: 5 Engineering Pillars), **Tom Baeyens** (Data Contracts as Producer-Consumer Interface), **Yasar Kocyigit** (Metadata-Driven Lakehouse Ingestion Framework, open source), **Mengyu Shi** (DABs Custom Templates + DABs CI/CD Asset Bundles), **Bain & Company** (Agentic AI Platform 3-Layer Architecture, Apr 2026), **Google Cloud** (Dataplex 6 Data Product Principles).
+- **Cornell-Queen's EMBA faculty** — Risa Mish (Congress Model), Shai Dubey (Negotiation), Hambrick & Fredrickson (Strategy Diamond), Nadler & Tushman (Congruence Model), Kotter (8-Step Change Management), and the NBAB5630 Strategic Planning toolkit.
+- **Boris Jeltsky** (build-in-public AI PM patterns), **Andrej Karpathy** (autoresearch loop pattern), **Aakash Gupta** (Team OS shape).
 
-MIT. See [LICENSE](LICENSE) for details.
-
----
-
-*Built by [Paroz Mehta](https://linkedin.com/in/parozmehta), Technical PM, Data Engineering at Questrade | Cornell-Queen's EMBA CA26 | [github.com/wanwrick/noosphere](https://github.com/wanwrick/noosphere)*
+Built by [Paroz Mehta](https://linkedin.com/in/parozmehta) · Cornell-Queen's EMBA CA26 · [github.com/wanwrick/noosphere](https://github.com/wanwrick/noosphere)

@@ -1,0 +1,41 @@
+name: Sanitization
+
+# CI gate for the Noosphere Practice OS sanitization invariant. Runs on every
+# pull request and push to main. Fails closed on any banned token or secret.
+# See _Logs/sanitization-audit.md for the audit trail.
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sanitization-lint:
+    name: Banned-token guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install ripgrep
+        run: sudo apt-get update && sudo apt-get install -y ripgrep
+
+      - name: Run sanitization lint
+        run: bash scripts/lint_sanitization.sh
+
+  gitleaks:
+    name: gitleaks (secrets + custom rules)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_CONFIG: .gitleaks.toml

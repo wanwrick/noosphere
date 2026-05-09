@@ -1,0 +1,33 @@
+# Invalid: missing required `freshness` block.
+api_version: data-product/v1
+kind: DataContract
+
+metadata:
+  id: bad-freshness-product
+  name: Bad Freshness Product
+  owner_team: producer-platform
+  classification: internal
+  pii: false
+  version:
+    current: 0.1.0
+
+grain:
+  description: "one row per event"
+
+bronze:
+  source_type: files
+  ingestion_strategy: snapshot
+
+schema:
+  columns:
+    - name: id
+      type: STRING
+      nullable: false
+      classification: internal
+
+# MISSING: freshness block
+
+quality_expectations:
+  - name: id_not_null
+    expectation: "id IS NOT NULL"
+    on_violation: fail

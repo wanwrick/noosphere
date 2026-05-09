@@ -1,0 +1,44 @@
+# .pre-commit-config.yaml — Noosphere Practice OS gates.
+#
+# Runs sanitization-lint + gitleaks on every commit so banned tokens never
+# ship. Install with:
+#   pip install pre-commit
+#   pre-commit install
+#
+# Run manually:
+#   pre-commit run --all-files
+
+repos:
+  - repo: local
+    hooks:
+      - id: sanitization-lint
+        name: sanitization-lint (banned-token guard)
+        entry: bash scripts/lint_sanitization.sh
+        language: system
+        pass_filenames: false
+        always_run: true
+        description: |
+          Refuses any commit that introduces an employer / team / stakeholder /
+          JIRA / Databricks-internal-ID token. See _Logs/sanitization-audit.md
+          for rationale and Workflows/sanitization-pass.md for remediation.
+
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.21.2
+    hooks:
+      - id: gitleaks
+        args:
+          - "detect"
+          - "--config=.gitleaks.toml"
+          - "--redact"
+          - "--no-banner"
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+        exclude: '^(\.github/|templates/dabs-data-product-template/data-contract\.yml)$'
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: ["--maxkb=2048"]

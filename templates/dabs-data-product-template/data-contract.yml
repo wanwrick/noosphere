@@ -1,0 +1,127 @@
+# Data Contract — single source of truth for this data product.
+#
+# This file declares schema, freshness, quality, ownership, and AI consumption
+# semantics. The DABs bundle wires it into Bronze ingestion + Silver DLT
+# expectations + UC permissions/tags/masking + Platinum scoped views + AI
+# Consumption Contract auto-generation.
+#
+# Validate: python -c "from src.contract.loader import load; load('data-contract.yml')"
+# Lint:     bash scripts/validate_bundle.sh
+
+api_version: data-product/v1
+kind: DataContract
+
+metadata:
+  id: example-data-product
+  name: Example Data Product
+  description: |
+    Replace this. One paragraph describing what this data product represents,
+    who consumes it, and why it exists.
+  owner_team: producer-platform           # team codename, no employer leak
+  steward: data-product-steward-role      # role or DL, not a person
+  classification: internal                # public | internal | confidential | restricted
+  pii: false
+  version:
+    current: 1.0.0
+    deprecation_window_days: 90
+    breaking_changes_require: data-product-council-approval
+
+grain:
+  description: "one row per <entity> per <period>"
+
+bronze:
+  source_type: files                      # files | database | api | kafka | saas
+  ingestion_strategy: incremental         # snapshot | incremental | cdc
+  incremental_column: updated_at          # required when strategy=incremental
+  rate_limit_aware: true
+  rescue_column: _rescued_data
+  schema_evolution: rescue                # strict | merge | rescue
+  expected_volume_gb_per_day: 5
+
+schema:
+  columns:
+    - name: account_id
+      type: STRING
+      nullable: false
+      classification: internal
+      description: "Stable internal account identifier."
+
+    - name: event_timestamp
+      type: TIMESTAMP
+      nullable: false
+      classification: internal
+      description: "UTC timestamp of the source event."
+
+    - name: account_email
+      type: STRING
+      nullable: true
+      classification: confidential
+      pii: true
+      masking_function: mask_completely
+      description: "Account holder email."
+
+    - name: amount
+      type: DECIMAL(18,2)
+      nullable: false
+      classification: internal
+      description: "Transaction amount in account currency."
+
+    - name: currency_code
+      type: STRING
+      nullable: false
+      classification: public
+      description: "ISO-4217 three-letter currency code."
+
+freshness:
+  sla_minutes: 90
+  measurement: "max ingestion-to-availability lag at p95"
+
+quality_expectations:
+  - name: pk_not_null
+    expectation: "account_id IS NOT NULL"
+    on_violation: fail
+
+  - name: timestamp_present
+    expectation: "event_timestamp IS NOT NULL"
+    on_violation: fail
+
+  - name: amount_positive_or_zero
+    expectation: "amount >= 0"
+    on_violation: drop_to_quarantine
+
+  - name: currency_iso
+    expectation: "length(currency_code) = 3"
+    on_violation: drop_to_quarantine
+
+completeness:
+  expected_row_count_min: 1000
+  expected_row_count_max: 10000000
+  null_rate_threshold:
+    account_email: 0.05                    # max 5% nulls accepted
+
+ai_consumption:
+  enabled: true
+  answerable_questions:
+    - "What is the total amount transacted by account X in period Y?"
+    - "How many accounts had activity in the last 24 hours?"
+    - "What is the per-currency activity distribution last quarter?"
+  scoped_views:
+    - name: vw_account_activity_for_agents
+      grain: "one row per account per day"
+      columns: [account_id, activity_date, transaction_count, total_amount, currency_code]
+      description: |
+        Question-oriented view for AI agents. 5 columns, 1 row per account per
+        day. Excludes PII columns by construction.
+  uc_functions:
+    - name: classify_amount_band
+      logic_summary: "Maps amount to one of: micro (<10) / small (<1k) / medium (<100k) / large (>=100k)."
+      governance: producer-owned
+
+consumed_by:
+  bi: [primary-bi-tool]
+  ai_agents: [mcp-clients]
+
+slis:
+  freshness_p95_minutes: 90
+  schema_drift_alerts: true
+  quality_breach_threshold: 1

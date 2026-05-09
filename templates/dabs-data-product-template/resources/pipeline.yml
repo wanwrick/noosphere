@@ -1,0 +1,38 @@
+# DLT pipeline resource — Bronze + Silver + Gold + Platinum layers.
+# Quality expectations and column-level masking are applied at runtime by
+# src/pipelines/silver.py reading data-contract.yml.
+
+resources:
+  pipelines:
+    data_product_pipeline:
+      name: "${var.catalog}_${var.schema}_pipeline"
+      catalog: ${var.catalog}
+      target: ${var.schema}
+      development: true
+      photon: true
+      libraries:
+        - notebook:
+            path: ../src/pipelines/bronze.py
+        - notebook:
+            path: ../src/pipelines/silver.py
+        - notebook:
+            path: ../src/pipelines/gold.py
+        - notebook:
+            path: ../src/pipelines/platinum.py
+      configuration:
+        contract_path: ${var.contract_path}
+        catalog: ${var.catalog}
+        schema: ${var.schema}
+      clusters:
+        - label: default
+          autoscale:
+            min_workers: 1
+            max_workers: 4
+            mode: ENHANCED
+      notifications:
+        - email_recipients:
+            - ${var.alert_email_dl}
+          alerts:
+            - on-update-failure
+            - on-update-fatal-failure
+            - on-flow-failure
