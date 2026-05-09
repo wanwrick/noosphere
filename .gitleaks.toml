@@ -64,11 +64,19 @@ tags = ["sanitization", "databricks-leak"]
 # ---------------------------------------------------------------------------
 
 [allowlist]
-description = "Sanitization tooling and audit trail are exempt."
+description = "Sanitization tooling, audit trail, sanitizer source, and historic-content commits are exempt."
 paths = [
   '''scripts/lint_sanitization\.sh''',
+  '''scripts/sanitize_from_notion\.py''',
   '''_Logs/sanitization-audit\.md''',
   '''Workflows/sanitization-pass\.md''',
   '''\.gitleaks\.toml''',
   '''\.github/workflows/sanitization\.yml''',
+  '''\.pre-commit-config\.yaml''',
+]
+# Historic README.md byline (replaced in v1.2.0). Allowed at the diff level
+# only because it appears as a deletion. New occurrences are still blocked
+# by every other rule + by scripts/lint_sanitization.sh.
+regexes = [
+  '''Built by \[Paroz Mehta\].*at [Practice Name]''',
 ]
