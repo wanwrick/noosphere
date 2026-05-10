@@ -1,0 +1,82 @@
+# .gitleaks.toml — secret scanning + sanitization rules for Noosphere Practice OS.
+#
+# Combines stock secret detection with custom banned-token rules so the
+# sanitization invariant fails fast at commit and PR time.
+#
+# Run locally: gitleaks detect --redact --source .
+# Run in CI: see .github/workflows/sanitization.yml
+
+title = "Noosphere Sanitization + Secret Scanning"
+
+[extend]
+useDefault = true   # Stock secret scanning (AWS keys, GitHub tokens, etc.).
+
+# ---------------------------------------------------------------------------
+# Custom banned-token rules.
+# Mirrors scripts/lint_sanitization.sh; here for IDE / pre-commit integration.
+# ---------------------------------------------------------------------------
+
+[[rules]]
+id = "noosphere-employer-name"
+description = "Employer / team name leaked into committed content."
+regex = '''(?i)\b(questrade|qfg|questbank|quest bank|quest financial group|datawizards|data wizards|qtg|quest tech group)\b'''
+tags = ["sanitization", "employer-leak"]
+
+[[rules]]
+id = "noosphere-internal-vendor"
+description = "Internal vendor / system name leaked into committed content."
+regex = '''(?i)\b(temenos|prospector|portfolioplus|intellify|corpbi|westway|martech force)\b'''
+tags = ["sanitization", "vendor-leak"]
+
+[[rules]]
+id = "noosphere-jira-ticket"
+description = "Project-specific JIRA ticket code."
+regex = '''\bQB-\d+\b'''
+tags = ["sanitization", "jira-leak"]
+
+[[rules]]
+id = "noosphere-cross-hub-marker"
+description = "Cross-Hub: marker copied verbatim from a Notion source."
+regex = '''Cross-Hub:'''
+tags = ["sanitization", "notion-leak"]
+
+[[rules]]
+id = "noosphere-stakeholder-name"
+description = "Internal stakeholder full name."
+regex = '''\b(Adam Muise|Mark Huang|Kriti Sood|Dan Cici|Gabriel Cortes|Yelena Hakhumyan|Hayk Danielyan|Mariano Barrionuevo|Artur Gyulambaryan)\b'''
+tags = ["sanitization", "stakeholder-leak"]
+
+[[rules]]
+id = "noosphere-databricks-workspace-id"
+description = "Databricks workspace identifier."
+regex = '''\bdbc-[a-f0-9]{8}-[a-f0-9]{4}\b'''
+tags = ["sanitization", "databricks-leak"]
+
+[[rules]]
+id = "noosphere-databricks-cluster-id"
+description = "Databricks cluster identifier."
+regex = '''clusterId\s*[:=]\s*["']?[0-9]{4}-[0-9]{6}-[a-z0-9]{8}["']?'''
+tags = ["sanitization", "databricks-leak"]
+
+# ---------------------------------------------------------------------------
+# Allowlist — files that legitimately reference banned tokens for testing or
+# audit purposes only.
+# ---------------------------------------------------------------------------
+
+[allowlist]
+description = "Sanitization tooling, audit trail, sanitizer source, and historic-content commits are exempt."
+paths = [
+  '''scripts/lint_sanitization\.sh''',
+  '''scripts/sanitize_from_notion\.py''',
+  '''_Logs/sanitization-audit\.md''',
+  '''Workflows/sanitization-pass\.md''',
+  '''\.gitleaks\.toml''',
+  '''\.github/workflows/sanitization\.yml''',
+  '''\.pre-commit-config\.yaml''',
+]
+# Historic README.md byline (replaced in v1.2.0). Allowed at the diff level
+# only because it appears as a deletion. New occurrences are still blocked
+# by every other rule + by scripts/lint_sanitization.sh.
+regexes = [
+  '''Built by \[Paroz Mehta\].*at Questrade''',
+]

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "DABs Data-Contract Golden Path — bundle init parameters",
+  "description": "Parameters captured by `databricks bundle init <this-template>`.",
+  "properties": {
+    "product_name": {
+      "type": "string",
+      "description": "Display name of the data product (1-64 chars).",
+      "default": "example-data-product",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,62}[a-z0-9]$"
+    },
+    "owner_team": {
+      "type": "string",
+      "description": "Codename of the owning producer team.",
+      "default": "producer-platform"
+    },
+    "classification": {
+      "type": "string",
+      "description": "Default classification level for this product.",
+      "enum": ["public", "internal", "confidential", "restricted"],
+      "default": "internal"
+    },
+    "ingestion_strategy": {
+      "type": "string",
+      "description": "Bronze ingestion strategy.",
+      "enum": ["snapshot", "incremental", "cdc"],
+      "default": "incremental"
+    },
+    "ai_consumption_enabled": {
+      "type": "string",
+      "description": "Should this product expose an AI Consumption Contract?",
+      "enum": ["yes", "no"],
+      "default": "yes"
+    }
+  }
+}

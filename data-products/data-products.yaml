@@ -1,0 +1,27 @@
+# Data Products Registry
+#
+# Each row corresponds to one data-contract.yml deployed via the DABs
+# Data-Contract Golden Path. Forks add rows as new products land.
+
+schema_version: 1
+
+data_products:
+  - id: DP-001
+    name: example_platinum_domain
+    grain: "one row per <entity> per <period>"
+    refresh_cadence: hourly
+    refresh_sla_minutes: 90
+    classification: internal
+    pii: false
+    owner_team: producer-platform
+    archetype_link: ARCHETYPE-A-regulated-fsi-platform-launch
+    bi_consumption: true
+    ai_consumption: true
+    ai_consumption_contract_path: data-products/_example-platinum-domain.md
+    contract_path: templates/dabs-data-product-template/data-contract.yml
+    used_by_initiatives:
+      - ARCHETYPE-A-regulated-fsi-platform-launch
+      - ARCHETYPE-D-agentic-self-serve-analytics
+    last_validated: 2026-05-09
+    sli_p95_freshness_minutes: 90
+    sli_quality_breach_count_30d: 0

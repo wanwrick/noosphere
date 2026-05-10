@@ -1,0 +1,33 @@
+# Orchestration job — kicks off the DLT pipeline on a schedule.
+
+resources:
+  jobs:
+    data_product_orchestration:
+      name: "${var.catalog}_${var.schema}_orchestration"
+      schedule:
+        quartz_cron_expression: "0 0 * * * ?"   # hourly (override per env)
+        timezone_id: UTC
+      tasks:
+        - task_key: ingest_and_transform
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.data_product_pipeline.id}
+        - task_key: ai_contract_generation
+          depends_on:
+            - task_key: ingest_and_transform
+          notebook_task:
+            notebook_path: ../scripts/generate_ai_contract.py
+          job_cluster_key: small_cluster
+      job_clusters:
+        - job_cluster_key: small_cluster
+          new_cluster:
+            spark_version: 15.4.x-scala2.12
+            num_workers: 1
+            node_type_id: ${var.node_type}
+            data_security_mode: USER_ISOLATION
+      tags:
+        product: ${var.schema}
+        owner_team: ${var.owner_team}
+        classification: ${var.classification}
+      email_notifications:
+        on_failure:
+          - ${var.alert_email_dl}

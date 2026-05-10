@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://noosphere.dev/schemas/data-contract/v1",
+  "title": "Data Contract",
+  "description": "Schema for data-contract.yml. Validates the producer-consumer interface for a Databricks data product.",
+  "type": "object",
+  "required": ["api_version", "kind", "metadata", "grain", "bronze", "schema", "freshness", "quality_expectations"],
+  "properties": {
+    "api_version": {"const": "data-product/v1"},
+    "kind": {"const": "DataContract"},
+
+    "metadata": {
+      "type": "object",
+      "required": ["id", "name", "owner_team", "classification", "pii", "version"],
+      "properties": {
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]{1,62}[a-z0-9]$"},
+        "name": {"type": "string", "minLength": 1},
+        "description": {"type": "string"},
+        "owner_team": {"type": "string", "minLength": 1},
+        "steward": {"type": "string"},
+        "classification": {"enum": ["public", "internal", "confidential", "restricted"]},
+        "pii": {"type": "boolean"},
+        "version": {
+          "type": "object",
+          "required": ["current"],
+          "properties": {
+            "current": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+            "deprecation_window_days": {"type": "integer", "minimum": 0},
+            "breaking_changes_require": {"type": "string"}
+          }
+        }
+      }
+    },
+
+    "grain": {
+      "type": "object",
+      "required": ["description"],
+      "properties": {"description": {"type": "string"}}
+    },
+
+    "bronze": {
+      "type": "object",
+      "required": ["source_type", "ingestion_strategy"],
+      "properties": {
+        "source_type": {"enum": ["files", "database", "api", "kafka", "saas"]},
+        "ingestion_strategy": {"enum": ["snapshot", "incremental", "cdc"]},
+        "incremental_column": {"type": "string"},
+        "rate_limit_aware": {"type": "boolean"},
+        "rescue_column": {"type": "string"},
+        "schema_evolution": {"enum": ["strict", "merge", "rescue"]},
+        "expected_volume_gb_per_day": {"type": "number", "minimum": 0}
+      },
+      "if": {"properties": {"ingestion_strategy": {"const": "incremental"}}},
+      "then": {"required": ["incremental_column"]}
+    },
+
+    "schema": {
+      "type": "object",
+      "required": ["columns"],
+      "properties": {
+        "columns": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["name", "type", "nullable", "classification"],
+            "properties": {
+              "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+              "type": {"type": "string"},
+              "nullable": {"type": "boolean"},
+              "classification": {"enum": ["public", "internal", "confidential", "restricted"]},
+              "pii": {"type": "boolean"},
+              "masking_function": {"type": "string"},
+              "description": {"type": "string"}
+            },
+            "if": {"required": ["pii"], "properties": {"pii": {"const": true}}},
+            "then": {"required": ["masking_function"]}
+          }
+        }
+      }
+    },
+
+    "freshness": {
+      "type": "object",
+      "required": ["sla_minutes"],
+      "properties": {
+        "sla_minutes": {"type": "integer", "minimum": 1},
+        "measurement": {"type": "string"}
+      }
+    },
+
+    "quality_expectations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["name", "expectation", "on_violation"],
+        "properties": {
+          "name": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "expectation": {"type": "string"},
+          "on_violation": {"enum": ["fail", "drop", "drop_to_quarantine", "warn"]}
+        }
+      }
+    },
+
+    "completeness": {
+      "type": "object",
+      "properties": {
+        "expected_row_count_min": {"type": "integer", "minimum": 0},
+        "expected_row_count_max": {"type": "integer", "minimum": 0},
+        "null_rate_threshold": {"type": "object", "additionalProperties": {"type": "number", "minimum": 0, "maximum": 1}}
+      }
+    },
+
+    "ai_consumption": {
+      "type": "object",
+      "required": ["enabled"],
+      "properties": {
+        "enabled": {"type": "boolean"},
+        "answerable_questions": {"type": "array", "items": {"type": "string"}},
+        "scoped_views": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "grain", "columns"],
+            "properties": {
+              "name": {"type": "string"},
+              "grain": {"type": "string"},
+              "columns": {"type": "array", "items": {"type": "string"}, "minItems": 1, "maxItems": 8},
+              "description": {"type": "string"}
+            }
+          }
+        },
+        "uc_functions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "logic_summary", "governance"],
+            "properties": {
+              "name": {"type": "string"},
+              "logic_summary": {"type": "string"},
+              "governance": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+
+    "consumed_by": {
+      "type": "object",
+      "properties": {
+        "bi": {"type": "array", "items": {"type": "string"}},
+        "ai_agents": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+
+    "slis": {
+      "type": "object",
+      "properties": {
+        "freshness_p95_minutes": {"type": "integer"},
+        "schema_drift_alerts": {"type": "boolean"},
+        "quality_breach_threshold": {"type": "integer"}
+      }
+    }
+  }
+}
