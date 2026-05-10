@@ -288,3 +288,22 @@ v1.2.0 version. All 14 phases of PR #3 closed.
 **File-count summary (v1.1.2 → v1.2.0):** ~32 files → ~180 files. The repo is now a portable, fork-and-customize Practice OS with a working DABs subproject, governed IP, codified archetypes, executable skills, machine-checked invariants, and a published POV defending the 30-minute claim.
 
 **Honest version-history note:** the per-phase tags (`-phase9` through `-phase13`) above remain as the build trail. They are not separate releases; they are commit-level checkpoints inside the v1.2.0 PR. The final tag is plain v1.2.0.
+
+---
+
+### v1.2.1 -- 2026-05-10 -- CI Fix: Install DABs Requirements
+**Author:** Paroz Mehta + Claude Opus 4.7
+
+**What changed:**
+
+| File | Change |
+|------|--------|
+| `.github/workflows/verify.yml` | Install `templates/dabs-data-product-template/requirements.txt` in addition to top-level pyyaml. |
+
+**Gap that triggered this update:** v1.2.0 merged green for sanitization but the new `verify` workflow failed in CI on commit `5024b74`. Cause: the GitHub-hosted runner image ships with `pytest` pre-installed, so `04_dabs_end_to_end.sh` proceeded to invoke pytest. The DABs unit tests import `jsonschema` (and `pyyaml`) from `requirements.txt`. CI installed only top-level `pyyaml`, so pytest collection failed.
+
+**Fix:** install the DABs subproject's `requirements.txt` in the workflow. Verified locally — 9/9 unit tests pass and full `verify_all.sh` returns 9/9 pass · 0 fail.
+
+**Design Decisions:**
+- Kept the script's defensive SKIP fallback for environments where pytest is genuinely absent (sandboxes, sparse CIs). The fix is in the workflow, not the script.
+- Patch increment (1.2.0 → 1.2.1) per `methodology/repository-conventions.md` — only an existing CI file was edited.
