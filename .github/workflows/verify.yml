@@ -25,4 +25,17 @@ jobs:
           pip install -r templates/dabs-data-product-template/requirements.txt
 
       - name: Run all 9 verification checks
-        run: bash scripts/verify_all.sh
+        id: verify
+        run: |
+          set +e
+          bash -x scripts/verify_all.sh > verify.log 2>&1
+          rc=$?
+          cat verify.log
+          exit $rc
+
+      - name: Upload verify log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: verify-log
+          path: verify.log
