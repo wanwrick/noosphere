@@ -9,6 +9,7 @@ on:
 permissions:
   contents: read
   pull-requests: write
+  issues: write
 
 jobs:
   verify-all:
@@ -34,15 +35,25 @@ jobs:
           set +e
           bash -x scripts/verify_all.sh > verify.log 2>&1
           rc=$?
-          {
-            echo '## verify_all.sh trace'
-            echo ''
-            echo '```'
-            cat verify.log
-            echo '```'
-          } >> "$GITHUB_STEP_SUMMARY"
           cat verify.log
           exit $rc
+
+      - name: Post log as PR comment on failure
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const log = fs.readFileSync('verify.log', 'utf8');
+            // GitHub comment limit is 65536 chars; truncate generously.
+            const trimmed = log.length > 60000 ? log.slice(-60000) : log;
+            const body = `### verify_all.sh failure trace\n\n\`\`\`\n${trimmed}\n\`\`\``;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
 
       - name: Upload verify log
         if: always()
