@@ -1,0 +1,42 @@
+# Invalid: column has pii=true but no masking_function. Schema's conditional
+# `if pii==true then masking_function required` should reject this.
+api_version: data-product/v1
+kind: DataContract
+
+metadata:
+  id: bad-pii-product
+  name: Bad PII Product
+  owner_team: producer-platform
+  classification: confidential
+  pii: true
+  version:
+    current: 0.1.0
+
+grain:
+  description: "one row per user"
+
+bronze:
+  source_type: database
+  ingestion_strategy: incremental
+  incremental_column: updated_at
+
+schema:
+  columns:
+    - name: user_id
+      type: STRING
+      nullable: false
+      classification: internal
+    - name: email
+      type: STRING
+      nullable: true
+      classification: confidential
+      pii: true
+      # MISSING: masking_function
+
+freshness:
+  sla_minutes: 60
+
+quality_expectations:
+  - name: id_not_null
+    expectation: "user_id IS NOT NULL"
+    on_violation: fail

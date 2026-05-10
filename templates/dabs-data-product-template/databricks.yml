@@ -1,0 +1,46 @@
+# Databricks Asset Bundle config — wires data-contract.yml into Bronze
+# ingestion + Silver DLT expectations + UC permissions + Platinum views.
+#
+# Validate: databricks bundle validate
+# Deploy:   databricks bundle deploy --target dev
+# Run:      databricks bundle run <pipeline_or_job_name> --target dev
+
+bundle:
+  name: dabs-data-product-template
+
+variables:
+  # The contract path is relative to the bundle root.
+  contract_path:
+    description: "Path to data-contract.yml. Override per environment if needed."
+    default: data-contract.yml
+  catalog:
+    description: "Unity Catalog target."
+    default: main
+  schema:
+    description: "Schema within the catalog."
+    default: example_data_product
+
+include:
+  - resources/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: ${DATABRICKS_HOST_DEV}
+    variables:
+      catalog: dev
+  staging:
+    workspace:
+      host: ${DATABRICKS_HOST_STAGING}
+    variables:
+      catalog: staging
+  prod:
+    mode: production
+    workspace:
+      host: ${DATABRICKS_HOST_PROD}
+    variables:
+      catalog: prod
+    run_as:
+      service_principal_name: ${DATABRICKS_PROD_SP}

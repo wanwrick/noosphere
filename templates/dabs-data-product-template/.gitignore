@@ -1,0 +1,14 @@
+# DABs subproject local artifacts
+.databricks/
+dist/
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Generated docs
+docs/ai-consumption-contract.md

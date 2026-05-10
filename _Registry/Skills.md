@@ -80,6 +80,33 @@
 | `notion-meeting-intelligence` | Prep meeting materials from Notion context |
 | `notion-knowledge-capture` | Conversation to structured Notion page |
 
+## Practice OS Skills (v1.2.0)
+
+Practice-defining skills shipped with the Noosphere v1.2.0 Practice OS extension.
+Source: `.claude/skills/<name>/SKILL.md`. Invoke via `/<name>` or by
+referencing the skill in a prompt.
+
+| Skill | Trigger | What It Does |
+|-------|---------|-------------|
+| `claude-md-bootstrap` | Forking Noosphere, new repo onto Noosphere conventions | Generates the ~480-token CLAUDE.md routing brain (three-layer model + routing table + invariants + skills + IP catalog) |
+| `data-source-10q-intake` | Onboarding a new data source, drafting a contract | Runs the 10-question intake interview; produces a `data-contract.yml` + 2-page intake brief |
+| `dabs-template-init` | Bootstrapping a DABs project from a contract | Forks `templates/dabs-data-product-template/`, fills placeholders, runs validation + 9 unit tests, generates initial AI Consumption Contract |
+| `governance-audit` | Phase advance for `regulated: true` or `pii: true` | 7-check pre-advance audit (DPIA, classification, masking, retention, erasure, access, jurisdiction); pass / conditional / fail verdict |
+| `ai-consumption-contract` | Granting an AI agent Platinum read access | Authors per-agent contract against AI-Ready Platinum 5 Principles + 6-question metadata rubric |
+| `defending-ai-spend-memo` | CFO / Board / Architecture Council asks "why this AI spend?" | One-page memo + dense appendix using Hewing 12-question framework + No LAC + Platinum defence |
+| `weekly-practice-synthesis` | Friday end-of-week ritual | Pulls week's commits, feedback, evolution, governance items; produces synthesis page with punch list |
+
+## Practice OS Atomic Subagents (v1.2.0)
+
+Single-purpose subagents invoked from Practice OS skills (or directly when a
+focused lens is needed). Source: `.claude/agents/<name>.md`.
+
+| Subagent | Single Job | Boundary |
+|----------|------------|----------|
+| `dq-validator` | Validate the `quality:` section of a data contract against DLT expectations | Does not review schema, classification, or AI consumption |
+| `schema-reviewer` | Review the `schema:` section against authored modeling IP (No LAC + AI-Ready Platinum) and curated principles (Shi 5 Pillars, Dataplex 6) | Does not validate DQ, classification, or governance |
+| `compliance-checker` | Cross-reference contract / archetype against `governance/compliance-register.yaml` (classification, masking, retention, erasure, access, DPIA, cross-jurisdiction) | Does not validate DQ or schema; does not write a DPIA |
+
 ---
 
-*Last updated: 2026-03-07*
+*Last updated: 2026-05-09 (v1.2.0 — Practice OS skills + atomic subagents added)*

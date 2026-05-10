@@ -1,0 +1,93 @@
+# Compliance Register — active compliance obligations
+#
+# Tracks DPIA status, regulatory regimes, and outstanding items per archetype.
+# The governance-audit skill reads this file to gate phase advance.
+
+schema_version: 1
+
+obligations:
+  # Each row links to an initiative archetype + tracks open compliance items.
+  # Forks should add rows per their actual initiatives.
+
+  - archetype_id: ARCHETYPE-A-regulated-fsi-platform-launch
+    regimes:
+      - osfi-style
+      - pipeda-style
+    dpia_required: true
+    dpia_completed: false
+    dpia_path: governance/dpia/dpia-archetype-a.md   # exists when completed
+    classification_taxonomy_applied: true
+    masking_functions_registered: false              # in flight
+    audit_logging_wired: true
+    last_review_date: null
+    next_review_due: null
+    open_items:
+      - "Register masking_function for restricted-class columns (DP-001..005)"
+      - "Complete DPIA for cross-tenant data sharing pattern"
+
+  - archetype_id: ARCHETYPE-B-cdp-clean-room-modernization
+    regimes:
+      - pipeda-style
+      - gdpr
+    dpia_required: true
+    dpia_completed: false
+    classification_taxonomy_applied: true
+    masking_functions_registered: true
+    audit_logging_wired: false
+    open_items:
+      - "Wire audit logging on outbound clean-room exchange"
+      - "DPIA for cross-jurisdictional partner data movement"
+
+  - archetype_id: ARCHETYPE-C-self-serve-tenant-flatpack
+    regimes:
+      - osfi-style
+    dpia_required: false
+    dpia_completed: null
+    classification_taxonomy_applied: true
+    masking_functions_registered: true
+    audit_logging_wired: true
+    open_items: []
+
+  - archetype_id: ARCHETYPE-D-agentic-self-serve-analytics
+    regimes:
+      - pipeda-style
+      - osfi-style
+    dpia_required: true
+    dpia_completed: false
+    classification_taxonomy_applied: false           # AI-Ready Platinum metadata in flight
+    masking_functions_registered: true
+    audit_logging_wired: true
+    open_items:
+      - "Apply 6-question metadata rubric to all Platinum scoped views"
+      - "DPIA for AI agent access to Restricted-class data"
+      - "Wire MCP-path masking testing"
+
+  - archetype_id: ARCHETYPE-E-legacy-dw-to-cloud-lakehouse
+    regimes:
+      - osfi-style
+      - sox-equivalent
+    dpia_required: true
+    dpia_completed: false
+    classification_taxonomy_applied: false
+    masking_functions_registered: false
+    audit_logging_wired: false
+    open_items:
+      - "Complete classification audit on legacy DW columns"
+      - "Map legacy data flows to new lakehouse classification taxonomy"
+      - "DPIA for migration window"
+
+erasure_requests:
+  # Article 17 (or PIPEDA equivalent) requests log.
+  # Format: ERASE-YYYY-NNNN
+  - request_id: ERASE-2026-0001
+    received: 2026-04-12
+    decision: granted
+    execution_date: 2026-05-08
+    notes: "Standard erasure; Bronze pseudonymized; Silver/Gold/Platinum erased; backups flagged for next cycle."
+
+audits:
+  # Sanitization + governance audit history.
+  - date: 2026-05-09
+    type: sanitization
+    result: pass
+    notes: "Pre-v1.2.0 freeze audit. 0 banned-token matches across full tree."

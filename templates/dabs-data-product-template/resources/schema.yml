@@ -1,0 +1,24 @@
+# UC catalog + schema declaration. Tags are applied per data-contract.yml
+# metadata (owner_team, classification, pii) by pipeline runtime helpers.
+
+resources:
+  schemas:
+    bronze_schema:
+      catalog_name: ${var.catalog}
+      name: ${var.schema}_bronze
+      comment: "Bronze layer for ${var.schema} — raw landing, append-only, audit-grade."
+
+    silver_schema:
+      catalog_name: ${var.catalog}
+      name: ${var.schema}_silver
+      comment: "Silver layer — cleaned + standardized + DLT expectations applied."
+
+    gold_schema:
+      catalog_name: ${var.catalog}
+      name: ${var.schema}_gold
+      comment: "Gold layer — first cross-source joins; custom code lives here."
+
+    platinum_schema:
+      catalog_name: ${var.catalog}
+      name: ${var.schema}_platinum
+      comment: "Platinum layer — semantic + AI-ready scoped views + UC Functions."

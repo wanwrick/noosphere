@@ -1,0 +1,138 @@
+# Initiatives Registry — anonymized engagement archetypes.
+#
+# Each row is an archetype: a generic engagement pattern with codified ip_applied
+# and governance status. Forks can add specific live initiatives as additional rows.
+
+schema_version: 1
+
+archetypes:
+  - id: ARCHETYPE-A-regulated-fsi-platform-launch
+    codename: regulated-fsi-platform-launch
+    sector_anonymized: financial-services-regulated
+    type: platform-launch
+    scope: ["bronze-to-platinum", "regulatory-reporting", "secure-tenant-model"]
+    phase: build              # qualify | diagnose | design | build | embed | exit
+    leverage_ratio: "5:1"
+    regulated: true
+    regulations: [osfi-style, pipeda-style, fincrime-style]
+    dpia_required: true
+    dpia_completed: false
+    fee_tier_band: T3         # T1: <$1M | T2: $1M-$5M | T3: >$5M annual platform value
+    scorecard:
+      cognitive_clarity: green
+      data_fluency: amber
+      decision_velocity: green
+      organizational_adoption: amber
+    ip_applied:
+      authored: [no-lac-principle, ai-ready-platinum-layer, enterprise-claude-md, dabs-data-contract-golden-path, 10q-framework]
+      curated: [data-thinking-4-pillars, data-contracts-producer-consumer, data-product-architecture-5-pillars, bain-3-layer-agentic, metadata-driven-ingestion-framework]
+    risks:
+      - id: R1
+        statement: "Platform formalization not yet ratified"
+        severity: medium
+        mitigation: "Apply ip/authored/platform-mandate-playbook.md"
+    archetype_file: initiatives/archetypes/ARCHETYPE-A-regulated-fsi-platform-launch.md
+
+  - id: ARCHETYPE-B-cdp-clean-room-modernization
+    codename: marketing-cdp-clean-room-modernization
+    sector_anonymized: financial-services-marketing
+    type: marketing-cdp-modernization
+    scope: ["customer-data-platform-integration", "data-clean-rooms", "governed-outbound"]
+    phase: design
+    leverage_ratio: "3:1"
+    regulated: true
+    regulations: [pipeda-style, gdpr]
+    dpia_required: true
+    dpia_completed: false
+    fee_tier_band: T2
+    scorecard:
+      cognitive_clarity: green
+      data_fluency: green
+      decision_velocity: amber
+      organizational_adoption: amber
+    ip_applied:
+      authored: [no-lac-principle, dabs-data-contract-golden-path]
+      curated: [dashboard-factory-escape-9q, data-contracts-producer-consumer, dataplex-six-data-product-principles]
+    risks:
+      - id: R1
+        statement: "Cross-jurisdictional data movement requires DPIA + adequacy assessment"
+        severity: high
+        mitigation: "DPIA in flight; partner agreements adopt SCCs"
+    archetype_file: initiatives/archetypes/ARCHETYPE-B-cdp-clean-room-modernization.md
+
+  - id: ARCHETYPE-C-self-serve-tenant-flatpack
+    codename: self-serve-tenant-flatpack
+    sector_anonymized: financial-services-platform
+    type: self-serve-platform
+    scope: ["tenant-provisioning-toolkit", "exchange-workflow", "domain-onboarding"]
+    phase: build
+    leverage_ratio: "7:1"
+    regulated: true
+    regulations: [osfi-style]
+    dpia_required: false
+    dpia_completed: null
+    fee_tier_band: T2
+    scorecard:
+      cognitive_clarity: green
+      data_fluency: green
+      decision_velocity: green
+      organizational_adoption: amber
+    ip_applied:
+      authored: [enterprise-claude-md, dabs-data-contract-golden-path, platform-mandate-playbook]
+      curated: [dabs-custom-templates, dabs-cicd-asset-bundles, data-product-architecture-5-pillars]
+    risks: []
+    archetype_file: initiatives/archetypes/ARCHETYPE-C-self-serve-tenant-flatpack.md
+
+  - id: ARCHETYPE-D-agentic-self-serve-analytics
+    codename: agentic-self-serve-analytics
+    sector_anonymized: financial-services-analytics
+    type: agentic-analytics
+    scope: ["semantic-layer", "ai-bi-natural-language", "agentic-analytics-pilot"]
+    phase: design
+    leverage_ratio: "4:1"
+    regulated: true
+    regulations: [pipeda-style, osfi-style]
+    dpia_required: true
+    dpia_completed: false
+    fee_tier_band: T2
+    scorecard:
+      cognitive_clarity: green
+      data_fluency: amber
+      decision_velocity: green
+      organizational_adoption: amber
+    ip_applied:
+      authored: [ai-ready-platinum-layer, no-lac-principle, dabs-data-contract-golden-path]
+      curated: [context-wall-meta-knowledge-graph, bain-3-layer-agentic, defending-ai-spend-12q]
+    risks:
+      - id: R1
+        statement: "AI agent access to Restricted-class data requires DPIA + MCP-path masking testing"
+        severity: high
+        mitigation: "DPIA in flight; MCP-path tests planned"
+    archetype_file: initiatives/archetypes/ARCHETYPE-D-agentic-self-serve-analytics.md
+
+  - id: ARCHETYPE-E-legacy-dw-to-cloud-lakehouse
+    codename: legacy-dw-to-cloud-lakehouse
+    sector_anonymized: financial-services-modernization
+    type: legacy-modernization
+    scope: ["legacy-dw-decommissioning", "cloud-lakehouse-migration", "domain-by-domain-rollout"]
+    phase: qualify
+    leverage_ratio: "2:1"
+    regulated: true
+    regulations: [osfi-style, sox-equivalent]
+    dpia_required: true
+    dpia_completed: false
+    fee_tier_band: T3
+    scorecard:
+      cognitive_clarity: amber
+      data_fluency: red
+      decision_velocity: amber
+      organizational_adoption: red
+    ip_applied:
+      authored: [10q-framework, no-lac-principle, dabs-data-contract-golden-path]
+      curated: [data-product-architecture-5-pillars, cdo-top-10-deliverables]
+    risks:
+      - id: R1
+        statement: "Legacy DW classification audit incomplete; migration scope uncertain"
+        severity: high
+        mitigation: "Run full classification audit before phase advance"
+    archetype_file: initiatives/archetypes/ARCHETYPE-E-legacy-dw-to-cloud-lakehouse.md
