@@ -6,6 +6,10 @@ on:
   push:
     branches: [main]
 
+permissions:
+  contents: read
+  pull-requests: write
+
 jobs:
   verify-all:
     runs-on: ubuntu-latest
@@ -30,6 +34,13 @@ jobs:
           set +e
           bash -x scripts/verify_all.sh > verify.log 2>&1
           rc=$?
+          {
+            echo '## verify_all.sh trace'
+            echo ''
+            echo '```'
+            cat verify.log
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
           cat verify.log
           exit $rc
 
