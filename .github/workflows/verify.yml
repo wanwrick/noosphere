@@ -19,8 +19,13 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install Python deps
-        run: pip install pyyaml
+      - name: Install ripgrep
+        run: sudo apt-get update -qq && sudo apt-get install -y ripgrep
+
+      - name: Install Python deps (Noosphere + DABs subproject)
+        run: |
+          pip install pyyaml
+          pip install -r templates/dabs-data-product-template/requirements.txt
 
       - name: Run all 9 verification checks
         run: bash scripts/verify_all.sh
