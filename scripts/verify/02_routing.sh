@@ -23,16 +23,8 @@ $DIRS"
 while read -r p; do
   [ -z "$p" ] && continue
   if [ ! -e "$ROOT/$p" ]; then
-    # Some routing entries point to fork-time directories (talent/, playbooks/) — accept WARN
-    case "$p" in
-      talent/CLAUDE.md|playbooks/CLAUDE.md)
-        echo "WARN: $p (deferred to Phase 14)"
-        ;;
-      *)
-        echo "FAIL: routing target missing: $p"
-        FAIL=1
-        ;;
-    esac
+    echo "FAIL: routing target missing: $p"
+    FAIL=1
   fi
 done <<< "$CHECK"
 

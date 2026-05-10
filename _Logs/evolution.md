@@ -241,3 +241,50 @@
 - 05_attribution_lint warns on authored files lacking author marker but does not fail; that's a craft issue, not a hard invariant. Hard invariant is: curated files MUST cite Source.
 - 06_governance_gate is intentionally narrow: it checks that the field declaration is honest (no nulls where regulated:true). The 7-check audit lives in the `governance-audit` skill, not in CI.
 - CI workflow runs on PR + main push so the gate is honored end-to-end, not just locally.
+
+---
+
+### v1.2.0 -- 2026-05-09 -- Practice OS Extension (FINAL)
+**Author:** Paroz Mehta + Claude Opus 4.7
+
+**The full v1.2.0 release.** This entry supersedes the per-phase tags
+(`v1.2.0-phase9` through `v1.2.0-phase13`) and stamps the final clean
+v1.2.0 version. All 14 phases of PR #3 closed.
+
+**What v1.2.0 ships:**
+
+1. **No LAC** — the headline architectural principle (`ip/authored/no-lac-principle.md`).
+2. **AI-Ready Platinum Layer** — UC metadata as the runtime semantic layer (`ip/authored/ai-ready-platinum-layer.md`).
+3. **DABs Data-Contract Golden Path** — forkable Databricks Asset Bundle subproject (`templates/dabs-data-product-template/`).
+4. **12 attributed industry methodologies** in `ip/curated/`.
+5. **5 anonymized engagement archetypes** in `initiatives/archetypes/`.
+6. **Governance pack** — 8 files in `governance/`, including OSFI/PIPEDA-style runbooks, GDPR Article 17 erasure, DPIA template, ethics policy, model risk, classification, NDA, compliance register YAML.
+7. **EMBA + Strategy framework expansion** — 13 new files across Cornell-Queen's frameworks and cross-cutting toolkits.
+8. **Sanitization Protocol (Invariant #0)** — banned-token lint + gitleaks + GitHub Actions gate.
+9. **3-layer mental model** — Shared Context / Shared Queries / Shared Discipline routing in `CLAUDE.md`.
+10. **7 Practice OS skills + 3 atomic subagents** — Phase 10.
+11. **Insights seed** — first published POV (Phase 11).
+12. **13 Mermaid diagrams** under `_Diagrams/` (Phase 12).
+13. **9 verification checks + CI workflow** under `scripts/verify/` (Phase 13).
+14. **Talent + playbooks** — `talent/` (3 files) and `playbooks/` (4 files), final routing fully resolved (Phase 14).
+
+**This commit (Phase 14):**
+
+| File | Change |
+|------|--------|
+| `talent/CLAUDE.md` | New: routing for talent dir; three-pillar staffing model (Producer · Platform · Governance). |
+| `talent/roles.md` | New: 7-role archetype table with hand-off discipline. |
+| `talent/capability-matrix.md` | New: capability × level grid; reading rules for bench depth, authoring concentration, hiring trigger, promotion trigger. |
+| `talent/hiring-brief-template.md` | New: fork-and-fill role brief. |
+| `playbooks/CLAUDE.md` | New: routing for playbooks dir; conventions (Trigger, Owner, Done when). |
+| `playbooks/producer-onboarding.md` | New: 12-step onboarding playbook from intake → bundle → consumer notification. |
+| `playbooks/governance-runbook.md` | New: 10-step regulated-archetype audit playbook. |
+| `playbooks/change-management.md` | New: 9-step platform-change playbook with deprecation discipline. |
+| `playbooks/engagement-kickoff.md` | New: 11-step engagement-kickoff playbook with discovery week shape. |
+| `scripts/verify/02_routing.sh` | Removed the talent/ + playbooks/ deferred-WARN allowance — both now exist. |
+
+**Verification result on this commit:** 9/9 pass · 0 fail.
+
+**File-count summary (v1.1.2 → v1.2.0):** ~32 files → ~180 files. The repo is now a portable, fork-and-customize Practice OS with a working DABs subproject, governed IP, codified archetypes, executable skills, machine-checked invariants, and a published POV defending the 30-minute claim.
+
+**Honest version-history note:** the per-phase tags (`-phase9` through `-phase13`) above remain as the build trail. They are not separate releases; they are commit-level checkpoints inside the v1.2.0 PR. The final tag is plain v1.2.0.
