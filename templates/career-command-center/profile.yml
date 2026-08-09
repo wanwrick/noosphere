@@ -1,0 +1,43 @@
+# Career Command Center — Personal Profile
+# This file is populated during your first session via /onboard.
+# Do NOT commit this file to a public repository — it contains personal career data.
+
+# --- Identity ---
+name:
+current_situation:          # e.g., "Employed and exploring", "Actively searching", "Recently laid off"
+years_of_experience:
+target_roles: []            # e.g., ["Senior Product Manager", "Director of Strategy"]
+target_seniority:           # e.g., "Senior IC", "Manager", "Director", "VP"
+
+# --- Target Profile ---
+target_industries: []       # e.g., ["FinTech", "Healthcare AI", "SaaS"]
+target_geographies: []      # e.g., ["Toronto", "Remote / North America"]
+work_arrangement:           # e.g., "Remote", "Hybrid", "On-site"
+work_authorization:         # e.g., "Canadian citizen", "US Green Card", "Requires sponsorship"
+ideal_company_size:         # e.g., "Startup (< 200)", "Mid-market (200–2000)", "Enterprise (2000+)"
+
+# --- Strategy & Constraints ---
+timeline_urgency:           # e.g., "6 months", "Immediate", "Passive / 12+ months"
+whats_not_working:
+biggest_gap_in_materials:
+networking_comfort:         # 1 (avoidant) – 5 (energized)
+salary_range:               # e.g., "$140k–$180k CAD"
+
+# --- Skills & Stories ---
+top_technical_skills: []
+top_soft_skills: []
+proudest_accomplishment:
+biggest_career_challenge:
+key_credentials: []         # e.g., ["MBA", "PMP", "AWS Solutions Architect"]
+
+# --- Deep Intake ---
+top_target_companies: []
+active_resume_version:      # e.g., "resume-v3-pm-focus.pdf"
+furthest_interview_stage:   # e.g., "Final round", "Offer extended", "Phone screen"
+biggest_interview_stumble:
+coaching_insight_you_wish_you_had:
+
+# --- Populated by system ---
+onboarding_completed:       false
+onboarding_date:
+last_session_date:
