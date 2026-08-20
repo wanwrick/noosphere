@@ -7,75 +7,79 @@ named explicitly. Cite sources: never blur authored vs curated IP.
 
 ## Three-Layer Mental Model
 
-1. **Shared Context** — identity, voice, IP catalog, MBA / EMBA grounding.
+1. **Shared Context** — identity, voice, IP catalog, MBA/EMBA grounding.
 2. **Shared Queries** — initiatives, data products, playbooks, talent.
-3. **Shared Discipline** — governance, workflows, skills, logs, the DABs
-   Data-Contract Golden Path subproject.
+3. **Shared Discipline** — governance, workflows, skills, logs, gates, the
+   DABs Golden Path.
 
 ## Routing Table
 
 | Question is about… | Read first |
 |---|---|
-| who I am, voice, stack, regulated context | `practice-context/CLAUDE.md` |
-| how I work (Session Protocol, attribution, diagrams) | `methodology/CLAUDE.md` |
-| my authored IP (No LAC, AI-Ready Platinum, 10Q, etc.) | `ip/authored/CLAUDE.md` |
-| curated industry methodologies (12 named authors) | `ip/curated/CLAUDE.md` |
-| which engagement archetypes are codified | `initiatives/CLAUDE.md` |
-| live data products + AI Consumption Contracts | `data-products/CLAUDE.md` |
-| step-by-step playbooks (onboarding, governance, change-mgmt) | `playbooks/CLAUDE.md` |
-| people, roles, capability matrix | `talent/CLAUDE.md` |
-| compliance, NDA, DPIA, regulated-FSI runbook | `governance/CLAUDE.md` |
-| publishable POV articles | `insights/CLAUDE.md` |
-| evergreen MBA frameworks | `Knowledge/Frameworks/CLAUDE.md` |
+| identity, voice, stack, regulated context | `practice-context/CLAUDE.md` |
+| protocol, attribution, diagrams | `methodology/CLAUDE.md` |
+| authored IP: No LAC, Platinum, 10Q | `ip/authored/CLAUDE.md` |
+| curated methodologies (12 authors) | `ip/curated/CLAUDE.md` |
+| engagement archetypes | `initiatives/CLAUDE.md` |
+| data products, AI Consumption Contracts | `data-products/CLAUDE.md` |
+| step-by-step playbooks | `playbooks/CLAUDE.md` |
+| roles, capability matrix | `talent/CLAUDE.md` |
+| compliance, DPIA, FSI runbook | `governance/CLAUDE.md` |
+| POV articles | `insights/CLAUDE.md` |
+| MBA frameworks | `Knowledge/Frameworks/CLAUDE.md` |
 | Cornell-Queen's EMBA frameworks | `Knowledge/EMBA/CLAUDE.md` |
 | cross-cutting strategy toolkits | `Knowledge/Strategy/CLAUDE.md` |
-| repeatable rituals (Monday producer ritual, etc.) | `Workflows/` |
+| work context | `Knowledge/Work/CLAUDE.md` |
+| rituals, verification loops | `Workflows/CLAUDE.md` |
+| document formats (memo, RCA, story) | `Templates/CLAUDE.md` |
+| skills, cadences, MCPs | `_Registry/CLAUDE.md` |
+| changelog, feedback, audit | `_Logs/CLAUDE.md` |
+| lint, CI gates, verification checks | `scripts/CLAUDE.md` |
+| forkable subprojects | `templates/CLAUDE.md` |
 | firm decisions log | `Knowledge/Decisions/` |
-| forking the DABs Data-Contract Golden Path | `templates/dabs-data-product-template/README.md` |
-| live work data | Notion Work Hub via MCP (see `_Registry/MCPs.md`) |
+| live work data | Notion MCP, `_Registry/MCPs.md` |
 
 ## Invariants
 
 0. **Sanitization is sacred.** Banned-token lint blocks any commit naming an
-   employer / team / stakeholder / JIRA code / internal vendor / Databricks
-   workspace ID. Run `bash scripts/lint_sanitization.sh` to verify. See
-   `Workflows/sanitization-pass.md` and `_Logs/sanitization-audit.md`.
-1. Every active archetype names ≥1 IP framework (authored or curated) in
-   `ip_applied`.
+   employer, team, stakeholder, JIRA code, vendor, or workspace ID.
+   See `Workflows/sanitization-pass.md`.
+1. Every active archetype names ≥1 IP framework in `ip_applied`.
 2. Phase advance requires `governance-audit` skill pass when `regulated: true`
    or `pii: true`.
 3. Cite sources. Authored vs curated IP never blurred.
 4. Banned style: leverage, utilize, synergies, deep dive, circle back.
+5. **Gates are CI-enforced.** Run `bash scripts/verify_all.sh` before commit.
+   This file caps at 600 tokens; every routed path must exist.
 
-## Skills (v1.2.0)
+## Skills
 
-`claude-md-bootstrap` · `data-source-10q-intake` · `dabs-template-init` ·
-`governance-audit` · `ai-consumption-contract` · `defending-ai-spend-memo` ·
+`claude-md-bootstrap`, `data-source-10q-intake`, `dabs-template-init`,
+`governance-audit`, `ai-consumption-contract`, `defending-ai-spend-memo`,
 `weekly-practice-synthesis`
 
-Atomic subagents: `dq-validator` · `schema-reviewer` · `compliance-checker`
+Atomic subagents: `dq-validator`, `schema-reviewer`, `compliance-checker`
 
-## IP Catalog (Honest Attribution)
+## IP Catalog
 
-**Authored** — No LAC (No Lack of Analytical Capability) · AI-Ready Platinum
-Layer · 10Q Framework · Enterprise CLAUDE.md pattern · Platform-Mandate
-Playbook · DABs Data-Contract Golden Path subproject.
+**Authored** — No LAC (No Lack of Analytical Capability), AI-Ready Platinum
+Layer, 10Q Framework, Enterprise CLAUDE.md pattern, Platform-Mandate
+Playbook, DABs Data-Contract Golden Path.
 
-**Curated (12)** — Mahboub · Grover · Hewing · Tekiner · Czarnas · Baeyens
-· Bain · Kocyigit · Shi (×2) · Dataplex 6 · CDO Top 10.
+**Curated (12)** — Mahboub, Grover, Hewing, Tekiner, Czarnas, Baeyens, Bain,
+Kocyigit, Shi (×2), Dataplex 6, CDO Top 10.
 
 ## Session Protocol Summary
 
 Long form: `methodology/how-we-work.md`. Short form:
 
 1. Load `GOALS.md`, `_Logs/feedback.md`, `_Registry/Cadences.md`.
-2. Plan before execute. Name files to read, frameworks to apply, output shape.
+2. Plan before execute: files, frameworks, output shape.
 3. Execute with three-pass verification (framework, BLUF, action).
-4. Close the loop: log corrections to `_Logs/feedback.md`, decisions to
+4. Close the loop: corrections to `_Logs/feedback.md`, decisions to
    `Knowledge/Decisions/`.
 5. Self-improvement check: gap → `Workflows/self-improvement.md` autoresearch.
 
 ## Version
 
-v1.2.0. Changelog: `_Logs/evolution.md`. Sanitization audit:
-`_Logs/sanitization-audit.md`.
+v1.3.0. Changelog: `_Logs/evolution.md`. Audit: `_Logs/sanitization-audit.md`.

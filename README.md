@@ -29,6 +29,17 @@ The repo doubles as a portfolio artifact AND a forkable practice OS. One repo, m
 
 ---
 
+## What's New in v1.3.0
+
+| Capability | What landed |
+|---|---|
+| **Routing coverage completed** | Seven directories that held real content but no routing brain now have one: `Workflows/`, `Templates/`, `Knowledge/Work/`, `_Registry/`, `_Logs/`, `scripts/`, `templates/`. Every top-level content directory is now reachable from `CLAUDE.md`. |
+| **Gates documented where they live** | `scripts/CLAUDE.md` documents the 9 verification checks, the three constraints on editing the root routing brain (token budget, routing targets, skill names), and how to add a check. |
+| **Career Command Center routed** | The forkable job-search OS shipped in v1.2.1 but was unreachable from the routing table. `templates/CLAUDE.md` now covers both subprojects and draws the line between a subproject's own `CLAUDE.md` (payload for a fork) and this repo's instructions. |
+| **Directory tree corrected** | The tree described a subdivided `playbooks/` and a `templates/dabs-data-product-template/examples/` folder; neither exists. Tree now matches disk. |
+
+---
+
 ## What's New in v1.2.0
 
 | Capability | What landed |
@@ -52,8 +63,8 @@ The repo doubles as a portfolio artifact AND a forkable practice OS. One repo, m
 ```
 +--------------------------------------------------------------------+
 |  SHARED DISCIPLINE                                                 |
-|    governance/ · workflows/ · _Registry/ · _Logs/ · scripts/       |
-|    .claude/skills/ · templates/dabs-data-product-template/         |
+|    governance/ · Workflows/ · _Registry/ · _Logs/ · scripts/       |
+|    .claude/skills/ · .claude/agents/ · templates/                  |
 +--------------------------------------------------------------------+
 |  SHARED QUERIES                                                    |
 |    initiatives/ · data-products/ · playbooks/ · talent/            |
@@ -68,18 +79,18 @@ The DABs Data-Contract Golden Path subproject sits at the boundary of Discipline
 
 ---
 
-## Directory Structure (v1.2.0)
+## Directory Structure (v1.3.0)
 
 ```
 noosphere/
-+-- CLAUDE.md                        Routing brain (~500 tokens)
++-- CLAUDE.md                        Routing brain (CI-capped at 600 tokens)
 +-- README.md                        This file
 +-- GOALS.md                         Priorities + OKRs (private to your fork)
 +-- CONTRIBUTING.md                  Fork-and-customize guide
 +-- LICENSE                          MIT
 +-- .gitleaks.toml                   Secret scanning + custom sanitization rules
 +-- .pre-commit-config.yaml          Sanitization gate at commit time
-+-- .github/workflows/sanitization.yml  CI gate
++-- .github/workflows/               sanitization.yml + verify.yml CI gates
 +--
 +-- practice-context/                Identity, voice, stack, regulated context
 +-- methodology/                     How we work, attribution policy, diagrams
@@ -100,11 +111,13 @@ noosphere/
 +-- data-products/
 |   +-- data-products.yaml           Data product registry
 |   +-- ai-consumption-contract-template.md
+|   +-- _example-platinum-domain.md  Generic example entry (forks replace)
 +--
 +-- playbooks/
-|   +-- onboarding/                  10Q discovery session
-|   +-- governance/                  UC ABAC, PII medallion classification, masking
-|   +-- change-mgmt/                 Stakeholder mandate, Kotter applied
+|   +-- producer-onboarding.md       Intake -> bundle -> consumer notification
+|   +-- governance-runbook.md        Regulated phase advance, audit, DPIA refresh
+|   +-- change-management.md         Platform change + deprecation discipline
+|   +-- engagement-kickoff.md        New engagement, discovery week shape
 +--
 +-- talent/                          Roles, capability matrix, bench policy
 +-- governance/                      Ethics, model risk, classification, NDA, DPIA
@@ -121,7 +134,9 @@ noosphere/
 +-- _Registry/                       Skills, MCPs, Cadences
 +-- _Logs/                           evolution.md, feedback.md, sanitization-audit.md
 +-- _Diagrams/                       PNG + Mermaid architecture visuals
-+-- scripts/                         lint_sanitization.sh, sanitize_from_notion.py
++-- scripts/                         Gates: lint_sanitization.sh, sanitize_from_notion.py
+|   +-- verify/                      The 9 verification checks
+|   +-- verify_all.sh                Runner (what CI executes)
 +--
 +-- templates/dabs-data-product-template/   ← THE FLAGSHIP SUBPROJECT
     +-- data-contract.yml            Single source of truth
@@ -131,9 +146,13 @@ noosphere/
     +-- tests/                       Unit + integration + fixtures
     +-- scripts/                     validate_bundle.sh + deploy.sh + AI contract gen
     +-- .github/workflows/           ci.yml + deploy.yml
-    +-- examples/                    3 worked examples (snapshot, CDC, AI-ready)
     +-- docs/                        4 walkthrough docs
-+-- .claude/skills/                  7 v1.2.0 skills + 3 atomic subagents
++-- templates/career-command-center/       ← FORKABLE JOB-SEARCH OS
+    +-- profile.yml                  User profile (drives every response)
+    +-- .claude/skills/              6 slash commands (onboard, tailor-resume, …)
+    +-- job-search/ interview-prep/ career-strategy/   Routed subfolders
++-- .claude/skills/                  7 Practice OS skills
++-- .claude/agents/                  3 atomic subagents
 ```
 
 ---
@@ -189,7 +208,9 @@ noosphere/
 | Add a curated framework | Create under `ip/curated/` with a Source callout (author + URL); attribution lint enforces. |
 | Add a workflow | Create under `Workflows/`; add to `_Registry/Cadences.md` if trigger-based. |
 | Add a skill | Create under `.claude/skills/<name>/SKILL.md` with YAML frontmatter; register in `_Registry/Skills.md`. |
-| Add a worked DABs example | Drop into `templates/dabs-data-product-template/examples/<name>/`; ensure `databricks bundle validate` passes. |
+| Add a worked DABs example | Drop into `templates/dabs-data-product-template/`; ensure `databricks bundle validate` and the unit tests pass. |
+| Add a routing rule | Create the target file first, then add the row to `CLAUDE.md`; the root file is capped at 600 tokens, so budget a removal for every addition. |
+| Add a verification check | Add `scripts/verify/<NN>_<name>.{sh,py}`; register it in the `CHECKS` array in `scripts/verify_all.sh`. |
 | Refresh from Notion | Follow `Workflows/sanitization-pass.md`. |
 | Update priorities | Edit `GOALS.md` at the start of each quarter. |
 
