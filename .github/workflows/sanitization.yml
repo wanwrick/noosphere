@@ -1,8 +1,25 @@
 name: Sanitization
 
 # CI gate for the Noosphere Practice OS sanitization invariant. Runs on every
-# pull request and push to main. Fails closed on any banned token or secret.
-# See _Logs/sanitization-audit.md for the audit trail.
+# pull request and push to main. See _Logs/sanitization-audit.md for the audit
+# trail.
+#
+# THE LEXICON IS NOT IN THIS REPOSITORY.
+#   The banned-token list names the employer / team / vendor / stakeholder
+#   proper nouns it protects, so committing it here would publish them. CI
+#   loads it from the SANITIZATION_LEXICON repository secret instead.
+#
+#   Set it up:  Settings -> Secrets and variables -> Actions -> New secret
+#               Name:  SANITIZATION_LEXICON
+#               Value: the contents of your .sanitization-lexicon.local
+#
+#   Without the secret the banned-token job still runs, but on placeholder
+#   terms only — it reports NOT PROTECTED rather than silently passing.
+#
+# NOTE: this repository is public, so these logs are public. The lint runs in
+# --files-only mode, which reports offending file paths but never the matched
+# pattern or the matched line. Printing either would republish the exact token
+# the gate exists to suppress.
 
 on:
   pull_request:
@@ -23,19 +40,43 @@ jobs:
       - name: Install ripgrep
         run: sudo apt-get update && sudo apt-get install -y ripgrep
 
-      - name: Run sanitization lint
-        run: bash scripts/lint_sanitization.sh
+      - name: Materialize lexicon from secret
+        id: lexicon
+        env:
+          SANITIZATION_LEXICON: ${{ secrets.SANITIZATION_LEXICON }}
+        run: |
+          if [ -n "${SANITIZATION_LEXICON:-}" ]; then
+            # Written via env, never echoed. Actions masks the value in logs.
+            printf '%s\n' "$SANITIZATION_LEXICON" > .sanitization-lexicon.local
+            echo "have_lexicon=true" >> "$GITHUB_OUTPUT"
+            echo "Lexicon loaded from secret ($(grep -vc '^#' .sanitization-lexicon.local) rules)."
+          else
+            echo "have_lexicon=false" >> "$GITHUB_OUTPUT"
+            echo "::warning title=No sanitization lexicon::SANITIZATION_LEXICON secret is not set. The banned-token guard is running on PLACEHOLDER terms and is NOT protecting real content. Add the secret under Settings > Secrets and variables > Actions."
+          fi
+
+      - name: Run sanitization lint (real lexicon)
+        if: steps.lexicon.outputs.have_lexicon == 'true'
+        run: bash scripts/lint_sanitization.sh --files-only --require-real-lexicon
+
+      - name: Run sanitization lint (placeholders — not protecting real content)
+        if: steps.lexicon.outputs.have_lexicon != 'true'
+        run: bash scripts/lint_sanitization.sh --files-only
+
+      - name: Remove lexicon from runner
+        if: always()
+        run: rm -f .sanitization-lexicon.local
 
   gitleaks:
-    name: gitleaks (secrets + custom rules)
+    name: gitleaks (secrets)
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
       # Scan only the working tree at HEAD (not git history). The repo's
       # historic content predates the v1.2.0 sanitization invariant; new
-      # banned-token introductions are blocked by lint_sanitization.sh and
-      # the working-tree gitleaks scan below. See _Logs/sanitization-audit.md.
+      # introductions are blocked by lint_sanitization.sh and the working-tree
+      # gitleaks scan below. See _Logs/sanitization-audit.md.
       - name: Run gitleaks (no-git mode)
         run: |
           docker run --rm -v "$PWD:/path" zricethezav/gitleaks:latest \

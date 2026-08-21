@@ -5,6 +5,12 @@
 #   pip install pre-commit
 #   pre-commit install
 #
+# FIRST, bootstrap your lexicon (once per clone) — the real banned-token list
+# is gitignored and is NOT in this repo:
+#   cp .sanitization-lexicon.example .sanitization-lexicon.local
+#   # then replace the placeholders with your real terms
+# Without it the lint runs on placeholders and prints a NOT-PROTECTED warning.
+#
 # Run manually:
 #   pre-commit run --all-files
 
@@ -19,7 +25,8 @@ repos:
         always_run: true
         description: |
           Refuses any commit that introduces an employer / team / stakeholder /
-          JIRA / Databricks-internal-ID token. See _Logs/sanitization-audit.md
+          JIRA / Databricks-internal-ID token. Terms load at runtime from
+          .sanitization-lexicon.local (gitignored). See _Logs/sanitization-audit.md
           for rationale and Workflows/sanitization-pass.md for remediation.
 
   - repo: https://github.com/gitleaks/gitleaks

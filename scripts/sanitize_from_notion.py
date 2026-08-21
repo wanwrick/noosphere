@@ -13,20 +13,28 @@ The script does NOT auto-commit. Human review of the diff is mandatory before
 the sanitized draft can land in the repo. This is what keeps the sanitization
 invariant defensible — every transform is logged with a reviewer name.
 
+THE LEXICON IS NOT STORED IN THIS REPOSITORY.
+    The banned-token lexicon enumerates the employer / team / vendor /
+    stakeholder proper nouns it exists to protect. Committing it to a public
+    repo publishes exactly what it is meant to hide. It loads at runtime from
+    a gitignored file; see .sanitization-lexicon.example for the format.
+
 Usage:
+    cp .sanitization-lexicon.example .sanitization-lexicon.local   # once
     notion-fetch <id> > /tmp/raw.md
     python scripts/sanitize_from_notion.py \
         --source /tmp/raw.md \
         --target ip/authored/no-lac-principle.md \
-        --source-id 32c7b88e-336f-8134-ae9e-e7c504061915 \
-        --reviewer "Paroz Mehta" \
+        --source-id <notion-page-id> \
+        --reviewer "<your name>" \
         --diff-out /tmp/diff.txt \
         --audit
 
 Exit codes:
     0 — sanitized draft written; reviewer must inspect diff before commit.
     1 — banned token survived sanitization (rule needs updating). NOT written.
-    2 — argument or I/O error.
+    2 — argument, I/O, or lexicon error.
+    3 — only placeholder terms available and --require-real-lexicon was passed.
 """
 
 from __future__ import annotations
@@ -34,73 +42,121 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import difflib
+import os
 import re
 import sys
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
-# Sanitization rules — mirrors scripts/lint_sanitization.sh / .gitleaks.toml.
-# Each entry: (compiled regex, replacement string, category).
-# ---------------------------------------------------------------------------
+EXAMPLE_LEXICON = ".sanitization-lexicon.example"
+LOCAL_LEXICON = ".sanitization-lexicon.local"
 
-RULES: list[tuple[re.Pattern, str, str]] = [
-    # Employer / team
-    (re.compile(r"\b([Practice Name]|[Practice Name]|[Practice Name]|[Practice Name]|[Practice Name])\b", re.I), "[Practice Name]", "employer"),
-    (re.compile(r"\b([Producer Team]|[Producer Team]|[Producer Team]|[Producer Team])\b", re.I), "[Producer Team]", "team"),
-
-    # Internal vendors / systems
-    (re.compile(r"\b([Internal System]|[Internal System]|[Internal System]|[Internal System]|[Internal System]|[Internal System])\b", re.I), "[Internal System]", "vendor"),
-    (re.compile(r"\b[Marketing Vendor]\b", re.I), "[Marketing Vendor]", "vendor"),
-
-    # JIRA / ticket codes
-    (re.compile(r"\bQB-\d+\b"), "[Ticket]", "jira"),
-
-    # Internal incident figures
-    (re.compile(r"\$\d+K?\s+(incident|cost spike|disruption)", re.I), "[Incident reference]", "incident"),
-
-    # Cross-Hub callouts
-    (re.compile(r"Cross-Hub:.*$", re.M), "", "notion-marker"),
-
-    # Stakeholder full names
-    (re.compile(r"\b([Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder])\b"), "[Stakeholder]", "stakeholder"),
-
-    # Internal Databricks identifiers
-    (re.compile(r"\bdbc-[a-f0-9]{8}-[a-f0-9]{4}\b"), "[Databricks workspace]", "databricks-id"),
-    (re.compile(r"clusterId\s*[:=]\s*['\"]?\d{4}-\d{6}-[a-z0-9]{8}['\"]?"), "clusterId: [redacted]", "databricks-id"),
-
-    # Dated meeting attributions
-    (re.compile(r"\b(Jan 21, 2026|Mar 12, 2026|Mar 18, 2026|Mar 19, 2026)\b"), "[Date]", "dated-meeting"),
-
-    # Internal team-size attributions
-    (re.compile(r"\b40-45\b"), "[Team size]", "team-size"),
-    (re.compile(r"\b15-20 to bank\b"), "[Org change]", "team-size"),
-]
-
-# Final lint after substitution — same rules as the bash linter would run.
-FINAL_LINT: list[re.Pattern] = [
-    re.compile(r"\b([Practice Name]|[Practice Name]|[Practice Name]|[Producer Team]|[Internal System]|[Internal System]|[Internal System]|[Internal System]|[Internal System]|[Internal System]|[Marketing Vendor]|[Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder]|[Stakeholder])\b", re.I),
-    re.compile(r"\bQB-\d+\b"),
-    re.compile(r"Cross-Hub:"),
-    re.compile(r"\bdbc-[a-f0-9]{8}-[a-f0-9]{4}\b"),
-]
+Rule = tuple[re.Pattern, str, str]
 
 
-def sanitize(text: str) -> tuple[str, dict[str, int]]:
-    """Apply RULES; return sanitized text + per-category replacement count."""
+def resolve_lexicon(repo_root: Path, explicit: Path | None) -> tuple[Path, bool]:
+    """Return (lexicon_path, using_placeholders). First match wins."""
+    if explicit:
+        if not explicit.is_file():
+            raise FileNotFoundError(f"--lexicon points at a missing file: {explicit}")
+        return explicit, False
+
+    env = os.environ.get("NOOSPHERE_LEXICON")
+    if env:
+        path = Path(env)
+        if not path.is_file():
+            raise FileNotFoundError(f"NOOSPHERE_LEXICON points at a missing file: {path}")
+        return path, False
+
+    local = repo_root / LOCAL_LEXICON
+    if local.is_file():
+        return local, False
+
+    example = repo_root / EXAMPLE_LEXICON
+    if example.is_file():
+        return example, True
+
+    raise FileNotFoundError(
+        f"No lexicon found. Expected one of: --lexicon, $NOOSPHERE_LEXICON, "
+        f"{LOCAL_LEXICON}, {EXAMPLE_LEXICON}"
+    )
+
+
+def load_lexicon(path: Path) -> list[Rule]:
+    """Parse a TAB-separated lexicon into compiled rules.
+
+    Format per line: category<TAB>flags<TAB>pattern<TAB>replacement[<TAB>canary]
+    Flags: 'i' case-insensitive, 'm' multiline, '-' none. Combine as 'im'.
+
+    A rule may carry a canary: a sample string the pattern must match. This is
+    load-bearing. A regex typo (a doubled backslash, an unbalanced group)
+    compiles fine and then matches nothing, so the gate reports "clean" while
+    protecting nothing — silent failure indistinguishable from success. A
+    canary that does not match is a hard error.
+    """
+    rules: list[Rule] = []
+    for lineno, raw_line in enumerate(path.read_text(encoding="utf-8").splitlines(), 1):
+        # rstrip('\n') only — a trailing tab means "replace with empty string".
+        line = raw_line.rstrip("\r")
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+
+        fields = line.split("\t")
+        if len(fields) < 4:
+            print(
+                f"WARN: {path}:{lineno} skipped — need 4 tab-separated fields, got {len(fields)}",
+                file=sys.stderr,
+            )
+            continue
+
+        category, flags, pattern, replacement = fields[0], fields[1], fields[2], fields[3]
+        canary = fields[4] if len(fields) > 4 else ""
+
+        compiled_flags = 0
+        if "i" in flags:
+            compiled_flags |= re.I
+        if "m" in flags:
+            compiled_flags |= re.M
+
+        try:
+            compiled = re.compile(pattern, compiled_flags)
+        except re.error as exc:
+            raise ValueError(f"{path}:{lineno} invalid regex {pattern!r}: {exc}") from exc
+
+        if canary and not compiled.search(canary):
+            raise ValueError(
+                f"{path}:{lineno} rule [{category}] does not match its own canary.\n"
+                f"    pattern: {pattern!r}\n"
+                f"    canary:  {canary!r}\n"
+                f"    This rule would match nothing and the gate would report a "
+                f"false pass. Check for doubled backslashes."
+            )
+
+        rules.append((compiled, replacement, category))
+
+    return rules
+
+
+def sanitize(text: str, rules: list[Rule]) -> tuple[str, dict[str, int]]:
+    """Apply rules; return sanitized text + per-category replacement count."""
     counts: dict[str, int] = {}
-    for pattern, replacement, category in RULES:
+    for pattern, replacement, category in rules:
         text, n = pattern.subn(replacement, text)
         if n:
             counts[category] = counts.get(category, 0) + n
     return text, counts
 
 
-def final_lint(text: str) -> list[str]:
-    """Return a list of any banned tokens that survived. Empty list = clean."""
+def final_lint(text: str, rules: list[Rule]) -> list[str]:
+    """Return any banned tokens that survived substitution. Empty list = clean.
+
+    Rules whose replacement is empty are skipped: deleting a marker cannot be
+    verified by re-matching the same pattern against the result.
+    """
     survivors: list[str] = []
-    for pat in FINAL_LINT:
-        for match in pat.finditer(text):
-            survivors.append(match.group(0))
+    for pattern, replacement, _category in rules:
+        if replacement == "":
+            continue
+        survivors.extend(match.group(0) for match in pattern.finditer(text))
     return survivors
 
 
@@ -113,14 +169,44 @@ def main() -> int:
     parser.add_argument("--diff-out", type=Path, help="Where to write a unified diff for review. Defaults to stderr.")
     parser.add_argument("--audit", action="store_true", help="Append an entry to _Logs/sanitization-audit.md.")
     parser.add_argument("--repo-root", type=Path, default=Path.cwd(), help="Repo root (for the audit log).")
+    parser.add_argument("--lexicon", type=Path, help="Explicit lexicon path. Overrides $NOOSPHERE_LEXICON.")
+    parser.add_argument(
+        "--require-real-lexicon",
+        action="store_true",
+        help="Exit 3 rather than running with placeholder terms.",
+    )
     args = parser.parse_args()
 
-    raw = args.source.read_text() if args.source else sys.stdin.read()
-    sanitized, counts = sanitize(raw)
+    try:
+        lexicon_path, using_placeholders = resolve_lexicon(args.repo_root, args.lexicon)
+        rules = load_lexicon(lexicon_path)
+    except (FileNotFoundError, ValueError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 2
 
-    survivors = final_lint(sanitized)
+    if not rules:
+        print(f"ERROR: lexicon {lexicon_path} contained no usable rules.", file=sys.stderr)
+        return 2
+
+    print(f"Lexicon: {lexicon_path} ({len(rules)} rules)", file=sys.stderr)
+
+    if using_placeholders:
+        print(
+            "WARNING: running with PLACEHOLDER terms — YOU ARE NOT PROTECTED.\n"
+            f"         cp {EXAMPLE_LEXICON} {LOCAL_LEXICON} and replace the\n"
+            "         placeholders with your real terms.",
+            file=sys.stderr,
+        )
+        if args.require_real_lexicon:
+            print("FAIL: --require-real-lexicon was passed but only placeholders are available.", file=sys.stderr)
+            return 3
+
+    raw = args.source.read_text() if args.source else sys.stdin.read()
+    sanitized, counts = sanitize(raw, rules)
+
+    survivors = final_lint(sanitized, rules)
     if survivors:
-        print(f"FAIL: {len(survivors)} banned tokens survived sanitization. Update RULES in this script.", file=sys.stderr)
+        print(f"FAIL: {len(survivors)} banned tokens survived sanitization. Update the lexicon.", file=sys.stderr)
         for s in survivors[:10]:
             print(f"  - {s!r}", file=sys.stderr)
         return 1
