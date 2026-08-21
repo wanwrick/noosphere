@@ -307,3 +307,59 @@ v1.2.0 version. All 14 phases of PR #3 closed.
 **Design Decisions:**
 - Kept the script's defensive SKIP fallback for environments where pytest is genuinely absent (sandboxes, sparse CIs). The fix is in the workflow, not the script.
 - Patch increment (1.2.0 → 1.2.1) per `methodology/repository-conventions.md` — only an existing CI file was edited.
+
+---
+
+### v1.3.0 -- 2026-08-20 -- Routing Coverage + Gate Documentation
+**Author:** Paroz Mehta + Claude
+
+**What changed:**
+
+| File | Change |
+|------|--------|
+| `CLAUDE.md` | Rewritten within the 600-token cap. Seven routing rows added (`Knowledge/Work/`, `Workflows/`, `Templates/`, `_Registry/`, `_Logs/`, `scripts/`, `templates/`). Invariant #5 added: gates are CI-enforced. Version bumped to v1.3.0. |
+| `scripts/CLAUDE.md` | New. The 9 verification checks, how to run them, the three constraints on editing the root routing brain, how to add a check, and the CI wiring. |
+| `templates/CLAUDE.md` | New. Both forkable subprojects. States explicitly that a subproject's own `CLAUDE.md` is payload for a fork, not instructions for this repo. |
+| `Workflows/CLAUDE.md` | New. Six workflows, the mandatory Verification Loop convention, and the two workflows that govern the repo itself. |
+| `Templates/CLAUDE.md` | New. Four document formats, the mandatory Pre-Delivery Verification convention, and the `Templates/` vs `templates/` distinction. |
+| `_Registry/CLAUDE.md` | New. The three inventories and the rule that the skills registry, `.claude/`, and the root `## Skills` block must agree. |
+| `_Logs/CLAUDE.md` | New. The three trails, the version-increment table, and the escalation rule from correction to structural defect. |
+| `Knowledge/Work/CLAUDE.md` | New. Five operational-context files, the fork note, and the sanitization warning for the repo's highest-risk surface. |
+| `README.md` | Directory tree corrected against disk. "What's New in v1.3.0" added. Two "How to Extend" rows added (routing rule, verification check). |
+
+**Gap that triggered this update:** three defects, all found by reading the
+repo against its own rules.
+
+1. **Unreachable content.** Seven directories held real content but had no
+   nested `CLAUDE.md` and no routing row. `Knowledge/Work/` and `Templates/`
+   were absent from the routing table entirely. Check 02 could not catch this:
+   it verifies that routed paths exist, not that existing paths are routed.
+2. **Career Command Center unrouted.** It shipped after v1.2.1 with no
+   changelog entry, no routing row, and no version bump — a version-discipline
+   miss. Worse, its `CLAUDE.md` opens by casting the reader as a career coach.
+   An agent reading it while working on Noosphere inherits the wrong role.
+   `templates/CLAUDE.md` now draws that line explicitly.
+3. **Tree described directories that do not exist.** `playbooks/onboarding/`,
+   `playbooks/governance/`, `playbooks/change-mgmt/`, and
+   `templates/dabs-data-product-template/examples/` were all in the README
+   tree and none is on disk. The `examples/` path was also cited as a live
+   target in "How to Extend".
+
+**Design Decisions:**
+- **The root file stays a routing brain.** The obvious response to "document
+  the repo comprehensively" is to grow `CLAUDE.md`. Check 01 caps it at 600
+  tokens, and the cap is the design: detail belongs in nested files that load
+  only when the work is in that directory. Comprehensiveness came from adding
+  seven nested brains, not from growing the root.
+- **Budget paid honestly.** The root file was at 599 of 600 tokens. Seven new
+  rows and a new invariant were funded by trimming routing descriptions to
+  their nouns and replacing `·` separators with commas in the skill and IP
+  lists — `wc -w` counts a standalone `·` as a word. Final: 455 words ≈ 591
+  tokens.
+- **Check 01's estimator documented where it bites.** `scripts/CLAUDE.md`
+  records the `·` behaviour so the next editor does not rediscover it.
+- **Minor increment** per `methodology/repository-conventions.md`: new routing
+  rules and a new file class (nested routing brains for system directories),
+  no structural overhaul.
+
+**Verification result on this commit:** 9/9 pass · 0 fail.
