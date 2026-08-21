@@ -46,3 +46,9 @@ linkedin/
 canva/
 github/
 POSTING-GUIDE.md
+
+# Sanitization lexicon — the REAL banned-token list. Never commit this to a
+# public repo: it enumerates the employer / team / vendor / stakeholder proper
+# nouns it exists to protect. Canonical copy lives in noosphere-private.
+# Bootstrap with: cp .sanitization-lexicon.example .sanitization-lexicon.local
+.sanitization-lexicon.local
