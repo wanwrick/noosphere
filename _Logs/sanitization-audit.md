@@ -5,6 +5,43 @@
 > (see CLAUDE.md §0 and Workflows/sanitization-pass.md) is a first-class
 > invariant of Noosphere v1.2.0+.
 
+## Lexicon Change Log
+
+Structural changes to the sanitization mechanism itself. Record the *category
+and reason*, never the term — this log is public.
+
+### 2026-08-21 — Lexicon extracted from tracked files
+
+**What changed.** The banned-token lexicon was removed from
+`.gitleaks.toml`, `scripts/lint_sanitization.sh`, and
+`scripts/sanitize_from_notion.py`. All three now either load it at runtime
+from a gitignored file (`.sanitization-lexicon.local`, bootstrapped from
+`.sanitization-lexicon.example`) or, in the case of `.gitleaks.toml`, no
+longer perform proper-noun matching at all.
+
+**Why.** The lexicon must enumerate the employer, team, vendor, and
+stakeholder proper nouns it exists to suppress. Committing it to a *public*
+repository published that list in plaintext — in the very files whose purpose
+was to prevent exactly that. The previous `lint_sanitization.sh` and
+`.gitleaks.toml` both excluded those three files from their own scans, so the
+gate structurally could not detect its own exposure.
+
+**Consequences.**
+- `.gitleaks.toml` keeps stock secret scanning plus generic structural ID
+  patterns (Databricks workspace/cluster formats), which identify nobody.
+- Proper-noun matching lives solely in `scripts/lint_sanitization.sh`.
+- Exclusions shrank to the lexicon files alone. The sanitization tooling is
+  now scanned by its own lint.
+- New `--files-only` mode reports offending paths without echoing the pattern
+  or matched line, so CI on this public repo cannot republish a banned token
+  into its public logs.
+- New `--require-real-lexicon` flag fails rather than falling back to
+  placeholders.
+- CI reads the lexicon from the `SANITIZATION_LEXICON` repository secret.
+
+**Still outstanding.** Removing the terms from the working tree does not remove
+them from git history. A history rewrite is tracked separately.
+
 ## How This Log Works
 
 - One row per sanitization pass.

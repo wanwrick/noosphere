@@ -1,0 +1,47 @@
+# .sanitization-lexicon.example — placeholder banned-token lexicon.
+#
+# WHY THIS FILE EXISTS
+#   The banned-token lexicon names the very things it protects: employer,
+#   team, vendor, and stakeholder proper nouns. Committing it to a PUBLIC
+#   repo publishes that list. So the real lexicon is NEVER committed here.
+#
+# HOW IT LOADS (first match wins)
+#   1. $NOOSPHERE_LEXICON                 — explicit path
+#   2. .sanitization-lexicon.local        — your real lexicon (gitignored)
+#   3. .sanitization-lexicon.example      — this file; PLACEHOLDERS ONLY
+#
+#   Falling through to (3) makes the lint print a loud NOT-PROTECTED warning.
+#   It never silently passes with placeholders.
+#
+# SETUP
+#   cp .sanitization-lexicon.example .sanitization-lexicon.local
+#   # then replace the placeholders below with your real terms
+#
+# FORMAT — TAB-separated fields. Tabs, not spaces:
+#   category<TAB>flags<TAB>pattern<TAB>replacement<TAB>canary
+#
+#   category     free-form label, shown in lint output and audit counts
+#   flags        "i" case-insensitive, "m" multiline, "-" none; combine as "im"
+#   pattern      regex understood by BOTH ripgrep and Python re
+#   replacement  substitution used by sanitize_from_notion.py
+#   canary       OPTIONAL sample string the pattern MUST match
+#
+# THE CANARY IS LOAD-BEARING. A regex with a typo — a doubled backslash, an
+# unbalanced group — compiles fine and then matches nothing, so the gate
+# reports "clean" while protecting nothing. That is the worst possible failure
+# for this tool: silent, and indistinguishable from success. Every rule that
+# carries a canary is verified against it at load time, and a rule whose
+# canary does not match is a hard error, not a warning.
+#
+# Lines starting with # and blank lines are ignored.
+
+# --- Proper nouns: replace every one of these with your real terms --------
+employer	i	\b(AcmeCorp|ACME|Acme Financial Group)\b	[Practice Name]	AcmeCorp
+team	i	\b(TeamAlpha|Team Alpha)\b	[Producer Team]	TeamAlpha
+vendor	i	\b(VendorOne|VendorTwo|LegacyCore)\b	[Internal System]	LegacyCore
+stakeholder	-	\b(Jane Doe|John Roe|Ada Placeholder)\b	[Stakeholder]	Jane Doe
+jira	-	\bPROJ-[0-9]+\b	[Ticket]	PROJ-1234
+
+# --- Structural patterns: generic formats, safe to keep as-is -------------
+databricks-id	-	\bdbc-[a-f0-9]{8}-[a-f0-9]{4}\b	[Databricks workspace]	dbc-1a2b3c4d-9f8e
+notion-marker	m	Cross-Hub:.*$		Cross-Hub: something

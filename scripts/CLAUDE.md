@@ -5,17 +5,39 @@ commit or reports a verdict.
 
 | File | Purpose |
 |---|---|
-| `lint_sanitization.sh` | Invariant #0 — banned-token guard over the working tree |
-| `sanitize_from_notion.py` | Rewrites private-source content into placeholder form |
+| `lint_sanitization.sh` | Invariant #0 — banned-token guard over the working tree; loads a gitignored lexicon |
+| `sanitize_from_notion.py` | Rewrites private-source content into placeholder form; same lexicon |
 | `verify_all.sh` | Runner for the 9 verification checks; non-zero exit on any FAIL |
 | `verify/` | The 9 checks themselves |
+
+## The lexicon (read this first)
+
+`lint_sanitization.sh` and `sanitize_from_notion.py` both need a banned-token
+lexicon, and **it is not in this repository**. It enumerates the employer,
+team, vendor, and stakeholder proper nouns it exists to suppress, so
+committing it to a public repo would publish exactly that list. Bootstrap once
+per clone:
+
+```bash
+cp .sanitization-lexicon.example .sanitization-lexicon.local
+# then replace the placeholders with your real terms
+```
+
+Load order: `$NOOSPHERE_LEXICON`, then `.sanitization-lexicon.local`, then
+`.sanitization-lexicon.example`. Falling through to the example prints a loud
+NOT-PROTECTED banner — it never silently passes. Pass
+`--require-real-lexicon` to fail instead. The canonical copy lives in
+`noosphere-private`; CI reads it from the `SANITIZATION_LEXICON` repo secret.
 
 ## Run the gates
 
 ```bash
-bash scripts/lint_sanitization.sh   # Invariant #0 only, fast
-bash scripts/verify_all.sh          # all 9 checks, what CI runs
+bash scripts/lint_sanitization.sh --require-real-lexicon   # Invariant #0, fast
+bash scripts/verify_all.sh                                 # all 9 checks, what CI runs
 ```
+
+Add `--files-only` to report offending paths without echoing the pattern or
+the matched line — use it anywhere the output is public, such as CI logs.
 
 `lint_sanitization.sh` needs `ripgrep`. `06`/`07` need `pyyaml`.
 `04` needs the `databricks` CLI plus `pytest`; it prints SKIP when either is
