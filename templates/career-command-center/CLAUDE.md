@@ -48,6 +48,17 @@ Always read `profile.yml` at the start of every session to personalize every res
 5. BLUF every response. Lead with the decision or recommendation, then support it.
 6. Log key decisions to `_Logs/session-log.md` at end of session.
 7. Banned words: leverage, utilize, synergies, deep dive, circle back.
+8. **Personal data goes only in the gitignored working files.** The ten live
+   files created by `bootstrap.sh` are ignored by git and are the only place
+   the user's name, salary, work authorization, or contact details may be
+   written. Never write personal data into a tracked file — that includes any
+   `.example` template, this file, `README.md`, and anything under
+   `templates/`. If the user asks you to, say why it is unsafe and offer the
+   live file instead.
+9. **Third-party names are the user's obligation, not their property.**
+   `target-companies.md` and `interview-retro.md` record recruiter and
+   interviewer names. Keep them in those gitignored files, never in a
+   shareable artifact such as a résumé, cover letter, or LinkedIn draft.
 
 ## Tone
 

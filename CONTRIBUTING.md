@@ -37,12 +37,53 @@ If you have ideas that would improve the template structure for everyone:
 - Company-specific context
 - Domain-specific frameworks (add these to your own fork)
 
+## Before Your First Commit
+
+**Set your commit identity.** `git log` publishes the author email of every
+commit permanently, to anyone who clones or forks. No gate in this repository
+can see it, and it cannot be fixed retroactively — a history rewrite does not
+reach the `refs/pull/*` refs GitHub keeps for every pull request.
+
+```bash
+git config user.email "<id>+<username>@users.noreply.github.com"
+```
+
+Find your address under GitHub → Settings → Emails → *Keep my email address
+private*. Set it per clone, before you commit.
+
+**Bootstrap the sanitization lexicon**, or the banned-token gate runs on fake
+terms:
+
+```bash
+cp .sanitization-lexicon.example .sanitization-lexicon.local
+# then replace the placeholders with your real terms
+```
+
 ## Validation
 
 Before submitting, verify:
-1. **Routing works:** Ask Claude a question that should route to your new/changed file. Does it find the right content?
-2. **Templates render:** If you changed a template, ask Claude to generate a document using it. Does the output match the format?
-3. **No broken cross-references:** Search for any file paths or cross-references you changed. Update all references in CLAUDE.md and other files.
+1. **Gates pass:** Run `bash scripts/verify_all.sh` and confirm 10 pass · 0 fail.
+2. **Routing works:** Ask Claude a question that should route to your new/changed file. Does it find the right content?
+3. **Templates render:** If you changed a template, ask Claude to generate a document using it. Does the output match the format?
+4. **No broken cross-references:** Search for any file paths or cross-references you changed. Update all references in CLAUDE.md and other files.
+
+### Never Commit Personal Data
+
+Real emails, phone numbers, national IDs, postal addresses, and payment
+details are blocked by `scripts/lint_pii.py` on every commit. Use the
+placeholder conventions below instead.
+
+This applies to **other people's** data as much as your own. A recruiter's
+name in a tracker, a colleague's email in an example — neither consented to
+being published. Full procedure: `Workflows/pii-audit-pass.md`.
+
+Writing a commit message that removes a person's reference? Describe the
+change, do not name them. "Remove third-party attribution" — never "remove
+<name>". A commit subject is permanent on more surfaces than the file it
+changes.
+
+Found personal data already published here? See `SECURITY.md` and report it
+privately. Do not open a public issue.
 
 ### Placeholder Conventions
 

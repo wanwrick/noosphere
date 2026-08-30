@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# verify_all.sh — run all 9 v1.2.0 verification checks. Non-zero exit on
+# verify_all.sh — run all 10 verification checks. Non-zero exit on
 # any FAIL. Used by CI and by the weekly-practice-synthesis ritual.
 set -uo pipefail
 ROOT="$(git rev-parse --show-toplevel)"
@@ -15,6 +15,7 @@ CHECKS=(
   "07_ip_coverage.py"
   "08_sanitization_audit.sh"
   "09_diagram_coverage.sh"
+  "10_pii_scan.py"
 )
 
 PASS=0; FAIL=0; SKIP=0

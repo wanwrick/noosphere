@@ -6,7 +6,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "python3 -c \"import yaml, os; f='profile.yml'; d=(yaml.safe_load(open(f)) if os.path.exists(f) else None) or {}; print('NEW USER — profile.yml is empty. Begin onboarding.' if not d.get('name') else 'RETURNING USER: ' + d['name'] + '. Profile loaded.')\""
+            "command": "bash bootstrap.sh && python3 -c \"import yaml, os; f='profile.yml'; d=(yaml.safe_load(open(f)) if os.path.exists(f) else None) or {}; print('NEW USER — profile.yml is empty. Begin onboarding.' if not d.get('name') else 'RETURNING USER: ' + d['name'] + '. Profile loaded.')\""
           }
         ]
       }

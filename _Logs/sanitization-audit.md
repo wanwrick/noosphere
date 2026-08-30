@@ -75,6 +75,82 @@ files. `git filter-repo --replace-text` has no comment syntax: any line lacking
 by comparing branch tip trees against their pre-rewrite values before pushing.
 Any future rewrite must diff tip trees before the push, never after.
 
+### 2026-08-30 — Full PII audit; personal-data gate added
+
+**Scope.** First audit covering *individuals* rather than organizations. All
+six surfaces from `Workflows/pii-audit-pass.md`: working tree, history content,
+commit metadata, commit messages, pull-request refs, forks. Five findings.
+
+**Working tree was clean.** Zero emails, phone numbers, IP addresses, or
+national identifiers across 240 files. `Knowledge/Work/collaborators.md` and
+`team.md` were fully placeholder-ized, as their own routing file requires.
+
+**F1 — Fork PII trap in `templates/career-command-center/` (fixed).** Ten
+tracked files were designed to be populated with personal data by a session:
+identity, salary expectation, work authorization, plus recruiter and
+interviewer names belonging to *other people*. The only control was a comment
+reading "do not commit this file to a public repository." A comment is not a
+control, and the files were already tracked, so a fork inherited the trap.
+
+Each now ships as a tracked `.example` template with the live filename
+gitignored, bootstrapped by `bootstrap.sh` from the SessionStart hook — the
+same example → local pattern this repo already uses for the lexicon. Generated
+résumés and cover letters are ignored by extension. Verified: all ten live
+files present after bootstrap, all ten ignored, none visible to `git status`.
+
+**F2 — No PII gate existed (fixed).** The sanitization lint matched
+organization proper nouns; gitleaks matched credentials and structural IDs.
+Neither matched a person. A contributor pasting a real email into a document
+passed every gate. Added `scripts/lint_pii.py` with 14 rules across email,
+phone, SIN, SSN, payment card, IBAN, IP, postal code, street address, date of
+birth, passport, and licence number. Wired into pre-commit, CI, and
+`verify_all.sh` as check 10.
+
+Two design decisions worth recording. **The rules are tracked, unlike the
+lexicon** — they are generic format regexes that identify nobody, so tracking
+them means a fork inherits protection with no setup. **CI runs `--files-only`**,
+reporting paths but never matched text, because this repo is public and its
+logs are public; the alternative republishes the data the gate exists to
+suppress. Verified against a seeded file: 10 blocking categories and 1 warning
+fired, every allowlisted reserved value was correctly suppressed, and
+`--files-only` echoed no matched text.
+
+**F3 — Author email in commit metadata (residual, not fixable).** 11 of 24
+commits carry a personal address in author metadata. The same author used
+GitHub's privacy address on the other 8, so the fix was already available and
+applied inconsistently. Not retroactively fixable: rewriting metadata does not
+reach `refs/pull/*`. Fixed forward — `CONTRIBUTING.md`, `SECURITY.md`, and the
+career-center README now require setting `user.email` before the first commit.
+
+**F4 — Third-party name in a commit subject (residual, needs GitHub Support).**
+A commit that *removed* a private individual's attribution named that person in
+its own subject line, republishing what it was removing. The pre-removal
+content survives in an earlier commit, and both are reachable through
+`refs/pull/*`. Same remediation path as the 2026-08-21 entry: only GitHub
+Support can drop those refs. Bundle it with that request.
+
+Distinguish this from the other names in the tree. Curated frameworks cite
+published authors by name and URL, and Invariant #3 *requires* that. The test
+is not "is this a name" but "did this person consent to being named here." A
+cited author has. A private individual has not.
+
+**F5 — Documented exclusion that did not exist (fixed).** `_Logs/CLAUDE.md`
+stated that `sanitization-audit.md` was excluded from the lint's own scan.
+That exemption was removed in the v1.3.0 lexicon extraction. The stale claim
+invited a contributor to write banned tokens here believing they were exempt.
+Corrected, with the reason: excluding a file from the gate is exactly how the
+lexicon went unnoticed.
+
+**Also added.** `SECURITY.md` — there was no private route to report an
+exposure, so the only option was a public issue, which republishes the value to
+everyone watching. `Workflows/pii-audit-pass.md` — the repeatable procedure,
+including the triage table that separates a leak from a byline, an attribution,
+and a false positive.
+
+**Still outstanding.** F3 and F4 both need the GitHub Support request already
+tracked in the 2026-08-21 entry. Neither is resolved by this pass and neither
+should be recorded as such.
+
 ## How This Log Works
 
 - One row per sanitization pass.
