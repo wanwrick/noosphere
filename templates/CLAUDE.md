@@ -39,13 +39,22 @@ Bootstrap a fork with the `dabs-template-init` skill.
 
 ## Career Command Center
 
-A folder a job seeker opens in Claude Code. `career-command-center/profile.yml`
-holds the user's profile and drives every response; six slash commands live in
+A folder a job seeker opens in Claude Code. `profile.yml` holds the user's
+profile and drives every response; six slash commands live in
 `career-command-center/.claude/skills/`. It carries its own routing table,
 invariants, and session-start protocol, independent of this repo's.
 
-Keep that profile as a template. It is the one file a fork must fill in and
-the one file a public fork must never commit filled.
+**Ten files in it hold personal data and none of them is tracked.** Each ships
+as a `.example` template that is tracked;
+`career-command-center/bootstrap.sh` copies each to its live filename at
+session start, and `career-command-center/.gitignore` keeps the live copy out
+of git. Editing this subproject means editing the `.example` files.
+
+The risk is not only the user's own data. `target-companies.md` and
+`interview-retro.md` ask for recruiter and interviewer names — other people's
+personal data, gathered by someone with no standing to publish it. Before
+v1.4.0 all ten were tracked, guarded only by a comment reading "do not commit
+this file." A comment is not a control.
 
 ## Not to be confused with
 

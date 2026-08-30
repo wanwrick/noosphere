@@ -29,6 +29,19 @@ repos:
           .sanitization-lexicon.local (gitignored). See _Logs/sanitization-audit.md
           for rationale and Workflows/sanitization-pass.md for remediation.
 
+      - id: pii-lint
+        name: pii-lint (personal data guard)
+        entry: python3 scripts/lint_pii.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        description: |
+          Refuses any commit that introduces personal data — email, phone,
+          SIN / SSN, payment card, IP address, postal address, date of birth,
+          passport or licence number. Rules live in .pii-patterns and false
+          positives in .pii-allowlist; both are tracked, because generic format
+          regexes identify nobody. See Workflows/pii-audit-pass.md.
+
   - repo: https://github.com/gitleaks/gitleaks
     rev: v8.21.2
     hooks:

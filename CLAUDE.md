@@ -30,7 +30,7 @@ named explicitly. Cite sources: never blur authored vs curated IP.
 | Cornell-Queen's EMBA frameworks | `Knowledge/EMBA/CLAUDE.md` |
 | cross-cutting strategy toolkits | `Knowledge/Strategy/CLAUDE.md` |
 | work context | `Knowledge/Work/CLAUDE.md` |
-| rituals, verification loops | `Workflows/CLAUDE.md` |
+| rituals, sanitization, PII | `Workflows/CLAUDE.md` |
 | document formats (memo, RCA, story) | `Templates/CLAUDE.md` |
 | skills, cadences, MCPs | `_Registry/CLAUDE.md` |
 | changelog, feedback, audit | `_Logs/CLAUDE.md` |
@@ -41,9 +41,10 @@ named explicitly. Cite sources: never blur authored vs curated IP.
 
 ## Invariants
 
-0. **Sanitization is sacred.** Banned-token lint blocks any commit naming an
-   employer, team, stakeholder, JIRA code, vendor, or workspace ID.
-   See `Workflows/sanitization-pass.md`.
+0. **Sanitization is sacred.** Two gates block any commit naming an employer,
+   team, stakeholder, JIRA code, vendor, workspace ID, or any person's
+   personal data. See `Workflows/sanitization-pass.md`,
+   `Workflows/pii-audit-pass.md`.
 1. Every active archetype names ≥1 IP framework in `ip_applied`.
 2. Phase advance requires `governance-audit` skill pass when `regulated: true`
    or `pii: true`.
@@ -71,7 +72,7 @@ Kocyigit, Shi (×2), Dataplex 6, CDO Top 10.
 
 ## Session Protocol Summary
 
-Long form: `methodology/how-we-work.md`. Short form:
+Long form: `methodology/how-we-work.md`.
 
 1. Load `GOALS.md`, `_Logs/feedback.md`, `_Registry/Cadences.md`.
 2. Plan before execute: files, frameworks, output shape.
@@ -82,4 +83,4 @@ Long form: `methodology/how-we-work.md`. Short form:
 
 ## Version
 
-v1.3.0. Changelog: `_Logs/evolution.md`. Audit: `_Logs/sanitization-audit.md`.
+v1.4.0. Changelog: `_Logs/evolution.md`. Audit: `_Logs/sanitization-audit.md`.

@@ -6,9 +6,10 @@ commit or reports a verdict.
 | File | Purpose |
 |---|---|
 | `lint_sanitization.sh` | Invariant #0 — banned-token guard over the working tree; loads a gitignored lexicon |
+| `lint_pii.py` | Personal-data guard: email, phone, SIN/SSN, card, IP, address, DOB, ID numbers |
 | `sanitize_from_notion.py` | Rewrites private-source content into placeholder form; same lexicon |
-| `verify_all.sh` | Runner for the 9 verification checks; non-zero exit on any FAIL |
-| `verify/` | The 9 checks themselves |
+| `verify_all.sh` | Runner for the 10 verification checks; non-zero exit on any FAIL |
+| `verify/` | The 10 checks themselves |
 
 ## The lexicon (read this first)
 
@@ -29,21 +30,47 @@ NOT-PROTECTED banner — it never silently passes. Pass
 `--require-real-lexicon` to fail instead. The canonical copy lives in
 `noosphere-private`; CI reads it from the `SANITIZATION_LEXICON` repo secret.
 
+## The PII rules (tracked, unlike the lexicon)
+
+`lint_pii.py` reads `.pii-patterns` and `.pii-allowlist`, and **both are
+committed**. That looks inconsistent with the lexicon rule above until you see
+what each file holds.
+
+| | Lexicon | PII rules |
+|---|---|---|
+| Contains | The actual proper nouns | Generic format regexes |
+| Publishing it | Publishes exactly what it protects | Reveals nothing |
+| A fork gets | Nothing until it bootstraps | Working protection immediately |
+
+"An email address shaped like `x@y.z`" identifies nobody. Tracking the rules is
+the only way a template repo protects the people who fork it.
+
+Each rule carries a **canary** the pattern must match, verified at load. A
+regex typo compiles fine and then matches nothing, so the gate reports clean
+while protecting nothing — a silent failure indistinguishable from success. A
+rule that fails its canary is a hard error. Same discipline as the lexicon.
+
+Allowlist entries match the **matched text**, not the line, so a line carrying
+both a documentation IP and a real one still fails. Full procedure and triage
+table: `Workflows/pii-audit-pass.md`.
+
 ## Run the gates
 
 ```bash
 bash scripts/lint_sanitization.sh --require-real-lexicon   # Invariant #0, fast
-bash scripts/verify_all.sh                                 # all 9 checks, what CI runs
+python3 scripts/lint_pii.py                                # personal data, fast
+bash scripts/verify_all.sh                                 # all 10 checks, what CI runs
 ```
 
 Add `--files-only` to report offending paths without echoing the pattern or
 the matched line — use it anywhere the output is public, such as CI logs.
 
-`lint_sanitization.sh` needs `ripgrep`. `06`/`07` need `pyyaml`.
+`lint_sanitization.sh` needs `ripgrep`. `06`/`07` need `pyyaml`. `lint_pii.py`
+needs only the standard library.
 `04` needs the `databricks` CLI plus `pytest`; it prints SKIP when either is
 absent rather than failing.
 
-## The 9 checks
+## The 10 checks
 
 | Check | Asserts |
 |---|---|
@@ -56,6 +83,7 @@ absent rather than failing.
 | `verify/07_ip_coverage.py` | Invariant #1 — every archetype names ≥1 IP file, and every slug resolves |
 | `verify/08_sanitization_audit.sh` | Wraps `lint_sanitization.sh` |
 | `verify/09_diagram_coverage.sh` | Every diagram declared in `methodology/diagram-generation.md` exists in `_Diagrams/` |
+| `verify/10_pii_scan.py` | No personal data in the working tree; wraps `lint_pii.py --files-only` |
 
 ## Editing root CLAUDE.md
 
@@ -69,7 +97,7 @@ committing a change to it:
 3. **Skills.** Under the `## Skills` heading, backtick only real skill or
    subagent names. Check 03 reads that section literally.
 
-Then run `bash scripts/verify_all.sh` and confirm 9 pass · 0 fail.
+Then run `bash scripts/verify_all.sh` and confirm 10 pass · 0 fail.
 
 ## Adding a check
 
@@ -80,7 +108,7 @@ to fail. Print `SKIP:` and exit 0 when a tool is genuinely unavailable.
 
 ## Wired into
 
-`.pre-commit-config.yaml` (sanitization lint + gitleaks + hygiene hooks),
-`.github/workflows/sanitization.yml` (banned-token guard + gitleaks),
-`.github/workflows/verify.yml` (all 9 checks). Both workflows run on pull
-requests to `main` and pushes to `main`.
+`.pre-commit-config.yaml` (sanitization lint + PII lint + gitleaks + hygiene
+hooks), `.github/workflows/sanitization.yml` (banned-token guard + PII guard +
+gitleaks), `.github/workflows/verify.yml` (all 10 checks). Both workflows run
+on pull requests to `main` and pushes to `main`.

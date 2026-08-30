@@ -1,0 +1,38 @@
+# .pii-patterns — PII detection rules for scripts/lint_pii.sh
+#
+# WHY THIS FILE IS TRACKED (unlike .sanitization-lexicon.local).
+#   The banned-token lexicon must enumerate the employer / team / vendor /
+#   stakeholder proper nouns it suppresses, so committing it would publish
+#   exactly what it protects. These rules are the opposite: they are generic
+#   format regexes. "an email address shaped like x@y.z" identifies nobody.
+#   Keeping them tracked means a fork inherits PII protection with no setup.
+#
+# FORMAT — five TAB-separated fields, one rule per line:
+#   category <TAB> flags <TAB> pattern <TAB> severity <TAB> canary
+#
+#   category  Short slug used in reports.
+#   flags     i = case-insensitive. - = none. Look-around needs no flag; the
+#             linter uses Python re, which supports it natively.
+#   pattern   The regex.
+#   severity  block = fails the gate. warn = reported, exit stays 0.
+#   canary    A sample string the pattern MUST match. Verified at load; a rule
+#             that cannot match its own canary is a hard error, because a regex
+#             typo compiles fine and then matches nothing, reporting a false
+#             clean. Same discipline as the sanitization lexicon.
+#
+# False positives belong in .pii-allowlist, matched against the matched TEXT.
+
+email	-	[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}	block	someone@example.org
+phone-na	-	(?<![\d-])(?:\+?1[ .-]?)?\(?\d{3}\)?[ .-]\d{3}[ .-]\d{4}(?![\d-])	block	416-555-0199
+sin-ca	-	(?<![\d-])\d{3}[ -]\d{3}[ -]\d{3}(?![\d-])	block	046 454 286
+ssn-us	-	(?<![\d-])\d{3}-\d{2}-\d{4}(?![\d-])	block	078-05-1120
+credit-card	-	(?<![\d-])(?:4\d{3}|5[1-5]\d{2}|3[47]\d{2}|6011)[ -]?\d{4}[ -]?\d{4}[ -]?\d{4}(?![\d-])	block	4111 1111 1111 1111
+iban	-	\b[A-Z]{2}\d{2}[A-Z0-9]{11,30}\b	block	GB82WEST12345698765432
+ipv4	-	(?<![\d.])(?:(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(?![\d.])	block	203.0.113.7
+postal-ca	-	(?<![#\w])[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d(?!\w)	block	K7L 3N6
+zip-us-plus4	-	(?<![\d-])\d{5}-\d{4}(?![\d-])	block	14853-6201
+street-address	-	\b\d{1,5}\s+[A-Z][A-Za-z]+\s+(?:Street|St|Avenue|Ave|Road|Rd|Boulevard|Blvd|Drive|Dr|Lane|Ln|Court|Ct|Way|Terrace|Place|Pl)\b(?!\w)	block	123 Sussex Drive
+date-of-birth	i	\b(?:date[ _-]?of[ _-]?birth|d\.?o\.?b\.?|birth[ _-]?date)\b\s*[:=]\s*\S	block	Date of Birth: 1980-01-01
+passport	i	\bpassport\s*(?:no\.?|number|#)?\s*[:=]\s*[A-Z0-9]{6,9}\b	block	Passport No: AB123456
+drivers-licence	i	\b(?:driver'?s?[ _-]?licen[cs]e|dl)\s*(?:no\.?|number|#)?\s*[:=]\s*[A-Z0-9-]{6,20}\b	block	Driver's Licence: M1234-56789-01234
+personal-profile-url	i	\b(?:linkedin\.com/in/|calendly\.com/|instagram\.com/|facebook\.com/)[A-Za-z0-9._-]+	warn	linkedin.com/in/someprofile

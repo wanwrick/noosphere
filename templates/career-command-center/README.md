@@ -57,30 +57,52 @@ Claude will immediately start the intake interview (~15 minutes). At the end, yo
 
 ```
 career-command-center/
-├── profile.yml          ← your profile (DO NOT commit to public repos)
-├── GOALS.md             ← your career targets and metrics
+├── profile.yml          ← your profile (gitignored — never committed)
+├── GOALS.md             ← your career targets and metrics (gitignored)
 ├── job-search/          ← applications, target companies, ATS keywords
 ├── interview-prep/      ← STAR stories, question bank, interview retros
 ├── career-strategy/     ← positioning narrative, compensation, 90-day plan
 ├── templates/           ← master resume, cover letters, STAR template
 ├── Workflows/           ← weekly ritual, application retro
-└── _Logs/               ← session log
+├── bootstrap.sh         ← creates your working files from the .example set
+└── _Logs/               ← session log (gitignored)
 ```
+
+Every file that holds personal data ships as a tracked `.example` template.
+`bootstrap.sh` copies each to its live filename on first session start, and
+`.gitignore` keeps the live copy out of git. You get a working folder; git
+never sees your data.
 
 ---
 
 ## Important: privacy
 
-`profile.yml` contains personal career information. If you use git:
-- Add `profile.yml` to `.gitignore` before your first commit
-- Do not push `_Logs/session-log.md` if it contains sensitive details
-- Do not commit real employer names if you are sharing this repo publicly
+**Your personal data is gitignored by default.** You do not have to configure
+anything, and there is no first-commit window in which it is exposed.
 
-A sample `.gitignore` entry:
-```
-profile.yml
-_Logs/session-log.md
-```
+Ten files are protected this way: `profile.yml`, `GOALS.md`,
+`_Logs/session-log.md`, both files under `job-search/` that name real
+companies, both `interview-prep/` files, and all three `career-strategy/`
+files. Generated résumés and cover letters (`*.pdf`, `*.docx`,
+`resume-*.md`, `cover-letter-*.md`) are ignored too — those carry your name,
+address, phone, and email in a single document.
+
+This matters beyond your own privacy. `target-companies.md` and
+`interview-retro.md` ask you to record recruiter and interviewer names.
+**That is other people's personal data, and it is not yours to publish.**
+
+Two things the tooling cannot do for you:
+
+- **Check `git status` before your first push.** If you added files of your
+  own, confirm none of them carries personal data.
+- **Set your commit identity.** `git log` publishes your email on every
+  commit forever. To use GitHub's privacy address instead:
+  ```
+  git config user.email "<your-id>+<username>@users.noreply.github.com"
+  ```
+  Find yours under GitHub → Settings → Emails → *Keep my email address
+  private*. Set this **before** your first commit; it does not apply
+  retroactively.
 
 ---
 

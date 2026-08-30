@@ -310,6 +310,85 @@ v1.2.0 version. All 14 phases of PR #3 closed.
 
 ---
 
+### v1.4.0 -- 2026-08-30 -- PII Gate + Career Center Fork Safety
+**Author:** Paroz Mehta + Claude
+
+**What changed:**
+
+| File | Change |
+|------|--------|
+| `scripts/lint_pii.py` | New. Personal-data gate: 14 rules across email, phone, SIN, SSN, payment card, IBAN, IP, postal code, street address, date of birth, passport, licence. Canary-verified at load; `--files-only` mode for public logs. |
+| `.pii-patterns` | New. The rules, tab-separated with a mandatory canary per rule. Tracked, unlike the lexicon. |
+| `.pii-allowlist` | New. False positives, matched against the matched text rather than the line. Reserved domains and IP ranges, `noreply@` identities, one reviewed byline. |
+| `scripts/verify/10_pii_scan.py` | New. Check 10, wrapping the gate in `--files-only`. |
+| `scripts/verify_all.sh` | Checks 9 → 10. |
+| `.pre-commit-config.yaml` | `pii-lint` hook added. |
+| `.github/workflows/sanitization.yml` | `pii-scan` job added. Needs no secret — the rules are tracked. |
+| `Workflows/pii-audit-pass.md` | New. The repeatable procedure: six surfaces, the triage table, allowlist discipline, commit identity, cadence. |
+| `SECURITY.md` | New. Private disclosure route, what is published by design, known residual exposure, fork setup. |
+| `templates/career-command-center/` | Ten personal-data files converted to tracked `.example` templates with gitignored live copies. New `.gitignore` and `bootstrap.sh`. SessionStart hook bootstraps before checking the profile. |
+| `CONTRIBUTING.md` | Commit-identity setup before first commit; never-commit-personal-data section; commit-message rule for removals. |
+| `_Logs/CLAUDE.md` | Corrected a documented lint exclusion that no longer existed. |
+| `CLAUDE.md` | Invariant #0 now covers both gates. Version → v1.4.0. 458 words ≈ 595 tokens. |
+| `Workflows/CLAUDE.md`, `scripts/CLAUDE.md`, `templates/CLAUDE.md` | Updated for the new gate and the career-center restructure. |
+
+**Gap that triggered this update:** a full PII audit across all six exposure
+surfaces. The working tree was clean — zero emails, phones, IPs, or national
+identifiers in 240 files. The defects were structural.
+
+1. **No gate matched a person.** Sanitization matched organization proper
+   nouns; gitleaks matched credentials and structural IDs. A contributor
+   pasting a real email into a document passed every gate in the repo. For a
+   practice OS whose `governance/` directory is largely about PIPEDA and GDPR
+   obligations, that was the wrong thing to be missing.
+2. **The Career Command Center was a fork PII trap.** Ten tracked files were
+   designed to be filled by a session with identity, salary expectation, work
+   authorization, and the names of recruiters and interviewers. The only
+   control was a comment reading "do not commit this file to a public
+   repository." The files were already tracked, so every fork inherited the
+   trap, and the comment sat inside the very file it was failing to protect.
+3. **A stale exclusion in the docs.** `_Logs/CLAUDE.md` claimed the audit log
+   was exempt from the lint's scan. That exemption was removed in v1.3.0. The
+   claim invited a contributor to write banned tokens there believing they
+   were exempt.
+
+**Design Decisions:**
+- **The PII rules are tracked; the lexicon is not.** These look contradictory
+  and are not. The lexicon must enumerate the proper nouns it suppresses, so
+  publishing it defeats it. PII rules are generic format regexes — "an email
+  shaped like `x@y.z`" identifies nobody. Tracking them is the only way a
+  template repo protects the people who fork it, because a gate that needs
+  setup protects nobody who skips the setup.
+- **`.example` + gitignore beats a warning comment.** The fix reuses the
+  pattern already proven on the lexicon rather than inventing a second one.
+  The template stays publishable, the populated file is structurally
+  unpublishable, and the user does nothing to get there.
+- **CI reports paths, never matches.** This repo is public, so its CI logs are
+  public. Echoing a match would republish the personal data the gate exists to
+  suppress — the same trap the sanitization lint fell into before v1.3.0.
+- **Every rule carries a canary.** A regex typo compiles fine and then matches
+  nothing, so the gate reports clean while protecting nothing. That silent
+  failure is indistinguishable from success, so a rule that cannot match its
+  own canary is a hard load error.
+- **Allowlisting matches the matched text, not the line.** A line carrying
+  both a documentation IP and a real one still fails. The first false positive
+  found in testing was a Mermaid hex colour (`#C3B1E1`) reading as a Canadian
+  postal code, which is exactly the kind of hit a line-level allowlist would
+  have silenced too broadly.
+- **Not every name is a leak.** Stripping all human names would break
+  Invariant #3, which *requires* citing the authors of curated frameworks. The
+  test is not "is this a name" but "did this person consent to being named
+  here." A cited author has; a recruiter in a tracker has not. The triage
+  table in `pii-audit-pass.md` makes that call explicit.
+- **Two findings were logged unresolved.** A personal email in historic commit
+  metadata and a private individual's name in a historic commit subject are
+  both real and neither is fixable by the repository owner: a rewrite does not
+  reach `refs/pull/*`. Both are recorded as outstanding in
+  `sanitization-audit.md`, bundled with the existing GitHub Support request.
+  Recording an incomplete fix as complete is its own failure.
+
+---
+
 ### v1.3.0 -- 2026-08-20 -- Routing Coverage + Gate Documentation
 **Author:** Paroz Mehta + Claude
 

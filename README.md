@@ -29,12 +29,24 @@ The repo doubles as a portfolio artifact AND a forkable practice OS. One repo, m
 
 ---
 
+## What's New in v1.4.0
+
+| Capability | What landed |
+|---|---|
+| **PII gate** (Invariant #0, second half) | `scripts/lint_pii.py` blocks any commit carrying personal data — email, phone, SIN/SSN, payment card, IBAN, IP, postal code, street address, date of birth, passport, licence. Runs in pre-commit, in CI, and as verification check 10. Sanitization protects organizations; this protects people. |
+| **Rules ship tracked** | Unlike the banned-token lexicon, `.pii-patterns` and `.pii-allowlist` are committed. They hold generic format regexes that identify nobody, so **a fork inherits PII protection with no setup** — the only arrangement that protects people who skip the setup step. |
+| **Career Command Center made fork-safe** | Ten files that a session fills with a name, salary expectation, work authorization, and recruiter and interviewer names were tracked, guarded only by a comment. Each now ships as a tracked `.example` with the live copy gitignored and created by `bootstrap.sh`. |
+| **Disclosure route** | `SECURITY.md` gives a private way to report an exposure. Previously the only option was a public issue, which republishes the value to everyone watching. |
+| **Audit procedure** | `Workflows/pii-audit-pass.md` covers all six exposure surfaces — four of which survive a clean `git status` — plus the triage table separating a leak from a byline, an attribution, and a false positive. |
+
+---
+
 ## What's New in v1.3.0
 
 | Capability | What landed |
 |---|---|
 | **Routing coverage completed** | Seven directories that held real content but no routing brain now have one: `Workflows/`, `Templates/`, `Knowledge/Work/`, `_Registry/`, `_Logs/`, `scripts/`, `templates/`. Every top-level content directory is now reachable from `CLAUDE.md`. |
-| **Gates documented where they live** | `scripts/CLAUDE.md` documents the 9 verification checks, the three constraints on editing the root routing brain (token budget, routing targets, skill names), and how to add a check. |
+| **Gates documented where they live** | `scripts/CLAUDE.md` documents the verification checks, the three constraints on editing the root routing brain (token budget, routing targets, skill names), and how to add a check. |
 | **Career Command Center routed** | The forkable job-search OS shipped in v1.2.1 but was unreachable from the routing table. `templates/CLAUDE.md` now covers both subprojects and draws the line between a subproject's own `CLAUDE.md` (payload for a fork) and this repo's instructions. |
 | **Directory tree corrected** | The tree described a subdivided `playbooks/` and a `templates/dabs-data-product-template/examples/` folder; neither exists. Tree now matches disk. |
 
@@ -79,7 +91,7 @@ The DABs Data-Contract Golden Path subproject sits at the boundary of Discipline
 
 ---
 
-## Directory Structure (v1.3.0)
+## Directory Structure (v1.4.0)
 
 ```
 noosphere/
@@ -87,9 +99,12 @@ noosphere/
 +-- README.md                        This file
 +-- GOALS.md                         Priorities + OKRs (private to your fork)
 +-- CONTRIBUTING.md                  Fork-and-customize guide
++-- SECURITY.md                      Private disclosure route + known residual exposure
 +-- LICENSE                          MIT
-+-- .gitleaks.toml                   Secret scanning + custom sanitization rules
-+-- .pre-commit-config.yaml          Sanitization gate at commit time
++-- .gitleaks.toml                   Secret scanning + structural ID rules
++-- .pii-patterns                    PII detection rules (tracked: generic formats)
++-- .pii-allowlist                   Justified PII false positives
++-- .pre-commit-config.yaml          Sanitization + PII gates at commit time
 +-- .github/workflows/               sanitization.yml + verify.yml CI gates
 +--
 +-- practice-context/                Identity, voice, stack, regulated context
@@ -135,7 +150,7 @@ noosphere/
 +-- _Logs/                           evolution.md, feedback.md, sanitization-audit.md
 +-- _Diagrams/                       PNG + Mermaid architecture visuals
 +-- scripts/                         Gates: lint_sanitization.sh, sanitize_from_notion.py
-|   +-- verify/                      The 9 verification checks
+|   +-- verify/                      The 10 verification checks
 |   +-- verify_all.sh                Runner (what CI executes)
 +--
 +-- templates/dabs-data-product-template/   ← THE FLAGSHIP SUBPROJECT
@@ -193,6 +208,7 @@ noosphere/
 ## Governance & Trust
 
 - **Sanitization** — `Workflows/sanitization-pass.md` + `_Logs/sanitization-audit.md`. Banned-token lint + gitleaks + CI gate. v1.2.0+ release tag blocked on a clean audit.
+- **Personal data** — `Workflows/pii-audit-pass.md` + `scripts/lint_pii.py`. Blocks personal data of any individual, the author's and other people's alike. Report an exposure privately via `SECURITY.md`, never a public issue.
 - **Data ethics + classification** — `governance/data-ethics-policy.md`, `governance/client-data-classification.md` (CDMC-aligned 4-tier).
 - **NDA + DPIA + regulated-FSI runbook** — `governance/nda-template.md`, `governance/dpia-template.md`, `governance/regulated-fsi-compliance-runbook.md` (OSFI-style + PIPEDA-style).
 - **Model risk** — `governance/model-risk-governance.md`.

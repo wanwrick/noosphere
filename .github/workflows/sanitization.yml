@@ -67,6 +67,22 @@ jobs:
         if: always()
         run: rm -f .sanitization-lexicon.local
 
+  pii-scan:
+    name: Personal data guard
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # No secret needed. Unlike the banned-token lexicon, the PII rules are
+      # generic format regexes that identify nobody, so they are tracked in
+      # .pii-patterns and a fork inherits this gate with no setup.
+      #
+      # --files-only reports offending paths but never the matched text. This
+      # repository is public, so these logs are public, and printing a match
+      # would republish the personal data the gate exists to suppress.
+      - name: Run PII lint
+        run: python3 scripts/lint_pii.py --files-only
+
   gitleaks:
     name: gitleaks (secrets)
     runs-on: ubuntu-latest

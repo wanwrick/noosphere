@@ -6,7 +6,7 @@ The repo's memory. Three append-only trails; none is a working document.
 |---|---|
 | `evolution.md` | Version changelog: what changed, why, and the gap that triggered it |
 | `feedback.md` | Corrections and preferences captured during sessions |
-| `sanitization-audit.md` | Invariant #0 audit trail and the rationale behind lexicon changes |
+| `sanitization-audit.md` | Invariant #0 audit trail, lexicon-change rationale, and PII audit passes |
 
 ## Version discipline
 
@@ -31,7 +31,16 @@ through `Workflows/self-improvement.md` and record the fix in `evolution.md`.
 
 ## Sanitization audit
 
-Every change to the banned-token lexicon in `scripts/lint_sanitization.sh` is
-logged here with its rationale. This file is excluded from the lint's own scan
-so it can discuss the lexicon; that exclusion is deliberate and must not be
-copied to other files.
+Every change to the banned-token lexicon is logged in `sanitization-audit.md`
+with its rationale, as is every full PII audit pass.
+
+**This directory is scanned by both gates. Nothing here is excluded.** An
+earlier version of this file claimed `sanitization-audit.md` was exempt so it
+could discuss the lexicon. That exemption was removed when the lexicon was
+extracted from tracked files in v1.3.0, because excluding a file from the gate
+is exactly how the lexicon sat unnoticed in the repository.
+
+So the audit log records the **category and the reason, never the term or the
+matched value**. Both logs are public. Write "employer proper noun, four
+occurrences" — never the noun. Write "email address in a template" — never the
+address. `scripts/lint_pii.py` will block the commit if you forget.

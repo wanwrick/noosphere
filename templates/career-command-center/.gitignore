@@ -1,0 +1,34 @@
+# Career Command Center — personal data is NEVER tracked.
+#
+# Every file below is populated by a session with real personal data: your
+# name, salary expectations, work authorization / immigration status, the
+# companies you are applying to, and the names of recruiters and interviewers
+# (other people's personal data, which is not yours to publish).
+#
+# Each ships as a `.example` template that IS tracked. `bootstrap.sh` copies
+# each example to its live filename on first run; the live file stays ignored.
+# That is the same example -> local pattern the parent repository uses for its
+# sanitization lexicon, and for the same reason: the template is safe to
+# publish, the populated file never is.
+#
+# A comment saying "do not commit this" is not a control. This file is.
+
+profile.yml
+GOALS.md
+_Logs/session-log.md
+job-search/applications-tracker.md
+job-search/target-companies.md
+interview-prep/star-stories.md
+interview-prep/interview-retro.md
+career-strategy/compensation-strategy.md
+career-strategy/positioning-narrative.md
+career-strategy/90-day-plan.md
+
+# Résumé and cover letter output — almost always contains name, address,
+# phone, and email.
+*.docx
+*.pdf
+resume-*.md
+cover-letter-*.md
+!templates/resume-template.md
+!templates/cover-letter-template.md
