@@ -36,11 +36,16 @@ from dataclasses import dataclass, field
 # Paths never scanned.
 #
 # The two rule files are excluded because their canaries are, by design,
-# strings shaped exactly like the PII they detect (4111 1111 1111 1111 and
-# friends). Those are published test vectors from public documentation — they
-# identify nobody, which is what makes this exclusion different in kind from
-# the one that let the sanitization lexicon sit unnoticed in tracked files.
-# Nothing else is exempt. This script is scanned by its own gate.
+# strings shaped exactly like the PII they detect. Those are published test
+# vectors from public documentation — they identify nobody, which is what
+# makes this exclusion different in kind from the one that let the
+# sanitization lexicon sit unnoticed in tracked files.
+#
+# Nothing else is exempt. This script is scanned by its own gate, which is how
+# a card-shaped test vector spelled out in this very comment was caught: it
+# passed locally only because the file was not yet staged, and failed in CI the
+# moment it was. Illustrate a pattern by naming its category, never by writing
+# a string that matches it.
 EXCLUDED_PATHS = {
     ".pii-patterns",
     ".pii-allowlist",
@@ -158,10 +163,18 @@ def load_allowlist(path: str) -> list[re.Pattern]:
 
 
 def tracked_files(root: str) -> list[str]:
-    """Prefer git's index; fall back to a walk outside a repo."""
+    """Every file git would let you commit: tracked plus untracked-not-ignored.
+
+    --others --exclude-standard is what makes a manual run trustworthy. Listing
+    the index alone leaves a blind spot: a brand-new file is invisible until it
+    is staged, so `lint_pii.py` before `git add` reports clean on exactly the
+    files most likely to carry fresh personal data. --exclude-standard still
+    honours .gitignore, so the career center's populated working files stay out
+    of scope — they are unpublishable by construction.
+    """
     try:
         out = subprocess.run(
-            ["git", "ls-files", "-z"],
+            ["git", "ls-files", "--cached", "--others", "--exclude-standard", "-z"],
             cwd=root, capture_output=True, text=True, check=True,
         )
         names = [n for n in out.stdout.split("\0") if n]

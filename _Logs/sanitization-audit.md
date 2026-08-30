@@ -147,6 +147,25 @@ everyone watching. `Workflows/pii-audit-pass.md` — the repeatable procedure,
 including the triage table that separates a leak from a byline, an attribution,
 and a false positive.
 
+**Lesson recorded.** The new gate's first CI run failed on the gate's own
+source. A comment in `lint_pii.py` illustrated the excluded-canary rule by
+spelling out a card-shaped test vector, and the credit-card rule matched it.
+
+Two failures, not one. The literal was avoidable — illustrate a pattern by
+naming its category, never by writing a string that matches it. But the reason
+it survived local verification was a blind spot in the scan: it listed the git
+index only, so the six files added in this change were invisible until staged.
+The gate reported clean on precisely the files most likely to carry new
+personal data, and every local check passed while CI failed on the first run.
+
+Fixed by scanning `--cached --others --exclude-standard`: everything git would
+let you commit, tracked or not. `--exclude-standard` still honours
+`.gitignore`, so the career center's populated working files remain out of
+scope, which is correct — they are unpublishable by construction. Verified: an
+untracked file carrying an email now fails the gate before it is ever staged.
+
+A gate whose coverage depends on staging order is not a gate.
+
 **Still outstanding.** F3 and F4 both need the GitHub Support request already
 tracked in the 2026-08-21 entry. Neither is resolved by this pass and neither
 should be recorded as such.
